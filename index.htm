@@ -2548,7 +2548,7 @@ function demarrerJeu() {
         historique = JSON.parse(window.localStorage.getItem("historique"));
         inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire")));
         historiqueInventaire = new Map(JSON.parse(window.localStorage.getItem("historiqueInventaire")));
-        afficherEpisode(clefEpisodeEnCours);
+        afficherEpisode(historique.pop());
     } else {
         afficherEpisode("intro");
     }
