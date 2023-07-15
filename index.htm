@@ -2372,6 +2372,7 @@ function sauvegarder() {
         window.localStorage.setItem("clefEpisodeEnCours", clefEpisodeEnCours);
         window.localStorage.setItem("historique", JSON.stringify(historique));
         window.localStorage.setItem("inventaire", JSON.stringify(Array.from(inventaire.entries())));
+        window.localStorage.setItem("historiqueInventaire", JSON.stringify(Array.from(historiqueInventaire.entries())));
         document.getElementById("disquette").classList.remove('glitch');
         window.setTimeout(function() {
            document.getElementById("disquette").classList.add('glitch');
@@ -2389,7 +2390,7 @@ function effacerSauvegarde() {
             window.localStorage.removeItem("clefEpisodeEnCours");
             window.localStorage.removeItem("historique");   
             window.localStorage.removeItem("inventaire");
-            alert("Sauvegarde effacée.");
+            window.localStorage.removeItem("historiqueInventaire");
         }
     }
 }
@@ -2546,6 +2547,7 @@ function demarrerJeu() {
         clefEpisodeEnCours = window.localStorage.getItem("clefEpisodeEnCours");
         historique = JSON.parse(window.localStorage.getItem("historique"));
         inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire")));
+        historiqueInventaire = new Map(JSON.parse(window.localStorage.getItem("historiqueInventaire")));
         afficherEpisode(clefEpisodeEnCours);
     } else {
         afficherEpisode("intro");
