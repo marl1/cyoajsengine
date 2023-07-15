@@ -2491,8 +2491,8 @@ function afficherInventaire() {
                 htmlInventaire+='<span class="supprInventaire">' + inventaireAjout.get(key).nombre + '</span><br>';
             }
             inventaire.get(key).nombre = inventaireAjout.get(key).nombre + inventaire.get(key).nombre; //on màj le nombre
-            if (historiqueInventaire.get(key)) { historiqueInventaire.set(key, []); }
-            historiqueInventaire.get(key).push(value);
+            if (!historiqueInventaire.get(clefEpisodeEnCours)) { historiqueInventaire.set(clefEpisodeEnCours, []); }
+            historiqueInventaire.get(clefEpisodeEnCours).push({clef:key, nom:value.nom, description:value.description, nombre:inventaireAjout.get(key).nombre});
 
             inventaireAjout.delete(key); //supprime l'ajout
         } else {
@@ -2505,6 +2505,8 @@ function afficherInventaire() {
         //ajout d'objet qui n'étaient pas dans l'inventaire
         htmlInventaire+='<span class="ajoutInventaire">-' + value.nom + " (x" + value.nombre + ")</span><br>";
         inventaire.set(key, {nom:value.nom, description:value.description, nombre:value.nombre});
+        if (!historiqueInventaire.get(clefEpisodeEnCours)) { historiqueInventaire.set(clefEpisodeEnCours, []); }
+        historiqueInventaire.get(clefEpisodeEnCours).push({clef:key, nom:value.nom, description:value.description, nombre:value.nombre});
         inventaireAjout.delete(key); //supprime l'ajout
     }
     document.getElementById("inventaire").innerHTML=htmlInventaire;
@@ -2512,17 +2514,28 @@ function afficherInventaire() {
 
 function episodePrecedent() {
     if(historique.length>0) {
+        enleverObjetsAcquis(historique[historique.length - 1]);
         historique.pop(); // supprime l'épisode en cours
         enleverObjetsAcquis(historique[historique.length - 1]);
         afficherEpisode(historique.pop()); //on repart sur la clef précédente+la supprime
     }
 }
 
+//Pour éviter que la fonction "retour" ne permette d'avoir une infinité d'objets
 function enleverObjetsAcquis(clefEpisode) {
-    for (const objetAcquis in historiqueInventaire.get(clefEpisode)) {
-        console.log(objetAcquis);
+    const tabObjetsARetirer = historiqueInventaire.get(clefEpisode);
+    if (tabObjetsARetirer) {
+        for (const objetARetirer of tabObjetsARetirer) {
+            if (inventaire.get(objetARetirer.clef)) {
+                if((inventaire.get(objetARetirer.clef).nombre - objetARetirer.nombre) === 0) {
+                    inventaire.delete(objetARetirer.clef);
+                } else {
+                   inventaire.get(objetARetirer.clef).nombre -= objetARetirer.nombre;
+                }
+            }
+        }
+        historiqueInventaire.delete(clefEpisode);
     }
-    //inventaire.set(key, {nom:value.nom, description:value.description, nombre:value.nombre});
 }
 
 analyserLiens();
