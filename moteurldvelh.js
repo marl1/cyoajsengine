@@ -57,6 +57,9 @@ function afficherEpisode(clefEpisode) {
     }
 
     // affichage de l'épisode
+    if (episode.callback) {
+        episode.callback();
+    }
     historique.push(clefEpisode);
     historiqueRedirection = [];
 	clefEpisodeEnCours = clefEpisode;
@@ -64,9 +67,6 @@ function afficherEpisode(clefEpisode) {
     document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
     genererLiens(episode.liens);
     animerTransition();
-    if (episode.callback) {
-        episode.callback();
-    }
     afficherInventaire();
 }
 
@@ -177,6 +177,14 @@ function analyserLiens() {
             console.log("L'épisode " + chemin + " est à créer.");
         }
     }
+}
+
+function modifierTexte(clefEpisode, nouveauTexte) {
+    return episodes.get(clefEpisode).texte = nouveauTexte;
+}
+
+function nombrePossedeDe(objet) {
+    return inventaire.get(objet)?inventaire.get(objet).nombre:0;
 }
 
 function ajouterInventaireDiscretement(objet) {
