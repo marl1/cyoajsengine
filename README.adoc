@@ -13,6 +13,10 @@ Licence CC0 (sous respect de la loi française).
 * Garde-fous (détection des liens vers épisodes inexistants, détection des noms d'épisodes en doublon...).
 * Javascript sans librairie.
 
+==== A FAIRE
+* Annuler les fonctions lors du retour arrière.
+
+
 ==== Examples
 
 Jeu d'exemple servant de démo des fonctionnalités :
