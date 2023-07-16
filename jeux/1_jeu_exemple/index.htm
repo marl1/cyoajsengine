@@ -1,0 +1,229 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPISODE 1 - Transaction dans le club</title>
+<style>
+*{
+margin:0px;
+padding:0px;
+}
+
+html,body {
+    height:100%;
+}
+
+body { 
+    font-family: BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    background-color: #000011;
+    color:white;
+    background-image:url("img/dancefloor1.gif");
+    background-size: auto 100%;
+    background-attachment: fixed;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: stretch ;
+    flex-wrap: wrap;
+    font-size: medium;
+}
+#colonneGauche {
+    flex-direction:column;
+    justify-content: center;
+    display:flex;
+    padding:1em;
+    width:25em;
+}
+
+/* présente uniquement pour centrer la colonne du milieu */
+#colonneDroite {
+    flex-direction:column;
+    justify-content: center;
+    display:flex;
+    width:25em;
+    padding:1em;
+}
+
+#menuOutils {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+
+#menuOutils a {
+    text-decoration: none;
+    color: white;
+    font-size: x-large;
+}
+
+#inventaire {
+    background-color: rgb(22, 38, 100);
+}
+
+.ajoutInventaire {
+    color: #49ff49;
+    font-weight: 600;
+}
+.supprInventaire {
+    color:#ff672b;
+    font-weight: 600;
+}
+
+ #general{
+    background:rgba(0, 0, 0, 0.8);
+    width:50em;
+    padding-right:1em;
+    padding-left:1em;
+    flex-wrap: wrap-reverse;
+}
+
+
+@media (min-width: 50em) {
+    #general{
+        width:50em;
+    }
+}
+
+@media (max-width: 70em) {
+    #colonneGauche{
+        width:100%;
+        padding: 0;
+    }
+    #colonneDroite{
+        width:0;
+        height: 0;
+        padding:0;
+    }
+    #general{
+        width:100%;
+        padding:0;
+    }
+    body { 
+        flex-direction:column;
+        justify-content:flex-start;
+        flex-wrap: nowrap;
+    }
+    
+
+}
+
+
+#titre{
+padding-top:10%;
+margin-bottom:10%;
+color:#FFFFFF;
+Background-image:url("img/a.gif");
+background-repeat: no-repeat ;
+background-position:bottom; 
+text-shadow: 1px 1px 1px #093293;
+}
+
+#texte {
+font-size:1.15em;
+color:#FFFFFF;
+padding-left:3%; 
+padding-right:15%; 
+margin-bottom:5%;
+text-shadow: 1px 1px 1px #093293;
+line-height: 1.5;
+font-weight: 400;
+}
+
+.emphase {
+    font-weight: 600;
+    color: rgb(44, 255, 0);
+    text-shadow: 1px 1px 1px #0010ff;
+}
+
+#liens A{
+    color:#a6d5ff;
+    padding:0.2em;
+    padding-bottom:2em;
+    margin-bottom:0.5em;
+    display:inline-block;
+    text-decoration:none;
+    border: 1px solid #233DFF;
+    width:15em;
+    background:rgba(0, 0, 0, 0.8);
+}
+ 
+#liens A:hover {
+    text-decoration:none;
+    background-color:#002244;
+    font-size:1.1em;
+    border: 1px solid #FFFFFF;
+    animation: 0.1s multicolor;
+    color:white;
+}
+
+@keyframes multicolor {
+    0% {
+        color: #233DFF;
+    }
+    50% {
+        color: #FFFFFF;
+    }
+    100% {
+        color: #233DFF;
+    }
+}
+
+#liens {
+margin: 2px;
+font-family: Verdana;
+font-size:1.3em;
+text-align:right;
+}
+
+.glitch {
+        animation: glitchAnim 0.021s ;
+}
+
+@keyframes glitchAnim {
+    0% {
+        transform: skew(0deg);
+        text-shadow: 20px 1px 0px rgb(255, 35, 218);
+    }
+    25% {
+        transform: skew(10deg);
+        text-shadow: 1px 1px 0px rgb(255, 35, 218);
+    }
+    70% {
+        text-shadow: 1px 1px 0px rgb(255, 35, 218);
+    }
+    75% {
+        transform: skew(-10deg);
+        text-shadow: -20px 1px 0px rgb(255, 35, 218);
+    }
+}
+
+</style>
+</head>
+<div id="colonneGauche">
+    <div id="menuOutils">
+        <a href="#" onClick="episodePrecedent()">&#129152;</a><a href="#" onClick="sauvegarder()" id="disquette">&#128426;</a><a href="#" onClick="effacerSauvegarde()">&#128446;</a>
+    </div>
+    <h2> Inventaire</h2>
+    <div id="inventaire">
+    blah
+    </div>    
+</div>
+<div id="general">
+    <H1 id="titre"></H1>
+    <div id="texte" class="glitch">
+    </div>
+    <div id="liens">
+        <a href="episode.php?episode=2"></a>
+        <a href="episode.php?episode=3"></a>
+    </div>
+</div>
+<div id="colonneDroite">
+</div>
+ <script src="../../moteurldvelh.js"></script>
+ <script src="data/episodes.js"></script>
+ <script>
+analyserLiens();
+demarrerJeu();
+ </script>
+</body>
+</html>
