@@ -1,14 +1,14 @@
-A CYOA Javascript engine.
+Un moteur de LDVELH / A CYOA Javascript engine.
 
-CC0 Licence / Public domain
+CC0 Licence
 
-Have fun with it.
+Amusez-vous bien avec. / Have fun with it.
 
 
 === Examples ===
 
-Demo:
+Demo des fonctionnalités / Demo of the features:
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
 
-Game I'm working on:
+Jeu sur lequel je bosse / Game I'm working on:
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/cyberpunk
