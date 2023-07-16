@@ -1,0 +1,28 @@
+See English below.
+
+== FRANCAIS ==
+Un moteur de LDVELH.
+
+Licence CC0 (sous respect de la loi française).
+
+== ENGLISH ==
+
+A CYOA Javascript engine.
+
+CC0 Licence under French law.
+
+Have fun with it.
+
+=== FEATURES ===
+-Système de sauvegarde / save system
+-
+
+
+
+=== Examples ===
+
+Demo des fonctionnalités / Demo of the features:
+http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
+
+Jeu sur lequel je bosse / Game I'm working on:
+http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/cyberpunk
