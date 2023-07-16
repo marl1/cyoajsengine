@@ -1,6 +1,6 @@
 Un moteur de LDVELH / A CYOA Javascript engine.
 
-CC0 Licence
+CC0 Licence (France).
 
 Amusez-vous bien avec. / Have fun with it.
 
