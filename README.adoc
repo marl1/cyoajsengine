@@ -5,7 +5,7 @@ Un moteur de LDVELH.
 
 Licence CC0 (sous respect de la loi française).
 
-==== FEATURES ====
+==== FEATURES
 * Sauvegarde/chargement.
 * Inventaire.
 * Redirections lors de seconde visite d'épisode (et gestion des redirections en boucle).
@@ -13,7 +13,7 @@ Licence CC0 (sous respect de la loi française).
 * Garde-fous (détection des liens vers épisodes inexistants, détection des noms d'épisodes en doublon...).
 * Javascript sans librairie.
 
-==== Examples ====
+==== Examples
 
 Jeu d'exemple servant de démo des fonctionnalités :
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
@@ -21,7 +21,34 @@ http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
 Jeu sur lequel je bosse :
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/cyberpunk
 
-== ENGLISH ==
+==== Fonctions
+====== Fonctions de callback
+
+Fonctions utilisées dans les épisodes, exemple avec la fonction "ajouterInventaire" ci-dessous :
+[source,javascript]
+----
+creerEpisode({
+    clef: "allerInterim",
+    titre : `Aller à l'agence d'interim.`,
+    texte :
+    `Vous travaillez avec l'agence et gagnez ***50 euros***.`
+    ,liens: [
+            {libelle: `Sortir.`,
+            chemin: "intro"},
+        ]
+    ,callback: function() {
+		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
+    }
+});
+----
+
+`ajouterInventaire({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` : ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire.
+
+`ajouterInventaireDiscretement({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` : ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire. Ne sera pas mis en valeur. Utile notamment pour donner quelque chose au joueur au début de l'aventure, ou de manière générale lorsqu'on ne veut pas attirer l'attention sur quelque chose qu'il reçoit.
+
+
+
+== ENGLISH
 
 A CYOA Javascript engine.
 
@@ -29,7 +56,7 @@ CC0 Licence under French law.
 
 Have fun with it.
 
-==== FEATURES ====
+==== FEATURES
 * Load/save system.
 * Inventory.
 * Redirect on already visited episode (and can manage circular redirects).
@@ -37,7 +64,7 @@ Have fun with it.
 * Safeguards (detect duplicates, detect paths that leads nowhere...)
 * Vanilla Javascript.
 
-==== Examples ====
+==== Examples
 
 A sample game that serve as a demo of the features:
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
