@@ -12,8 +12,11 @@ En clef : le numéro d'épisode. En valeur : l'objet rajouté.
 let historiqueInventaire=new Map();
 let inventaire=new Map();
 
-
+/* Tableau contenant les objets ajoutés durant un épisode.*/
 let inventaireAjout=[];
+
+/* Pour détecter les redirections en boucle */
+let historiqueRedirection=[];
 
 // Map contenant tous les épisodes, avec en clef la clef de l'épisode et en valeur l'intégralité de l'épisode
 var episodes = new Map();
@@ -28,16 +31,34 @@ function creerEpisode(nouvelEpisode) {
 
 // Affiche l'épisode à l'écran et le positionne comme celui en cours.
 function afficherEpisode(clefEpisode) {
-    const episode = episodes.get(clefEpisode);
+    let episode = episodes.get(clefEpisode);
     if (!episode) {alert("Episode " + clefEpisode + " introuvable."); return;}
 
-    if(episode.revisite && historique.includes(episode.clef)) {
+    if(episode.revisite && historique.includes(episode.clef)) { // gestion des redirections
         //cet épisode redirige vers un autre
-        afficherEpisode(episode.revisite);
-        return;
+        if (historiqueRedirection.filter((clefEp) => clefEp == episode.clef).length > 1) {
+            // boucle infinie (ep1 qui redirige vers ep2 qui redrigige vers ep1)
+            let posPlusVieilleClefAffichee=historique.length;
+            // on repasse sur chaque épisode qui ont redirigé
+            for (const clefEpisodeQuiARedirige of historiqueRedirection) {
+                if (historique.lastIndexOf(clefEpisodeQuiARedirige)<posPlusVieilleClefAffichee) {
+                    posPlusVieilleClefAffichee = historique.lastIndexOf(clefEpisodeQuiARedirige);
+                }
+            }
+            clefEpisode = historique[posPlusVieilleClefAffichee];
+            episode = episodes.get(clefEpisode);
+            historiqueRedirection = []; // vide l'historique de redirection qui vient de servir
+
+        } else { // pas une boucle infinie
+            historiqueRedirection.push(episode.revisite);
+            afficherEpisode(episode.revisite);
+            return;
+        }
     }
 
+    // affichage de l'épisode
     historique.push(clefEpisode);
+    historiqueRedirection = [];
 	clefEpisodeEnCours = clefEpisode;
     document.getElementById("titre").innerHTML=episode.titre;
     document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
@@ -167,7 +188,6 @@ function ajouterInventaire(objet) {
 }
 
 function afficherInventaire() {
-    console.log("ajouter inv");
     let htmlInventaireFinal = "";
     let mapHtmlInventaire=new Map();
     // Déjà, on parcourt l'inventaire et on prépare le html pour chaque objet existant

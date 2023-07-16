@@ -26,7 +26,7 @@ creerEpisode({
             ,
     liens: [
             {libelle: `Sortir.`,
-            chemin: "allerPremiereMaison"},
+            chemin: "intro"},
         ]
     ,revisite:"deuxiemeVisiteFerme"
 });
@@ -41,7 +41,7 @@ creerEpisode({
             ,
     liens: [
             {libelle: `Sortir.`,
-            chemin: "allerPremiereMaison"},
+            chemin: "intro"},
         ]
     ,revisite:"troisiemeVisiteFerme"
 });
@@ -50,11 +50,11 @@ creerEpisode({
     clef: "troisiemeVisiteFerme",
     titre : `Nouveau retour dans la ferme.`,
     texte :
-    `Mimi vous accueille chaleuresement. Elle vous offre le repas et le gîte. Vous passez une très bonne `
+    `Mimi vous accueille chaleuresement. Elle vous offre à manger et vous parlez de choses et d'autres. Vous passez un ***très agréable moment***.`
             ,
     liens: [
             {libelle: `Sortir.`,
-            chemin: "allerPremiereMaison"},
+            chemin: "intro"},
         ]
-    ,revisite:"troisiemeVisiteFerme"
+    ,revisite:"allerFerme"
 });
