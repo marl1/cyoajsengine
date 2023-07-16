@@ -5,7 +5,7 @@ Un moteur de LDVELH.
 
 Licence CC0 (sous respect de la loi française).
 
-=== FEATURES ===
+==== FEATURES ====
 * Sauvegarde/chargement.
 * Inventaire.
 * Redirections lors de seconde visite d'épisode (et gestion des redirections en boucle).
@@ -13,7 +13,7 @@ Licence CC0 (sous respect de la loi française).
 * Garde-fous (détection des liens vers épisodes inexistants, détection des noms d'épisodes en doublon...).
 * Javascript sans librairie.
 
-=== Examples ===
+==== Examples ====
 
 Jeu d'exemple servant de démo des fonctionnalités :
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
@@ -29,7 +29,7 @@ CC0 Licence under French law.
 
 Have fun with it.
 
-=== FEATURES ===
+==== FEATURES ====
 * Load/save system.
 * Inventory.
 * Redirect on already visited episode (and can manage circular redirects).
@@ -37,7 +37,7 @@ Have fun with it.
 * Safeguards (detect duplicates, detect paths that leads nowhere...)
 * Vanilla Javascript.
 
-=== Examples ===
+==== Examples ====
 
 A sample game that serve as a demo of the features:
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
