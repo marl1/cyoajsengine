@@ -46,9 +46,9 @@ creerEpisode({
 
 *ajouterInventaireDiscretement* : `ajouterInventaireDiscretement({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` : ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire. Ne sera pas mis en valeur. Utile notamment pour donner quelque chose au joueur au début de l'aventure, ou de manière générale lorsqu'on ne veut pas attirer l'attention sur quelque chose qu'il reçoit.
 
-*ajouterTexte* : `ajouterTexte(\`Nouveau texte !\`);` *ou bien* `ajouterTexte(\`Nouveau texte !\`, "dansCetEpisodePrécis");`. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
+*ajouterTexte* : ``ajouterTexte(`Nouveau texte !`);`` *ou bien* ``ajouterTexte(`Nouveau texte !`, "dansCetEpisodePrécis");``. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
 
-*remplacerTexte* : `remplacerTexte(\`Nouveau texte !\`);` *ou bien* `remplacerTexte(\`Nouveau texte !\`, "dansCetEpisodePrécis");`. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
+*remplacerTexte* : ``remplacerTexte(`Nouveau texte !`);`` *ou bien* ``remplacerTexte(`Nouveau texte !`, "dansCetEpisodePrécis");``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
 
 *nombrePossedeDe* : `nombrePossedeDe("pioche")`. Renvoie le nombre d'exemplaire de l'objet renseigné que possède le joueur. Utile pour metre des conditions en place, par exemple "si le joueur possède au moins 4 roues, alors...".
 
