@@ -57,12 +57,12 @@ function afficherEpisode(clefEpisode) {
     }
 
     // affichage de l'épisode
+    clefEpisodeEnCours = clefEpisode;
     if (episode.callback) {
         episode.callback();
     }
     historique.push(clefEpisode);
     historiqueRedirection = [];
-	clefEpisodeEnCours = clefEpisode;
     document.getElementById("titre").innerHTML=episode.titre;
     document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
     genererLiens(episode.liens);
@@ -179,8 +179,28 @@ function analyserLiens() {
     }
 }
 
-function modifierTexte(clefEpisode, nouveauTexte) {
-    return episodes.get(clefEpisode).texte = nouveauTexte;
+function ajouterLien(nouveauLien, clefEpisodeSurLequelAjouter) {
+    if (!clefEpisodeSurLequelAjouter) { clefEpisodeSurLequelAjouter = clefEpisodeEnCours; }
+    if (!episodes.get(clefEpisodeSurLequelAjouter).liens.find(e => e.libelle === nouveauLien.libelle && e.chemin === nouveauLien.chemin)) {
+        //Particularité, on n'ajoute le lien que s'il n'existe pas déjà
+        episodes.get(clefEpisodeSurLequelAjouter).liens.push(nouveauLien);
+    }
+}
+
+function remplacerLien(nouveauLien, clefEpisodeARemplacer) {
+    if (!clefEpisodeARemplacer) { clefEpisodeARemplacer = clefEpisodeEnCours; }
+    episodes.get(clefEpisodeARemplacer).liens = [];
+    episodes.get(clefEpisodeARemplacer).liens.push(nouveauLien);
+}
+
+function ajouterTexte(nouveauTexte, clefEpisodeSurLequelAjouter) {
+    if (!clefEpisodeSurLequelAjouter) { clefEpisodeSurLequelAjouter = clefEpisodeEnCours; }
+    episodes.get(clefEpisodeSurLequelAjouter).texte += nouveauTexte;
+}
+
+function remplacerTexte(nouveauTexte, clefEpisodeARemplacer) {
+    if (!clefEpisodeARemplacer) { clefEpisodeARemplacer = clefEpisodeEnCours; }
+    episodes.get(clefEpisodeARemplacer).texte = nouveauTexte;
 }
 
 function nombrePossedeDe(objet) {
@@ -200,7 +220,11 @@ function afficherInventaire() {
     let mapHtmlInventaire=new Map();
     // Déjà, on parcourt l'inventaire et on prépare le html pour chaque objet existant
     for (const [key, value] of inventaire) {
-        mapHtmlInventaire.set(key, "-" + value.nom + " (x" + value.nombre + ")");
+        if (value.nombre>0) {
+            mapHtmlInventaire.set(key, "-" + value.nom + " (x" + value.nombre + ")");
+        } else {
+            inventaire.delete(key);
+        }
     }
 
     //Ensuite, on parcourt les ajouts

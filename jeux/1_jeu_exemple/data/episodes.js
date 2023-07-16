@@ -9,7 +9,9 @@ creerEpisode({
             {libelle: `Aller à l'agence d'interim.`,
             chemin: "allerInterim"},
             {libelle: `Aller dans le magasin.`,
-            chemin: "allerMagasin"}
+            chemin: "allerMagasin"},
+            {libelle: `Aller dans les mines d'or.`,
+            chemin: "allerMines"}
         ]
 });
 
@@ -79,7 +81,7 @@ creerEpisode({
     texte :
     `Le magasin vend une belle ***pioche***.`
     ,liens: [
-            {libelle: `Acheter pioche (300 euros).`,
+            {libelle: `Acheter pioche (200 euros).`,
             chemin: "acheterPioche"},
             {libelle: `Sortir.`,
             chemin: "intro"},
@@ -96,13 +98,50 @@ creerEpisode({
             chemin: "intro"},
         ]
     ,callback: function() {
-        if (nombrePossedeDe("euros") < 300) {
-            modifierTexte("acheterPioche", `Vous n'avez pas assez d'argent.`);
+        if (nombrePossedeDe("euros") < 200) {
+            remplacerTexte(`Vous n'avez pas assez d'argent.`);
         }
-        if (nombrePossedeDe("euros") > 300) {
-            modifierTexte("acheterPioche", `Vous achetez ***une belle pioche***.`);
-            ajouterInventaire({clef:"pioche", nom:"Pioche", description:"Une pioche.", nombre:900});
+        if (nombrePossedeDe("euros") >= 200) {
+            remplacerTexte(`Vous achetez ***une belle pioche***.`);
+            ajouterInventaire({clef:"pioche", nom:"Pioche", description:"Une pioche.", nombre:1});
+            ajouterInventaire({clef:"euros", nom:"Euros", description:"De l'argent.", nombre:-200});
+        }
+    }
+});
 
+/* Exemple d'ajout d'un lien. */
+creerEpisode({
+    clef: "allerMines",
+    titre : `Aller dans les mines.`,
+    texte :`Vous voilà dans les mines.`
+    ,liens: [
+            {libelle: `Sortir.`,
+            chemin: "intro"},
+        ]
+    ,callback: function() {
+        if (nombrePossedeDe("pioche") < 1) {
+            ajouterTexte(`Vous n'avez rien à faire ici. Il vous faudrait ***une pioche*** pour trouver de l'or.`);
+        } else {
+            ajouterLien({libelle: `Piocher.`, chemin: "piocherDansLesMines"});
+        }
+    }
+});
+
+/* Exemple d'ajout d'un lien. */
+creerEpisode({
+    clef: "piocherDansLesMines",
+    titre : `Piocher dans les mines.`,
+    texte :`Tac tac tac, vous trouvez une ***pépite d'or*** !`
+    ,liens: [
+            {libelle: `Sortir.`,
+            chemin: "intro"},
+        ]
+    ,callback: function() {
+        if (nombrePossedeDe("pepiteOr") < 3) {
+            ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:1});
+        } else {
+            ajouterTexte(`L'entrée de la mine ***s'écroule !***`);
+            remplacerLien({libelle: `Avancer vers le fond de la mine.`, chemin: "avancerFondMine"});
         }
     }
 });
