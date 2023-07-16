@@ -274,6 +274,7 @@ function demarrerJeu() {
         historique = JSON.parse(window.localStorage.getItem("historique"));
         inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire")));
         historiqueInventaire = new Map(JSON.parse(window.localStorage.getItem("historiqueInventaire")));
+        enleverObjetsAcquis(clefEpisodeEnCours); // Evite bug "sauver sur episode qui donne un truc" + F5 = objet infini.
         afficherEpisode(historique.pop());
     } else {
         afficherEpisode("intro");
