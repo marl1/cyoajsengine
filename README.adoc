@@ -1,9 +1,25 @@
-See English below.
+:toc:
 
 == FRANCAIS ==
 Un moteur de LDVELH.
 
 Licence CC0 (sous respect de la loi française).
+
+=== FEATURES ===
+-Sauvegarde/chargement.
+-Inventaire.
+-Redirections lors de seconde visite d'épisode (et gestion des redirections en boucle).
+-Retour arrière (en ajustant l'inventaire de façon appropriée !).
+-Garde-fous (détection des liens vers épisodes inexistants, détection des noms d'épisodes en doublon...).
+-Javascript sans librairie.
+
+=== Examples ===
+
+Demo des fonctionnalités :
+http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
+
+Jeu sur lequel je bosse :
+http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/cyberpunk
 
 == ENGLISH ==
 
@@ -14,15 +30,17 @@ CC0 Licence under French law.
 Have fun with it.
 
 === FEATURES ===
--Système de sauvegarde / save system
--
-
-
+-Load/save system.
+-Inventory.
+-Redirect on already visited episode (and can manage circular redirects).
+-Go backward (adjusting inventory accordingly !).
+-Safeguards (detect duplicates, detect paths that leads nowhere...)
+-Vanilla Javascript.
 
 === Examples ===
 
-Demo des fonctionnalités / Demo of the features:
+Demo of the features:
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/1_jeu_exemple/
 
-Jeu sur lequel je bosse / Game I'm working on:
+Game I'm working on:
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/cyberpunk
