@@ -1,4 +1,7 @@
 "use strict";
+
+/* Utilisé globalement dans l'appli pour savoir 
+quel épisode est actuellement affiché. */
 var clefEpisodeEnCours;
 
 /* Clefs d'épisodes qui ont été visités par l'utilisateur.
@@ -7,12 +10,14 @@ var clefEpisodeEnCours;
 let historique=[];
 
 /* Indique quelles modifications d'inventaire ont été faites à quel épisode.
-En clef : le numéro d'épisode. En valeur : l'objet rajouté.
+Chaque élément du tableau contient un objet {clefEpisode, objets rajouté}.
+Il est parcouru à l'envers lors des retours arrières.
 */
-let historiqueInventaire=new Map();
+let historiqueInventaire=[];
 let inventaire=new Map();
 
-/* Tableau contenant les objets ajoutés durant un épisode.*/
+/* Tableau contenant les objets ajoutés durant l'épisode en cours,
+sera traité et vidé lors de l'affichage de l'inventaire.*/
 let inventaireAjout=[];
 
 /* Pour détecter les redirections en boucle */
@@ -58,8 +63,12 @@ function afficherEpisode(clefEpisode) {
 
     // affichage de l'épisode
     clefEpisodeEnCours = clefEpisode;
+
+
+    const episodeOriginal = JSON.parse(JSON.stringify(episode));
     if (episode.callback) {
         episode.callback();
+        episodeOriginal.callback = episode.callback;
     }
     historique.push(clefEpisode);
     historiqueRedirection = [];
@@ -68,6 +77,11 @@ function afficherEpisode(clefEpisode) {
     genererLiens(episode.liens);
     animerTransition();
     afficherInventaire();
+
+    // L'épisode a pu être modifié par des callbacks donc on réinjecte l'original.
+    // Sinon les modifs de texte par exemple s'additionneront à l'infini.
+    console.log("episodeOriginal", episodeOriginal);
+    episodes.set(clefEpisodeEnCours, episodeOriginal);
 }
 
 function sauvegarder() {
@@ -75,7 +89,7 @@ function sauvegarder() {
         window.localStorage.setItem("clefEpisodeEnCours", clefEpisodeEnCours);
         window.localStorage.setItem("historique", JSON.stringify(historique));
         window.localStorage.setItem("inventaire", JSON.stringify(Array.from(inventaire.entries())));
-        window.localStorage.setItem("historiqueInventaire", JSON.stringify(Array.from(historiqueInventaire.entries())));
+        window.localStorage.setItem("historiqueInventaire", JSON.stringify(historiqueInventaire));
         document.getElementById("disquette").classList.remove('glitch');
         window.setTimeout(function() {
            document.getElementById("disquette").classList.add('glitch');
@@ -181,10 +195,7 @@ function analyserLiens() {
 
 function ajouterLien(nouveauLien, clefEpisodeSurLequelAjouter) {
     if (!clefEpisodeSurLequelAjouter) { clefEpisodeSurLequelAjouter = clefEpisodeEnCours; }
-    if (!episodes.get(clefEpisodeSurLequelAjouter).liens.find(e => e.libelle === nouveauLien.libelle && e.chemin === nouveauLien.chemin)) {
-        //Particularité, on n'ajoute le lien que s'il n'existe pas déjà
         episodes.get(clefEpisodeSurLequelAjouter).liens.push(nouveauLien);
-    }
 }
 
 function remplacerLien(nouveauLien, clefEpisodeARemplacer) {
@@ -228,6 +239,7 @@ function afficherInventaire() {
     }
 
     //Ensuite, on parcourt les ajouts
+    let tabObjetspourHistorique=[];
     for (const nouvelObjet of inventaireAjout) {
         if (mapHtmlInventaire.get(nouvelObjet.clef)) { //l'objet n'est pas vraiment nouveau, c'est juste une modif de nombre
             // maj de sa quantite dans le vrai inventaire
@@ -250,10 +262,9 @@ function afficherInventaire() {
                 mapHtmlInventaire.set(nouvelObjet.clef, '-' + nouvelObjet.nom + " (x" + nouvelObjet.nombre + ")");
             }
         }
-
-        if (!historiqueInventaire.get(clefEpisodeEnCours)) { historiqueInventaire.set(clefEpisodeEnCours, []); }
-        historiqueInventaire.get(clefEpisodeEnCours).push({clef:nouvelObjet.clef, nom:nouvelObjet.nom, description:nouvelObjet.description, nombre:nouvelObjet.nombre});
+        tabObjetspourHistorique.push({clef:nouvelObjet.clef, nom:nouvelObjet.nom, description:nouvelObjet.description, nombre:nouvelObjet.nombre});
     }
+    historiqueInventaire.push({clefEpisode:clefEpisodeEnCours, modifObjets:{tabObjetspourHistorique}});
 
     // on peut vider les trucs à ajouter vu qu'on les as traité
     inventaireAjout = [];
@@ -267,16 +278,16 @@ function afficherInventaire() {
 
 function episodePrecedent() {
     if(historique.length>0) {
-        enleverObjetsAcquis(historique[historique.length - 1]);
-        historique.pop(); // supprime l'épisode en cours
-        enleverObjetsAcquis(historique[historique.length - 1]);
+        enleverDerniersObjetsAcquis();
+        historique.pop(); // supprime l'épisode en cours de l'historique
+        enleverDerniersObjetsAcquis();
         afficherEpisode(historique.pop()); //on repart sur la clef précédente+la supprime
     }
 }
 
 //Pour éviter que la fonction "retour" ne permette d'avoir une infinité d'objets
-function enleverObjetsAcquis(clefEpisode) {
-    const tabObjetsARetirer = historiqueInventaire.get(clefEpisode);
+function enleverDerniersObjetsAcquis() {
+    const tabObjetsARetirer = historiqueInventaire.pop().modifObjets.tabObjetspourHistorique;
     if (tabObjetsARetirer) {
         for (const objetARetirer of tabObjetsARetirer) {
             if (inventaire.get(objetARetirer.clef)) {
@@ -287,7 +298,6 @@ function enleverObjetsAcquis(clefEpisode) {
                 }
             }
         }
-        historiqueInventaire.delete(clefEpisode);
     }
 }
 
@@ -297,8 +307,8 @@ function demarrerJeu() {
         clefEpisodeEnCours = window.localStorage.getItem("clefEpisodeEnCours");
         historique = JSON.parse(window.localStorage.getItem("historique"));
         inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire")));
-        historiqueInventaire = new Map(JSON.parse(window.localStorage.getItem("historiqueInventaire")));
-        enleverObjetsAcquis(clefEpisodeEnCours); // Evite bug "sauver sur episode qui donne un truc" + F5 = objet infini.
+        historiqueInventaire = JSON.parse(window.localStorage.getItem("historiqueInventaire"));
+        enleverDerniersObjetsAcquis(); // Evite bug "sauver sur episode qui donne un truc" + F5 = objet infini.
         afficherEpisode(historique.pop());
     } else {
         afficherEpisode("intro");
