@@ -31,7 +31,7 @@ creerEpisode({
     titre : `Consulter la notif CopCast`,
     texte :
     `L'user Hyubriss a signalé ***trois flics*** du côté de la porte d'entrée. Son info a été confirmée par deux autres personnes.
-    C'est toujours bon à savoir. Même s'il y a pas de raison particulière que ça tombe sur vous, il vaut mieux peut être ***pas donner aux poulets l'occasion de trouver les gélules*** dans votre manteau.`
+    C'est toujours bon à savoir. Même s'il y a pas de raison particulière que ça tombe sur vous, il vaut mieux peut être ***ne pas donner*** aux poulets ***l'occasion de trouver les gélules*** dans votre manteau.`
             ,
     liens: [
             {libelle: `Aller vers les loges pour trouver la porte de derrière.`,
@@ -198,7 +198,7 @@ creerEpisode({
     
     Vous vous enfuyez en courant, sans demander votre reste, et retournez à votre planque.
 
-    Bravo, vous évitez ainsi de travailler de nouveau pour Chronos Group. Vous réussissez à quitter le pays et trouvez un poste de mercenaire. Mais ceci est une autre histoire...
+    Bravo, vous évitez ainsi de travailler de nouveau pour Premanod. Vous réussissez à quitter le pays et trouvez un poste de mercenaire. Mais ceci est une autre histoire...
 
     ***FIN***
     `
@@ -2098,7 +2098,449 @@ Vous vous asseyez sur le lit. Vous êtes dans une salle d'opération ou, pour ê
 Vous lui assurez que oui, et que non, vous n'allez pas faire de bêtises.
 
 Vous sortez de la salle et débouchez au milieu d'un court couloir plutôt chic, rappellant d'avantage un hôtel qu'un hôpital. Vers la gauche se trouve l'ascenseur. Une affichette vous indique que vous êtes au deuxième étage.
-
-***A SUIVRE...***
 `
+,liens: [
+    {libelle: `Aller vers l'ascenseur.`,
+    chemin: "115"},
+    {libelle: `Visiter les autres pièces du couloir.`,
+    chemin: "116"},
+    {libelle: `Retourner dans la salle d'implantation.`,
+    chemin: "117"},
+    {libelle: `Essayer de vous enfuir.`,
+    chemin: "118"}
+]
+});
+
+creerEpisode({ //TODO conditionné la vue de l'augmenté au club ou non
+    clef: "115",
+    titre : `Prendre l'ascenseur`,
+    texte :
+    `
+    Vous appelez l'ascenseur et appuyez sur le chiffre 3.
+
+    La cabine est plutôt clean elle aussi. De la musique, des fausses plantes vertes. Rien à voir avec les préfabriqués et les entrepots reconvertis où vous aviez l'habitude de travailler.
+    
+    Vous voilà au troisième étage. Le bureau d'Alice est juste en face, sa porte vitrée ouverte vous invite à rentrer. ***Le gros Alice*** est derrière son bureau en train de lire un dossier. Il n'a pas changé. Son visage poupin chauve et imberbe restera certainement le même jusqu'à sa mort. A côté de lui se tient ***un énorme augmenté*** en train de vous regarder. Vous vous souvenez l'avoir vu au club. Il vous fait un signe de sa tête blanche presque aveuglante. Alice se réveille.
+    
+    "Ah ! Te voilà ! Entre, entre." Il est tellement content de vous voir qu'il en manque de tomber de son fauteil à force de gesticulations.
+    
+    "J'ai démissionné, faites-vous, en détachant bien chaque syllabe.
+    -Haha, oui ! Et ça t'a pas réussi. Tu es obligé de te camer pour supprimer les erreurs de calibrations. Tu pirates des portes monnaies électroniques pour survivre. Tu as besoin de nous et ça tombe bien parce qu'on a encore besoin de toi.
+    -Je suis trop vieux. Vous avez besoin de quoi, d'un cobaye ?
+    -Oh non, t'es pas trop vieux, au contraire t'es par-fait. Des comme toi yen a plus beaucoup tu sais, donc c'est dommage que tu gâches ton talent. Si tu reviens, non seulement on te fera la maintenance régulière dont je suis sûr que tu rêves toutes les nuits, mais en plus, on pourra te donner quelques bonus. Tu as vu Max, là ?" Il désigne l'augmenté au visage cadavérique. Il porte un long manteau donc c'est un peu difficile à affirmer, mais son corps semble entièrement mécanique jusqu'en dessous du menton. Son crane blanc ressemble à une ampoule qu'on aurait vissé à la va vite sur son corps.
+    
+    "Il me fait peur, dites-vous.
+    -Désolé.", répond-il d'une petite voix en baissant les yeux.
+    
+    Alice reprend sans vous prêter attention.
+    "On travaille surtout avec la police ou l'armée, comme avant. Alors, qu'est ce que tu en dis ?"
+    
+    Vous hésitez. C'est vrai que ces derniers mois n'ont pas été particulièrement brillants et Alice est loin de se douter à quel point. Si vous continuez seul, vous savez très bien que vous finirez dans une poubelle ou alors dispersé entre les marchés noirs de Chine et des USA.
+    
+    C'est peut être l'heure de sonner la fin de la petite pause et de se remettre dans le circuit.
+`
+,liens: [
+    {libelle: `Accepter.`,
+    chemin: "119"},
+    {libelle: `Demander des détails.`,
+    chemin: "120"},
+    {libelle: `Retourner dans la salle d'implantation.`,
+    chemin: "117"},
+    {libelle: `Demander du temps pour réfléchir.`,
+    chemin: "121"}
+]
+});
+
+creerEpisode({
+    clef: "116",
+    titre : `Visiter les autres pièces du deuxième étage`,
+    texte :
+    `A côté de la salle d'implantation se trouve une pièce fermée à clef : vous pouvez voir à travers l'étroite vitre que du matériel médical y est stocké. La dernière porte le long de ce mur mène aux toilettes.
+
+    Sur le mur en face, deux autres portes : l'une, vitrée, est celle d'un bureau. Sur l'autre est indiqué "escaliers".
+    <img src="data/img/planEtageSalleImplantation.png">
+`
+,liens: [
+    {libelle: `Aller vers l'ascenseur.`,
+    chemin: "115"},
+    {libelle: `Retourner dans la salle d'implantation.`,
+    chemin: "117"},
+    {libelle: `Essayer de vous enfuir.`,
+    chemin: "118"},
+    {libelle: `Entrer dans le bureau.`,
+    chemin: "140"},
+    {libelle: `Aller aux toilettes.`,
+    chemin: "141"},
+    {libelle: `Jeter un oeil au matériel médical.`,
+    chemin: "163"},
+    {libelle: `Prendre la porte menant aux escaliers.`,
+    chemin: "142"}
+
+]
+});
+
+creerEpisode({
+    clef: "117",
+    titre : `Lumière`,
+    texte :
+    `Ils sont en train de ranger leur matériel. Le médecin lève les sourcils en vous voyant.
+
+    "Oui ? Un problème ?"
+    `
+,liens: [
+    {libelle: `"Qu'est-ce que vous m'avez fait, au juste ?"`,
+    chemin: "143"},
+    {libelle: `"Pouvez-vous m'améliorer ?"`,
+    chemin: "144"},
+    {libelle: `"Non, rien."`,
+    chemin: "145"}
+]
+});
+
+creerEpisode({
+    clef: "118",
+    titre : `Essayer de vous enfuir ?`,
+    texte :
+    `C'est ridicule. Vous n'avez rien à fuir, Alice est une vieille connaissance.
+    Mieux vaut discuter pour savoir ce qu'il veut avant de prendre de telles décisions.
+    
+    Et puis, ça fait longtemps que vous n'avez pas vu son visage bouffi.`
+,liens: [
+    {libelle: `Aller vers l'ascenseur.`,
+    chemin: "115"},
+    {libelle: `Visiter les autres pièces du couloir.`,
+    chemin: "116"},
+    {libelle: `Retourner dans la salle d'implantation.`,
+    chemin: "117"}
+]
+});
+
+creerEpisode({
+    clef: "119",
+    titre : `Lumière`,
+    texte :
+    `"C'est d'accord."
+
+C'est pas comme si vous avez le choix, de toute façon. La dernière mission que vous aviez effectué pour Premanod vous a laissé un goût amer dans la bouche, mais après tout, ils n'y étaient pour rien. Peut être que vous pourrez gérer les choses différemment cette fois.
+
+"Super ! Content que tu sois de retour parmi nous. Par contre il va me falloir un peu de temps pour les conneries administratives. Je te recontacte dans quelques jours pour signer le contrat, d'accord ?"
+
+Sur la demande d'Alice, vous ré-autorisez son accès à votre module de communication. L'augmenté vous raccompagne vers l'ascenseur.
+
+`
+,liens: [
+    {libelle: `Vous arrivez au rez de chaussé..`,
+    chemin: "152"}
+]
+});
+
+creerEpisode({
+    clef: "120",
+    titre : `Demander des détails sur l'offre d'Alice`,
+    texte :
+    `Les conditions n'ont pas beaucoup changées depuis que vous êtes parti.
+    Premanod vous fournit un appartement coquet à deux pas d'ici, un entretien et des upgrades du corps ainsi qu'un salaire dans la moyenne.
+    Obligation d'être d'astreinte en permanence : vous devez toujours être près à partir en mission. Vous êtes néanmoins libre de les exécuter selon vos termes ou même carrément de les refuser. Un comité décidera alors si votre attitude mérite des sanctions ou non.
+    
+    Quand aux missions elles mêmes, pas de changement non plus. Premanod propose aux états des groupes tactiques d'interventions lors de situation de siège, de prise d'otage et de missions à hauts risques.
+    
+    "Tu ne retrouveras pas tout de suite ta place dans la hierachie, évidemment, mais ça te reviendra rapidement. Ton talent nous manque. Tu nous manques."`
+,liens: [
+    {libelle: `Accepter.`,
+    chemin: "119"},
+    {libelle: `Demander du temps pour réfléchir.`,
+    chemin: "121"}
+]
+});
+
+creerEpisode({
+    clef: "121",
+    titre : `Demander à réfléchir sur la proposition`,
+    texte :
+    `"J'ai besoin de temps.
+    -Pas de souci. Tu sais quoi, je dois préparer toute la merde administrative de toute façon. On se revoit dans quelques jours, et là je te demanderais ta décision. Ok ?"
+    
+    Vous acceptez. Vous n'avez rien à perdre.
+    
+    La dernière mission que vous aviez effectué pour Premanod vous a laissé un goût amer dans la bouche, mais après tout, ils n'y étaient pour rien. Peut être que vous pourrez gérer les choses différemment cette fois.
+    
+    Sur la demande d'Alice, vous rétablissez son accès à votre module de communication. L'augmenté vous raccompagne vers l'ascenseur.`
+,liens: [
+    {libelle: `Vous arrivez au rez de chaussé.`,
+    chemin: "152"}
+]
+});
+
+creerEpisode({
+    clef: "140",
+    titre : `Aller dans le bureau en face de la salle d'implantation`,
+    texte :
+    `C'est une petite pièce, avec une table au centre entourée de petites armoires métalliques à tiroir. Les meubles sont recouverts de tas de dossiers bourrés à craquer, organisés sans logique apparente. Un ordinateur attend patiemment que quelqu'un vienne le réveiller.
+
+    Quoi que vous fassiez, faites-le vite : les médecins et les infirmiers vont bien finir par sortir de la salle d'implantation un jour et ils risquent de moyennement apprécier qu'on fouille leur bureau.`
+,liens: [
+    {libelle: `Fouiller la pièce.`,
+    chemin: "146"},
+    {libelle: `Fouiller l'ordinateur.`,
+    chemin: "147"},
+    {libelle: `Sortir du bureau.`,
+    chemin: "148"}
+]
+});
+
+creerEpisode({
+    clef: "146",
+    titre : `Fouiller le bureau`,
+    texte :
+    `Vous parcourez rapidement la pièce à la recherche de quelque chose d'intéressant. Rien de particulier. Des bons de livraisons, des rapports, des vieilles factures, des contrats, des décharges...`
+,liens: [
+    {libelle: `Consulter l'ordinateur.`,
+    chemin: "147"},
+    {libelle: `Sortir du bureau.`,
+    chemin: "148"}
+]
+});
+
+creerEpisode({
+    clef: "147",
+    titre : `Consulter l'ordinateur`,
+    texte :
+    `L'ordinateur était en veille. Il vous demande un mot de passe.
+    Vous tapez celui qui est inscrit sur le post-it collé sur l'écran et accédez au système.
+    
+    Le disque est quasi-vide, on pourrait penser que l'OS vient tout juste d'être installé. Seule une icône DOSSIERS MED sur le bureau indique le contraire.
+    `
+,liens: [
+    {libelle: `Consulter les dossiers médicaux.`,
+    chemin: "149"},
+    {libelle: `Lire les mails.`,
+    chemin: "150"},
+    {libelle: `Fouiller la pièce.`,
+    chemin: "146"},
+    {libelle: `Sortir du bureau.`,
+    chemin: "148"}
+]
+});
+
+creerEpisode({
+    clef: "149",
+    titre : `Ouvrir DOSSIER MED`,
+    texte :
+    `L'icône lance une application qui se connecte à priori à une base de donnée distante. Elle vous demande un mot de passe.
+
+    Le mot de passe du post-it n'est pas le bon. Impossible d'accéder à la base de donnée.
+    
+    Après quelques manipulations infructueuses, vous arrivez néanmoins à retrouver la trace résiduelle des derniers dossiers consultés sur le disque. Il y en a quatre de lisibles.
+    
+    ========================
+    B. Rimmi A.K.A. "Ditto"
+    
+    214 SCCP DONT RESUME :
+    -SQLTTE RENF CARBO. ALLG
+    -16 ENDO-ASSIST (VTS LIN FACTEUR 3.8, VTS CRS FACTEUR 2.7) BAS DU CORPS + COLONNE ET NUQUE
+    -6 LAMES RETRACT. BRAS
+    -OCULAIRE MAXI NORME 12b
+    
+    Stress test à mettre à jour après avoir vu les nouvelles vitesses.
+    
+    ========================
+    G. Schesno A.K.A. "REX"
+    112 SCCP DONT RESUME :
+    -SQLTTE RENF CARBO. LRD A TR LRD (SUR CRANE)
+    -4 CROCS MAINS AURICULAIRE+ANNULAIRE (sacrifiés)
+    -BASSIN CMPLT TYPE WOLF
+    -OCULAIRE MAXI NORME 12b
+    -AUDITIF NORME 17 BASSE
+    
+    Psychopatho totémique ? A faire suivre par personnel approprié.
+    
+    ========================
+    J. LIBRE A.K.A. "TSUKI"
+    182 SCCP DONT RESUME :
+    -SQLTTE RENF CARBO. LRD A TR LRD (SUR CRANE)
+    -12 PORTS HAUTE VITESSE NORME 812b SUR COLONNE+ESPACE FIXATION
+    -OCULAIRE MAXI NORME 12b
+    -2 CONTROLEURS HARDWARE AUTO (à noter !!!)
+    
+    Semble passer une majeure partie de son temps déconnectée de son corps ?
+    
+    ========================
+    
+    Votre nom est inscrit à la dernière ligne. Vous êtes sans doute le dernier fichier à avoir été consulté.
+    70 SCCP DONT RESUME :
+    -SQLTTE RENF CARBO BASE
+    -OCULAIRE GREFFE (MODULE DVR CONNECTIQUE 72)
+    -12 ENDO-ASSIST (BASE ARTI)
+    
+    Signes de vitro + erreurs de calibrations critiques. Maintenance & rapatriment à faire en urgence.
+    ========================
+    
+    Rien de plus.`
+,liens: [
+    {libelle: `Lire les mails.`,
+    chemin: "150"},
+    {libelle: `Fouiller la pièce.`,
+    chemin: "146"},
+    {libelle: `Sortir du bureau.`,
+    chemin: "148"}
+]
+});
+
+creerEpisode({
+    clef: "150",
+    titre : `Lire les mails de l'ordinateur du bureau en face de la salle d'implantation`,
+    texte :
+    `Le logiciel de messagerie fonctionne avec deux adresses. Vous arrivez à cracker l'une d'elle, qui semble être une adresse personnelle, mais pas la seconde, la professionelle.
+    Vous vous résignez et consultez donc les mails personnels.
+    
+    --Info Victis Le Cube : Votre Compte--
+    From:infocompte@victis.com
+    to:g.patou134@Econtel.com
+    Victis Le Cube vous informe. Votre forfait arrivera à expiration le 12.06 et sera automatiquement renouvelé sauf refus de votre part (voir ci-dessous).
+    (Vous pouvez refuser simplement en cliquant ici, puis vous rendant dans la rubrique "mon compte", sous rubrique "gérer mon abonnement", en choisissant votre abonnement, en cliquant sur "gérer", puis "actions client", puis sélectionnant "renouvellement automatique" dans le menu déroulant, puis "prochain", et enfin, en cliquant sur "ne pas renouveler".
+    Pensez à autoriser les pop up pour voir le message de confirmation, saisissez alors vos infos clients (n° client, montant et code ICT présent sur les trois dernières factures). Lorsque le message "non renouvellement automatique" s'affiche à la place de "renouvellement automatique", vous avez correctement configuré le panneau d'administration client. Vous devez maintenant sauvegarder les modifications. Rendez-vous dans l'onglet "quitter", puis cochez "enregistrer les modifications effectuées" et sur le bouton "quitter". La liste des modifications apportées à l'espace client s'affiche alors pour vous permettre de donner votre accord. Vous pouvez "quitter" ou "fermer" pour perdre les modifications effectuées.)
+    Merci de votre confiance.
+    Victis. Le Cube.
+    
+    --RE:RE:RE:RE:RE:RE:RE:RE:RE:Pieces pour le dossier maison ! URGENT--
+    From:leati.patou134@Econtel.com
+    to:g.patou134@Econtel.com
+    et celui-là ? il joue avec une pelote, trop mignon lol
+    http://www.youlube.com/v/?2048CUYT24C
+    
+    --BALAD.COM : MP d'un(e) BALADEUR/EUSE--
+    From:mp@BALAD.com
+    to:g.patou134@Econtel.com
+    Vous avez reçu un message privé sur BALAD.COM !
+    Connectez vous pour le lire !
+    Ce mail est envoyé automatiquement !
+    Inutile de répondre !
+    A bientôt sur BALAD.COM !
+    
+    --je fais la 1ere partie à l'anguille frite--
+    From:thibault.patou@mymail.com
+    to:g.patou134@Econtel.com
+    Yo ya un concert gratos a l'anguille frite vendredi prochain et c nous qui jouon en premiere partie bon te sens pas obligé de venir mais maman vient et elle m'a dit de te rapeler car tu voulais voir l'autre jour
+    voir le site : anguillefrite.com/progra
+    ya marqué ke c a 21h ke sa commence mais bon ca va etre genre 22h en fait voir + donc si t'es coince un peu au boulot pas de bile lol
+    je te force pas mais c'est cool si tu viens quand meme :)`
+,liens: [
+    {libelle: `Consulter les dossiers médicaux.`,
+    chemin: "149"},
+    {libelle: `Lire les mails.`,
+    chemin: "150"},
+    {libelle: `Fouiller la pièce.`,
+    chemin: "146"},
+    {libelle: `Sortir du bureau.`,
+    chemin: "148"}
+]
+});
+
+creerEpisode({
+    clef: "143",
+    titre : `Demander au médecin ce qu'il vous a fait`,
+    texte :
+    `"Eh bien, juste une petite maintenance. Vous savez, vous devriez la faire une fois par semaine au moins. Ca faisait longtemps, n'est-ce pas ?
+    -Presque deux mois, avouez-vous.
+    -Oh ? A ce point ?"
+    Il prend quelques instants pour réfléchir.
+    
+    "Ca n'a pas dû être facile. Pas trop de tremblements ?
+    -Avec les drogues, ça allait.
+    -Hmm hmm. Vous devriez faire un peu plus attention. Vous avez eu de la chance que la compagnie s'intéresse de nouveau à vous.
+    -Si vous le dites..."`
+,liens: [
+    {libelle: `"Pouvez-vous m'améliorer ?"`,
+    chemin: "144"},
+    {libelle: `"Je vais y aller..."`,
+    chemin: "145"}
+]
+});
+
+creerEpisode({
+    clef: "144",
+    titre : `Demander au médecin s'il peut vous améliorer.`,
+    texte :
+    `Il secoue la tête.
+    "Pas pour le moment. Revenez après avoir vu Alice et on en reparle, c'est d'accord ?"`
+,liens: [
+    {libelle: `"D'accord. J'y vais."`,
+    chemin: "145"},
+    {libelle: `"Que m'avez-vous fait, au fait ?"`,
+    chemin: "143"}
+]
+});
+
+creerEpisode({
+    clef: "145",
+    titre : `Dans le couloir du deuxième étage`,
+    texte :
+    `Vous voilà dans le couloir du deuxième étage.
+    En face, l'ascenseur menant à Alice, qui vous attend.`
+,liens: [
+    {libelle: `Prendre l'ascenseur.`,
+    chemin: "115"},
+    {libelle: `Visiter les autres pièces du couloir.`,
+    chemin: "116"},
+    {libelle: `Essayer de vous enfuir.`,
+    chemin: "118"}
+]
+});
+
+creerEpisode({
+    clef: "148",
+    titre : `Retourner dans le couloir du deuxième étage`,
+    texte :
+    `Vous revoilà dans le couloir chic aux tons bleus.`
+,liens: [
+    {libelle: `
+    Aller vers l'ascenseur où Alice vous attend.`,
+    chemin: "115"},
+    {libelle: `Visiter les autres pièces du couloir.`,
+    chemin: "116"},
+    {libelle: `Retourner dans la salle d'implantation.`,
+    chemin: "117"},
+    {libelle: `Essayer de vous enfuir.`,
+    chemin: "118"}
+]
+});
+
+creerEpisode({
+    clef: "141",
+    titre : `Dans les toilettes du deuxième étage`,
+    texte :
+    `Deux lavabos et autant de cabines. Pas de bouche d'aération.
+
+    Vous en profitez pour vous passer le visage sous l'eau. Quelle sale tête vous avez. Certainement en état de manque. La peau synthétique commence à se craqueler par endroit, aux tempes autour des implantations des connectiques des lunettes noires.
+    Vous éteignez le robinet. L'eau sur vos mains était-elle chaude, ou froide ? Vos capteurs n'ont même pas pu vous le dire. Vos doigts sont un petit miracle d'ingénérie robotique, répondant parfaitement à chacune de vos solicitation, aussi bien pour donner un coup qu'une caresse. Mais vous sentez les articulations frotter. La peau s'écaille sur le dessous des pouces. La couleur de la chair n'est plus aussi uniforme qu'autrefois.
+    
+    Finalement, c'est une forme de vieillesse, pensez-vous, en retournant dans le couloir.
+    
+    `
+,liens: [
+    {libelle: `
+    Aller vers l'ascenseur où Alice vous attend.`,
+    chemin: "115"},
+    {libelle: `Visiter les autres pièces du couloir.`,
+    chemin: "116"},
+    {libelle: `Retourner dans la salle d'implantation.`,
+    chemin: "117"},
+    {libelle: `Essayer de vous enfuir.`,
+    chemin: "118"}
+]
+});
+
+creerEpisode({
+    clef: "163",
+    titre : `Dans les toilettes du deuxième étage`,
+    texte :
+    `Le stock est fermé par une solide porte de métal. Un étroit panneau de verre blindé vous permet de voir le matériel médical stocké dans la pièce.
+
+    Vous savez déjà que vous n'arriverez à rien sans matériel. Impossible de briser cette porte, même avec vos augmentations.
+    
+    `
+,liens: [
+    {libelle: `Visiter les autres pièces du couloir.`,
+    chemin: "116"}
+]
 });
