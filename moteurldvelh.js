@@ -193,6 +193,16 @@ function analyserLiens() {
     }
 }
 
+function nombreVisites() {
+    let compteur=0;
+    for (const clefEpisode of historique) {
+        if (clefEpisode === clefEpisodeEnCours) {
+            compteur++;
+        }
+    }
+    return compteur;
+}
+
 function ajouterLien(nouveauLien) {
     episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
 }
