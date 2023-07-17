@@ -71,6 +71,9 @@ creerEpisode({
         ]
     ,callback: function() {
 		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
+        if (nombrePossedeDe("euros") === 0) {
+            ajouterInventaire({clef:"chaussuresSecu", nom:"Chaussures de sécurité", description:"Chaussures de sécurité.", nombre:50});
+        }
     }
 });
 
