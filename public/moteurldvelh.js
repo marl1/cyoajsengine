@@ -72,8 +72,18 @@ function afficherEpisode(clefEpisode) {
     }
     historique.push(clefEpisode);
     historiqueRedirection = [];
-    document.getElementById("titre").innerHTML=episode.titre;
-    document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
+    if (episode.titre instanceof Function) {
+        episodeOriginal.titre = episode.titre;
+        document.getElementById("titre").innerHTML=episode.titre();
+    } else {
+        document.getElementById("titre").innerHTML=episode.titre;
+    }
+    if (episode.texte instanceof Function) {
+        episodeOriginal.texte = episode.texte;
+        document.getElementById("texte").innerHTML=formatterTexte(episode.texte());
+    } else {
+        document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
+    }
     genererLiens(episode.liens);
     animerTransition();
     afficherInventaire();
