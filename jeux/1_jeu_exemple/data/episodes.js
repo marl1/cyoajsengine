@@ -60,7 +60,7 @@ creerEpisode({
     ,revisite:"allerFerme"
 });
 
-/* Exemple d'ajout d'un objet. */
+/* Exemple d'ajout d'un objet + détection du nombre de visite. */
 creerEpisode({
     clef: "allerInterim",
     titre : `Aller à l'agence d'interim.`,
@@ -72,8 +72,9 @@ creerEpisode({
         ]
     ,callback: function() {
 		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
-        if (nombrePossedeDe("euros") === 0) {
-            ajouterInventaire({clef:"chaussuresSecu", nom:"Chaussures de sécurité", description:"Chaussures de sécurité.", nombre:50});
+        if (nombreVisites() === 0) {
+            ajouterTexte(`Comme c'est la première fois que vous venez, on vous donne des ***chaussures de sécurité***.`);
+            ajouterInventaire({clef:"chaussuresSecu", nom:"Paire de chaussures de sécurité", description:"Chaussures de sécurité.", nombre:1});
         }
     }
 });
@@ -138,15 +139,26 @@ creerEpisode({
     titre : `Piocher dans les mines.`,
     texte :`Tac tac tac, vous trouvez une ***pépite d'or*** !`
     ,liens: [
-            {libelle: `Sortir.`,
-            chemin: "intro"},
+            {libelle: `Arrêter de piocher.`,
+            chemin: "allerMines"},
         ]
     ,callback: function() {
-        if (nombrePossedeDe("pepiteOr") < 3) {
+        if (nombreVisites() < 3) {
             ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:1});
         } else {
-            ajouterTexte(`L'entrée de la mine ***s'écroule !*** Vous entendez un ***rire***.`);
+            ajouterTexte(
+                ` L'entrée de la mine ***s'écroule !*** Vous entendez un ***rire***.
+                "Tu es venu ${nombreVisites()} fois ! Hahaha ! Tu es cupide !!"
+            `);
             remplacerLien({libelle: `Avancer vers le fond de la mine.`, chemin: "avancerFondMine"});
         }
     }
+});
+
+/* Exemple d'ajout d'un lien. */
+creerEpisode({
+    clef: "avancerFondMine",
+    titre : `Avancer vers le fond de la mine.`,
+    texte :`Oh non, c'est le fantôme de la mine ! Il vous saute dessus et vous tue.
+                            ***FIN***`
 });

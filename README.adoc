@@ -13,9 +13,6 @@ Licence CC0 (sous respect de la loi française).
 * Garde-fous (détection des liens vers épisodes inexistants, détection des noms d'épisodes en doublon...).
 * Javascript sans librairie.
 
-==== A FAIRE
-* Annuler les fonctions lors du retour arrière.
-
 
 ==== Examples
 
@@ -26,6 +23,9 @@ Jeu sur lequel je bosse :
 http://s140685957.onlinehome.fr/LDVELH/LdvelhJs/jeux/cyberpunk
 
 ==== Fonctions
+
+*creerEpisode* : fonction à utiliser pour écrire un nouvel épisode.
+
 ====== Fonctions de callback
 
 Fonctions utilisées dans les épisodes, exemple avec la fonction "ajouterInventaire" ci-dessous :
@@ -50,15 +50,17 @@ creerEpisode({
 
 *ajouterInventaireDiscretement* : `ajouterInventaireDiscretement({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` : ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire. Ne sera pas mis en valeur. Utile notamment pour donner quelque chose au joueur au début de l'aventure, ou de manière générale lorsqu'on ne veut pas attirer l'attention sur quelque chose qu'il reçoit.
 
-*ajouterLien* : ``ajouterLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});`` *ou bien* ``ajouterLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"}, "dansCetEpisodePrecis");``. Ajouter un lien. Si un lien identique existe déjà, il ne sera pas ajouté.
+*ajouterLien* : ``ajouterLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Ajouter un lien. Si un lien identique existe déjà, il ne sera pas ajouté.
 
-*remplacerLien* : ``remplacerLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});`` *ou bien* ``remplacerLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"}, "dansCetEpisodePrecis");``. Supprime tous les liens et remplace par d'autres.
+*remplacerLien* : ``remplacerLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Supprime tous les liens et remplace par d'autres.
 
-*ajouterTexte* : ``ajouterTexte(`Nouveau texte !`);`` *ou bien* ``ajouterTexte(`Nouveau texte !`, "dansCetEpisodePrécis");``. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
+*ajouterTexte* : ``ajouterTexte(`Nouveau texte !`);``. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
 
-*remplacerTexte* : ``remplacerTexte(`Nouveau texte !`);`` *ou bien* ``remplacerTexte(`Nouveau texte !`, "dansCetEpisodePrécis");``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
+*remplacerTexte* : ``remplacerTexte(`Nouveau texte !`);``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
 
 *nombrePossedeDe* : `nombrePossedeDe("pioche")`. Renvoie le nombre d'exemplaire de l'objet renseigné que possède le joueur. Utile pour metre des conditions en place, par exemple "si le joueur possède au moins 4 roues, alors...".
+
+*nombreVisite* : retourne le nombre de visite précédentes de l'épisode en cours.
 
 == ENGLISH
 
