@@ -82,10 +82,10 @@ creerEpisode({
 /* Exemple d'affichage de variables.Penser à utiliser get texte() ! */
 creerEpisode({
     clef: "allerMagasin",
-    titre : `Aller au magasin.`,
-    get texte() {
-        return `Le magasin vend une belle ***pioche***. Vous avez ${nombrePossedeDe("euros")} euros en poche.
-        Une horloge au mur indique qu'il est ${new Date().getHours()} heures, ${new Date().getMinutes()}min et ${new Date().getSeconds()}s.`; }
+    titre : () => `Aller au magasin (avec ${nombrePossedeDe("euros")} euros).`,
+    texte: () =>
+        `Le magasin vend une belle ***pioche***. Vous avez ${nombrePossedeDe("euros")} euros en poche.
+        Une horloge au mur indique qu'il est ${new Date().getHours()} heures, ${new Date().getMinutes()}min et ${new Date().getSeconds()}s.`
     ,liens: [
             {libelle: `Acheter pioche (200 euros).`,
             chemin: "acheterPioche"},
