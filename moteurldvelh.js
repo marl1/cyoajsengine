@@ -193,25 +193,21 @@ function analyserLiens() {
     }
 }
 
-function ajouterLien(nouveauLien, clefEpisodeSurLequelAjouter) {
-    if (!clefEpisodeSurLequelAjouter) { clefEpisodeSurLequelAjouter = clefEpisodeEnCours; }
-        episodes.get(clefEpisodeSurLequelAjouter).liens.push(nouveauLien);
+function ajouterLien(nouveauLien) {
+    episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
 }
 
-function remplacerLien(nouveauLien, clefEpisodeARemplacer) {
-    if (!clefEpisodeARemplacer) { clefEpisodeARemplacer = clefEpisodeEnCours; }
-    episodes.get(clefEpisodeARemplacer).liens = [];
-    episodes.get(clefEpisodeARemplacer).liens.push(nouveauLien);
+function remplacerLien(nouveauLien) {
+    episodes.get(clefEpisodeEnCours).liens = [];
+    episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
 }
 
-function ajouterTexte(nouveauTexte, clefEpisodeSurLequelAjouter) {
-    if (!clefEpisodeSurLequelAjouter) { clefEpisodeSurLequelAjouter = clefEpisodeEnCours; }
-    episodes.get(clefEpisodeSurLequelAjouter).texte += nouveauTexte;
+function ajouterTexte(nouveauTexte) {
+    episodes.get(clefEpisodeEnCours).texte += nouveauTexte;
 }
 
-function remplacerTexte(nouveauTexte, clefEpisodeARemplacer) {
-    if (!clefEpisodeARemplacer) { clefEpisodeARemplacer = clefEpisodeEnCours; }
-    episodes.get(clefEpisodeARemplacer).texte = nouveauTexte;
+function remplacerTexte(nouveauTexte) {
+    episodes.get(clefEpisodeEnCours).texte = nouveauTexte;
 }
 
 function nombrePossedeDe(objet) {
