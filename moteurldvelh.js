@@ -90,7 +90,6 @@ function afficherEpisode(clefEpisode) {
 
     // L'épisode a pu être modifié par des callbacks donc on réinjecte l'original.
     // Sinon les modifs de texte par exemple s'additionneront à l'infini.
-    console.log("episodeOriginal", episodeOriginal);
     episodes.set(clefEpisodeEnCours, episodeOriginal);
 }
 
