@@ -1,4 +1,13 @@
-# Repris de https://gitlab.com/pages/plain-html
+stages:
+  - build
+  - deploy
+
+image: busybox
+
+reorganise-html-js:
+  stage: build
+  script:
+    - echo "coucou"
 
 image: busybox
 
