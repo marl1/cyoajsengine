@@ -1,8 +1,9 @@
+/* Exemple d'affichage de variables */
 creerEpisode({
     clef: "intro",
     titre : `Un village simple`,
-    texte :
-    `Vous êtes dans ***un tout petit village***.`
+    get texte() {
+        return `Vous êtes dans ***un tout petit village***.`; }
     ,liens: [
             {libelle: `Aller dans la ferme.`,
             chemin: "allerFerme"},
@@ -77,12 +78,13 @@ creerEpisode({
     }
 });
 
-/* Exemple d'ajout d'un objet. */
+/* Exemple d'affichage de variables.Penser à utiliser get texte() ! */
 creerEpisode({
     clef: "allerMagasin",
     titre : `Aller au magasin.`,
-    texte :
-    `Le magasin vend une belle ***pioche***.`
+    get texte() {
+        return `Le magasin vend une belle ***pioche***. Vous avez ${nombrePossedeDe("euros")} euros en poche.
+        Une horloge au mur indique qu'il est ${new Date().getHours()} heures, ${new Date().getMinutes()}min et ${new Date().getSeconds()}s.`; }
     ,liens: [
             {libelle: `Acheter pioche (200 euros).`,
             chemin: "acheterPioche"},
@@ -143,7 +145,7 @@ creerEpisode({
         if (nombrePossedeDe("pepiteOr") < 3) {
             ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:1});
         } else {
-            ajouterTexte(`L'entrée de la mine ***s'écroule !***`);
+            ajouterTexte(`L'entrée de la mine ***s'écroule !*** Vous entendez un ***rire***.`);
             remplacerLien({libelle: `Avancer vers le fond de la mine.`, chemin: "avancerFondMine"});
         }
     }
