@@ -1,14 +1,9 @@
-stages:
-  - build
-  - deploy
-
 image: busybox
 
-reorganise-html-js:
-  stage: build
+pages:
+  stage: deploy
   script:
     - echo "Creation d'un timestamp pour eviter le cache..."
-    - ls
     - timestamp=$(date +%s)
     - echo "Copie du moteur dans les dossiers des jeux..."
     - cp moteurldvelh.js  ./jeux/1_jeu_exemple/data/
@@ -16,12 +11,6 @@ reorganise-html-js:
     - echo "Modification des chemins dans les index.htm..."
     - sed -i "s,../../moteurldvelh.js,/data/moteurldvelh.js?$timestamp," ./jeux/1_jeu_exemple/index.htm
     - sed -i "s,../../moteurldvelh.js,/data/moteurldvelh.js?$timestamp," ./jeux/cyberpunk/index.htm
-
-image: busybox
-
-pages:
-  stage: deploy
-  script:
     - mkdir .public
     - cp -r * .public
     - mv .public public
