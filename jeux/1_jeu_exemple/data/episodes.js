@@ -77,7 +77,7 @@ creerEpisode({
             chemin: "intro"},
         ]
     ,image: "interim.png"
-    ,commandes: function() {
+    ,commandes: () => {
 		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
         if (nombreVisites() === 0) {
             ajouterTexte(`Comme c'est la première fois que vous venez, on vous donne des ***chaussures de sécurité***.`);
@@ -111,7 +111,7 @@ creerEpisode({
             {libelle: `Sortir.`,
             chemin: "intro"},
         ]
-    ,commandes: function() {
+    ,commandes: () => {
         if (nombrePossedeDe("euros") < 200) {
             remplacerTexte(`Vous n'avez pas assez d'argent.`);
         }
@@ -133,7 +133,7 @@ creerEpisode({
             chemin: "intro"},
         ]
     ,image: "mine.png"
-    ,commandes: function() {
+    ,commandes: () => {
         if (nombrePossedeDe("pioche") < 1) {
             ajouterTexte(`Vous n'avez rien à faire ici. Il vous faudrait ***une pioche*** pour trouver de l'or.`);
         } else {
@@ -152,7 +152,7 @@ creerEpisode({
             chemin: "allerMines"},
         ]
     ,image: "mine.png"
-    ,commandes: function() {
+    ,commandes: () => {
         ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:1});
         if (nombreVisites() > 2) {
             ajouterTexte(
