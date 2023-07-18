@@ -26,6 +26,8 @@ http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm
 
 *creerEpisode* : fonction à utiliser pour écrire un nouvel épisode.
 
+*titrerJeu* : donne un titre au jeu. Il sera utilisé lors de l'enregistrement des sauvegardes, pour differencier les sauvegardes d'un jeu d'un autre.
+
 ====== Fonctions de callback
 
 Fonctions utilisées dans les épisodes, exemple avec la fonction "ajouterInventaire" ci-dessous :
