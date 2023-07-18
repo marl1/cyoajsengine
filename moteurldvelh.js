@@ -23,6 +23,9 @@ let inventaireAjout=[];
 /* Pour détecter les redirections en boucle */
 let historiqueRedirection=[];
 
+/* Titre du jeu, pour séparer le local storage entre les jeux sur la même adresse (localhost typiquement).*/
+var titreJeu="";
+
 // Map contenant tous les épisodes, avec en clef la clef de l'épisode et en valeur l'intégralité de l'épisode
 var episodes = new Map();
 
@@ -95,10 +98,10 @@ function afficherEpisode(clefEpisode) {
 
 function sauvegarder() {
     if (window.localStorage){
-        window.localStorage.setItem("clefEpisodeEnCours", clefEpisodeEnCours);
-        window.localStorage.setItem("historique", JSON.stringify(historique));
-        window.localStorage.setItem("inventaire", JSON.stringify(Array.from(inventaire.entries())));
-        window.localStorage.setItem("historiqueInventaire", JSON.stringify(historiqueInventaire));
+        window.localStorage.setItem("clefEpisodeEnCours"+titrerJeu, clefEpisodeEnCours);
+        window.localStorage.setItem("historique"+titrerJeu, JSON.stringify(historique));
+        window.localStorage.setItem("inventaire"+titrerJeu, JSON.stringify(Array.from(inventaire.entries())));
+        window.localStorage.setItem("historiqueInventaire"+titrerJeu, JSON.stringify(historiqueInventaire));
         document.getElementById("disquette").classList.remove('glitch');
         window.setTimeout(function() {
            document.getElementById("disquette").classList.add('glitch');
@@ -113,10 +116,10 @@ function sauvegarder() {
 function effacerSauvegarde() {
     if (window.confirm("Effacer la sauvegarde ?")) {
         if (window.localStorage){
-            window.localStorage.removeItem("clefEpisodeEnCours");
-            window.localStorage.removeItem("historique");   
-            window.localStorage.removeItem("inventaire");
-            window.localStorage.removeItem("historiqueInventaire");
+            window.localStorage.removeItem("clefEpisodeEnCours"+titrerJeu);
+            window.localStorage.removeItem("historique"+titrerJeu);
+            window.localStorage.removeItem("inventaire"+titrerJeu);
+            window.localStorage.removeItem("historiqueInventaire"+titrerJeu);
         }
     }
 }
@@ -210,6 +213,10 @@ function nombreVisites() {
         }
     }
     return compteur;
+}
+
+function titrerJeu(titre) {
+    titreJeu = titre;
 }
 
 function ajouterLien(nouveauLien) {
@@ -317,12 +324,12 @@ function enleverDerniersObjetsAcquis() {
 }
 
 function demarrerJeu() {
-    if (window.localStorage && window.localStorage.getItem("clefEpisodeEnCours")){
+    if (window.localStorage && window.localStorage.getItem("clefEpisodeEnCours"+titrerJeu)){
         //Il y a une sauvegarde, on la restore...
-        clefEpisodeEnCours = window.localStorage.getItem("clefEpisodeEnCours");
-        historique = JSON.parse(window.localStorage.getItem("historique"));
-        inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire")));
-        historiqueInventaire = JSON.parse(window.localStorage.getItem("historiqueInventaire"));
+        clefEpisodeEnCours = window.localStorage.getItem("clefEpisodeEnCours"+titrerJeu);
+        historique = JSON.parse(window.localStorage.getItem("historique"+titrerJeu));
+        inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire"+titrerJeu)));
+        historiqueInventaire = JSON.parse(window.localStorage.getItem("historiqueInventaire"+titrerJeu));
         enleverDerniersObjetsAcquis(); // Evite bug "sauver sur episode qui donne un truc" + F5 = objet infini.
         afficherEpisode(historique.pop());
     } else {
