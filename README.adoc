@@ -17,10 +17,10 @@ Licence CC0 (sous respect de la loi française).
 ==== Examples
 
 Jeu d'exemple servant de démo des fonctionnalités :
-https://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
+http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
 
 Jeu sur lequel je bosse :
-https://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm
+http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm
 
 ==== Fonctions
 
@@ -81,7 +81,7 @@ Have fun with it.
 ==== Examples
 
 A sample game that serve as a demo of the features:
-https://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
+http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
 
 Game I'm working on:
-https://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm
+http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm
