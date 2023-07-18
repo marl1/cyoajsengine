@@ -8,6 +8,7 @@ reorganise-html-js:
   stage: build
   script:
     - echo "Creation d'un timestamp pour eviter le cache..."
+    - ls
     - timestamp=$(date +%s)
     - echo "Copie du moteur dans les dossiers des jeux..."
     - cp moteurldvelh.js  ./jeux/1_jeu_exemple/data/
