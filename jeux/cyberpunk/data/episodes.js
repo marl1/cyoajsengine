@@ -613,7 +613,7 @@ creerEpisode({
             ,
     liens: [
             {libelle: `Traverser le couloir et sortir.`,
-            chemin: "51"},
+            chemin: "20"},
             {libelle: `Aller au premier étage.`,
             chemin: "21"}
         ]
