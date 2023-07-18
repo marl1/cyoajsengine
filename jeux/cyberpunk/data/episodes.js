@@ -21,7 +21,7 @@ creerEpisode({
             {libelle: `Ignorer la notification.`,
             chemin: "ignorerNotifClub"}
         ],
-    callback: function() {
+    commandes: function() {
 		ajouterInventaireDiscretement({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:2000});
 		ajouterInventaire({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:-900});
         ajouterInventaire({clef:"SMX", nom:"Gélules de SMX", description:"Relaxant utilisé de façon festive ou par les implantés pour limiter les tremblements.", nombre:3});
@@ -1010,7 +1010,7 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
         {libelle: `Partir.`,
         chemin: "133"}
     ],
-    callback: function() {
+    commandes: function() {
         ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
         ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet", description:"", nombre:40 });
     },
@@ -1052,7 +1052,7 @@ Il y a environ ***5.000 crédits*** dans le coffre. Pas mal. Vous empochez le to
                 {libelle: `Partir.`,
                 chemin: "133"}
         ],
-    callback: function() {
+    commandes: function() {
         ajouterInventaire({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:5000 });
     },
     revisite:"135Revisite"
@@ -1730,7 +1730,7 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
                 {libelle: `Partir.`,
                 chemin: "73"},
         ]
-        ,callback: function() {
+        ,commandes: function() {
         ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
         ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet", description:"", nombre:40 });
     }
@@ -1845,7 +1845,7 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
                 {libelle: `Retourner dans le conduit.`,
                 chemin: "73"},
         ],
-    callback: function() {
+    commandes: function() {
         ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
         ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet", description:"", nombre:40 });
     },

@@ -66,12 +66,17 @@ function afficherEpisode(clefEpisode) {
 
     // affichage de l'épisode
     clefEpisodeEnCours = clefEpisode;
+    animerTransition();
 
 
     const episodeOriginal = JSON.parse(JSON.stringify(episode));
     if (episode.callback) {
         episode.callback();
         episodeOriginal.callback = episode.callback;
+    }
+    if (episode.commandes) {
+        episode.commandes();
+        episodeOriginal.commandes = episode.commandes;
     }
     historique.push(clefEpisode);
     historiqueRedirection = [];
@@ -87,8 +92,11 @@ function afficherEpisode(clefEpisode) {
     } else {
         document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
     }
+    if(episode.image) {
+         remplacerImage(episode.image);
+    }
+
     genererLiens(episode.liens);
-    animerTransition();
     afficherInventaire();
 
     // L'épisode a pu être modifié par des callbacks donc on réinjecte l'original.
@@ -102,9 +110,9 @@ function sauvegarder() {
         window.localStorage.setItem("historique"+titrerJeu, JSON.stringify(historique));
         window.localStorage.setItem("inventaire"+titrerJeu, JSON.stringify(Array.from(inventaire.entries())));
         window.localStorage.setItem("historiqueInventaire"+titrerJeu, JSON.stringify(historiqueInventaire));
-        document.getElementById("disquette").classList.remove('glitch');
+        document.getElementById("disquette").classList.remove('doitAnimerTransition');
         window.setTimeout(function() {
-           document.getElementById("disquette").classList.add('glitch');
+           document.getElementById("disquette").classList.add('doitAnimerTransition');
         }, 1);
     
     
@@ -125,12 +133,11 @@ function effacerSauvegarde() {
 }
 
 function animerTransition() {
-    document.getElementById("texte").classList.remove('glitch');
-    document.getElementById("liens").classList.remove('glitch');
-    window.setTimeout(function() {
-        document.getElementById("texte").classList.add('glitch');
-        document.getElementById("liens").classList.add('glitch');
-    }, 1);
+    document.getElementById("texte").classList.remove('doitAnimerTransition');
+    document.getElementById("liens").classList.remove('doitAnimerTransition');
+    void document.getElementById("texte").offsetWidth; //https://stackoverflow.com/questions/4847996/
+    document.getElementById("texte").classList.add('doitAnimerTransition');
+    document.getElementById("liens").classList.add('doitAnimerTransition');
 }
 
 // Transforme le texte en HTML (saut de ligne, emphase, etc).
@@ -170,7 +177,11 @@ function formatterTexte(texte) {
 function genererLiens(liens) {
     let htmlLiens = "";
     for (const lien in liens) {
-        htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${liens[lien].chemin}')">${liens[lien].libelle}</a><br>`;
+        if (liens[lien].libelle instanceof Function) {
+            htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${liens[lien].chemin}')">${liens[lien].libelle()}</a><br>`;
+        } else {
+            htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${liens[lien].chemin}')">${liens[lien].libelle}</a><br>`;
+        }
     }
     document.getElementById("liens").innerHTML=htmlLiens;
 }
@@ -213,6 +224,10 @@ function nombreVisites() {
         }
     }
     return compteur;
+}
+
+function remplacerImage(img) {
+    document.body.style.backgroundImage = "url('data/img/" + img +"')"; 
 }
 
 function titrerJeu(titre) {
