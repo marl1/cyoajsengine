@@ -1,3 +1,5 @@
+titrerJeu("cyberpunk");
+
 creerEpisode({
     clef: "intro",
     titre : `Transaction dans le club`,

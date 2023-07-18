@@ -1,3 +1,5 @@
+titrerJeu("jeuExemple");
+
 /* Exemple d'affichage de variables */
 creerEpisode({
     clef: "intro",
