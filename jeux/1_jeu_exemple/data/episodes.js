@@ -16,6 +16,7 @@ creerEpisode({
             {libelle: `Aller dans les mines d'or.`,
             chemin: "allerMines"}
         ]
+    ,image: "exterieur.png"
 });
 
 /* Exemple redirection en cas de nouvelle visite ("revisite") de l'épisode. */
@@ -31,6 +32,7 @@ creerEpisode({
             {libelle: `Sortir.`,
             chemin: "intro"},
         ]
+    ,image: "ferme.png"
     ,revisite:"deuxiemeVisiteFerme"
 });
 
@@ -46,6 +48,7 @@ creerEpisode({
             {libelle: `Sortir.`,
             chemin: "intro"},
         ]
+    ,image: "ferme.png"
     ,revisite:"troisiemeVisiteFerme"
 });
 
@@ -59,6 +62,7 @@ creerEpisode({
             {libelle: `Sortir.`,
             chemin: "intro"},
         ]
+    ,image: "ferme.png"
     ,revisite:"allerFerme"
 });
 
@@ -72,7 +76,8 @@ creerEpisode({
             {libelle: `Sortir.`,
             chemin: "intro"},
         ]
-    ,callback: function() {
+    ,image: "interim.png"
+    ,commandes: function() {
 		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
         if (nombreVisites() === 0) {
             ajouterTexte(`Comme c'est la première fois que vous venez, on vous donne des ***chaussures de sécurité***.`);
@@ -81,17 +86,18 @@ creerEpisode({
     }
 });
 
-/* Exemple d'affichage de variables.Penser à utiliser get texte() ! */
+/* Exemple d'affichage de variables.Penser à utiliser "() =>" ! */
 creerEpisode({
     clef: "allerMagasin",
     titre : () => `Aller au magasin (avec ${nombrePossedeDe("euros")} euros).`,
     texte: () =>
         `Le magasin vend une belle ***pioche***. Vous avez ${nombrePossedeDe("euros")} euros en poche.
         Une horloge au mur indique qu'il est ${new Date().getHours()} heures, ${new Date().getMinutes()}min et ${new Date().getSeconds()}s.`
+    ,image: "magasin.png"
     ,liens: [
-            {libelle: `Acheter pioche (200 euros).`,
+            {libelle: () => `Acheter pioche (200 euros).`,
             chemin: "acheterPioche"},
-            {libelle: `Sortir.`,
+            {libelle: () => `Sortir.`,
             chemin: "intro"},
         ]
 });
@@ -99,13 +105,13 @@ creerEpisode({
 /* Exemple d'ajout d'un objet. */
 creerEpisode({
     clef: "acheterPioche",
-    titre : `Aller au magasin.`,
+    titre : `Acheter pioche.`,
     texte :``
     ,liens: [
             {libelle: `Sortir.`,
             chemin: "intro"},
         ]
-    ,callback: function() {
+    ,commandes: function() {
         if (nombrePossedeDe("euros") < 200) {
             remplacerTexte(`Vous n'avez pas assez d'argent.`);
         }
@@ -121,12 +127,13 @@ creerEpisode({
 creerEpisode({
     clef: "allerMines",
     titre : `Aller dans les mines.`,
-    texte :`Vous voilà dans les mines.`
+    texte : `Vous voilà dans les mines.`
     ,liens: [
             {libelle: `Sortir.`,
             chemin: "intro"},
         ]
-    ,callback: function() {
+    ,image: "mine.png"
+    ,commandes: function() {
         if (nombrePossedeDe("pioche") < 1) {
             ajouterTexte(`Vous n'avez rien à faire ici. Il vous faudrait ***une pioche*** pour trouver de l'or.`);
         } else {
@@ -135,24 +142,24 @@ creerEpisode({
     }
 });
 
-/* Exemple d'ajout d'un lien. */
+/* Exemple de remplacement d'un lien. */
 creerEpisode({
     clef: "piocherDansLesMines",
     titre : `Piocher dans les mines.`,
-    texte :`Tac tac tac, vous trouvez une ***pépite d'or*** !`
+    texte : `Tac tac tac, vous trouvez une ***pépite d'or*** !`
     ,liens: [
             {libelle: `Arrêter de piocher.`,
             chemin: "allerMines"},
         ]
-    ,callback: function() {
-        if (nombreVisites() < 3) {
-            ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:1});
-        } else {
+    ,image: "mine.png"
+    ,commandes: function() {
+        ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:1});
+        if (nombreVisites() > 2) {
             ajouterTexte(
                 ` L'entrée de la mine ***s'écroule !*** Vous entendez un ***rire***.
                 "Tu es venu ${nombreVisites()} fois ! Hahaha ! Tu es cupide !!"
             `);
-            remplacerLien({libelle: `Avancer vers le fond de la mine.`, chemin: "avancerFondMine"});
+            remplacerLien({libelle: () => `Avancer vers le fond de la mine avec vos ${nombrePossedeDe("pepiteOr")} pépites.`, chemin: "avancerFondMine"});
         }
     }
 });
@@ -163,4 +170,5 @@ creerEpisode({
     titre : `Avancer vers le fond de la mine.`,
     texte :`Oh non, c'est le fantôme de la mine ! Il vous saute dessus et vous tue.
                             ***FIN***`
+    ,image: "mine.png"
 });

@@ -175,25 +175,25 @@ font-size:1.3em;
 text-align:right;
 }
 
-.glitch {
-        animation: glitchAnim 0.021s ;
+.doitAnimerTransition {
+        animation: animTransition 0.015s ease;
 }
 
-@keyframes glitchAnim {
+@keyframes animTransition {
     0% {
         transform: skew(0deg);
-        text-shadow: 20px 1px 0px rgb(255, 35, 218);
+        text-shadow: 22px 1px 0px rgb(255, 35, 218);
     }
     25% {
-        transform: skew(10deg);
+        transform: skew(12deg);
         text-shadow: 1px 1px 0px rgb(255, 35, 218);
     }
     70% {
         text-shadow: 1px 1px 0px rgb(255, 35, 218);
     }
     75% {
-        transform: skew(-10deg);
-        text-shadow: -20px 1px 0px rgb(255, 35, 218);
+        transform: skew(-12deg);
+        text-shadow: -22px 1px 0px rgb(255, 35, 218);
     }
 }
 
@@ -210,7 +210,7 @@ text-align:right;
 </div>
 <div id="general">
     <H1 id="titre"></H1>
-    <div id="texte" class="glitch">
+    <div id="texte">
     </div>
     <div id="liens">
         <a href="episode.php?episode=2"></a>
