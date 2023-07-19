@@ -49,15 +49,19 @@ creerEpisode({
 
 *ajouterLien* : ``ajouterLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Ajouter un lien. Si un lien identique existe déjà, il ne sera pas ajouté.
 
-*remplacerLien* : ``remplacerLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Supprime tous les liens et remplace par d'autres.
-
 *ajouterTexte* : ``ajouterTexte(`Nouveau texte !`);``. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
 
-*remplacerTexte* : ``remplacerTexte(`Nouveau texte !`);``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
+modifierVariable : ``modifierVariable("nomDeMaVariable", 18);``. Donne une valeur à une nouvelle variable ou modifie une variable existant.
 
 *nombrePossedeDe* : `nombrePossedeDe("pioche")`. Renvoie le nombre d'exemplaire de l'objet renseigné que possède le joueur. Utile pour metre des conditions en place, par exemple "si le joueur possède au moins 4 roues, alors...".
 
 *nombreVisite* : retourne le nombre de visite précédentes de l'épisode en cours.
+
+*remplacerLien* : ``remplacerLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Supprime tous les liens et remplace par d'autres.
+
+*remplacerTexte* : ``remplacerTexte(`Nouveau texte !`);``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
+
+*valeurVariable* : ``valeurVariable("astuceFantomeDite")``. Retourne la valeur d'une variable.
 
 == ENGLISH
 
