@@ -5,7 +5,7 @@ Un moteur de LDVELH.
 
 Licence CC0 (sous respect de la loi française).
 
-==== FEATURES
+==== Fonctionnalités
 * Sauvegarde/chargement.
 * Inventaire.
 * Redirections lors de seconde visite d'épisode (et gestion des redirections en boucle).
@@ -14,7 +14,7 @@ Licence CC0 (sous respect de la loi française).
 * Javascript sans librairie.
 
 
-==== Examples
+==== Exemples
 
 Jeu d'exemple servant de démo des fonctionnalités :
 http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
@@ -22,28 +22,23 @@ http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
 Jeu sur lequel je bosse :
 http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm
 
-==== Fonctions
+==== Fonctions de base
 
 *creerEpisode* : fonction à utiliser pour écrire un nouvel épisode.
 
 *titrerJeu* : donne un titre au jeu. Il sera utilisé lors de l'enregistrement des sauvegardes, pour differencier les sauvegardes d'un jeu d'un autre.
 
-====== Fonctions de callback
+====== Commandes
 
-Fonctions utilisées dans les épisodes, exemple avec la fonction "ajouterInventaire" ci-dessous :
+Commandes utilisées dans les épisodes, exemple avec la fonction "ajouterInventaire" ci-dessous :
 [source,javascript]
 ----
 creerEpisode({
     clef: "allerInterim",
     titre : `Aller à l'agence d'interim.`,
-    texte :
-    `Vous travaillez avec l'agence et gagnez ***50 euros***.`
-    ,liens: [
-            {libelle: `Sortir.`,
-            chemin: "intro"},
-        ]
-    ,callback: function() {
-		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
+    texte :`Vous travaillez avec l'agence et gagnez ***50 euros***.`
+    ,commandes: () => {
+		    ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
     }
 });
 ----
