@@ -1,19 +1,19 @@
-titrerJeu("jeuExemple");
+titrerJeu("Jeu exemple");
 
 /* Exemple d'affichage de variables */
 creerEpisode({
     clef: "intro",
-    titre : `Un village simple`,
-    get texte() {
-        return `Vous êtes dans ***un tout petit village***.`; }
+    titre : () => `Un village simple`,
+    texte: () =>
+        `Vous êtes dans ***un tout petit village***.`
     ,liens: [
-            {libelle: `Aller dans la ferme.`,
+            {libelle: () => `Aller dans la ferme.`,
             chemin: "allerFerme"},
-            {libelle: `Aller à l'agence d'interim.`,
+            {libelle: () => `Aller à l'agence d'interim.`,
             chemin: "allerInterim"},
-            {libelle: `Aller dans le magasin.`,
+            {libelle: () => `Aller dans le magasin.`,
             chemin: "allerMagasin"},
-            {libelle: `Aller dans les mines d'or.`,
+            {libelle: () => `Aller dans les mines d'or.`,
             chemin: "allerMines"}
         ]
     ,image: "exterieur.png"
@@ -22,14 +22,14 @@ creerEpisode({
 /* Exemple redirection en cas de nouvelle visite ("revisite") de l'épisode. */
 creerEpisode({
     clef: "allerFerme",
-    titre : `Dans la ferme.`,
-    texte :
+    titre : () => `Dans la ferme.`,
+    texte: () =>
     `Vous frappez à la porte de la ferme. Celle-ci s'ouvre doucement d'elle-même. L'intérieur est rustique et dépouillé.
     
     Il y a un papier à l'intérieur :
     "Je reviens plus tard. -Mimi"`
     ,liens: [
-            {libelle: `Sortir.`,
+            {libelle: () => `Sortir.`,
             chemin: "intro"},
         ]
     ,image: "ferme.png"
@@ -39,13 +39,13 @@ creerEpisode({
 /* Exemple de chainage de redirection.*/
 creerEpisode({
     clef: "deuxiemeVisiteFerme",
-    titre : `Retour dans la ferme.`,
-    texte :
+    titre : () => `Retour dans la ferme.`,
+    texte: () =>
     `Cette fois-ci, à l'intérieur, vous voyez Mimi, ***une femme entre deux âge*** en train de ranger des bacs de légumes.
     
     "Bonjour !, dit-elle, ***repassez plus tard***, je suis un peu occupée."`
     ,liens: [
-            {libelle: `Sortir.`,
+            {libelle: () => `Sortir.`,
             chemin: "intro"},
         ]
     ,image: "ferme.png"
@@ -55,11 +55,11 @@ creerEpisode({
 /* Exemple de redirection en boucle.*/
 creerEpisode({
     clef: "troisiemeVisiteFerme",
-    titre : `Nouveau retour dans la ferme.`,
-    texte :
+    titre : () => `Nouveau retour dans la ferme.`,
+    texte: () =>
     `Mimi vous accueille chaleuresement. Elle vous offre à manger et vous parlez de choses et d'autres. Vous passez un ***très agréable moment***.`
     ,liens: [
-            {libelle: `Sortir.`,
+            {libelle: () => `Sortir.`,
             chemin: "intro"},
         ]
     ,image: "ferme.png"
@@ -69,18 +69,18 @@ creerEpisode({
 /* Exemple d'ajout d'un objet + détection du nombre de visite. */
 creerEpisode({
     clef: "allerInterim",
-    titre : `Aller à l'agence d'interim.`,
-    texte :
+    titre : () => `Aller à l'agence d'interim.`,
+    texte: () =>
     `Vous travaillez avec l'agence et gagnez ***50 euros***.`
     ,liens: [
-            {libelle: `Sortir.`,
+            {libelle: () => `Sortir.`,
             chemin: "intro"},
         ]
     ,image: "interim.png"
     ,commandes: () => {
 		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
         if (nombreVisites() === 0) {
-            ajouterTexte(`Comme c'est la première fois que vous venez, on vous donne des ***chaussures de sécurité***.`);
+            ajouterTexte(` Comme c'est la première fois que vous venez, on vous donne des ***chaussures de sécurité***.`);
             ajouterInventaire({clef:"chaussuresSecu", nom:"Paire de chaussures de sécurité", description:"Chaussures de sécurité.", nombre:1});
         }
     }
@@ -105,10 +105,10 @@ creerEpisode({
 /* Exemple d'ajout d'un objet. */
 creerEpisode({
     clef: "acheterPioche",
-    titre : `Acheter pioche.`,
-    texte :``
+    titre : () => `Acheter pioche.`,
+    texte: () =>``
     ,liens: [
-            {libelle: `Sortir.`,
+            {libelle: () => `Sortir.`,
             chemin: "intro"},
         ]
     ,commandes: () => {
@@ -126,10 +126,10 @@ creerEpisode({
 /* Exemple d'ajout d'un lien. */
 creerEpisode({
     clef: "allerMines",
-    titre : `Aller dans les mines.`,
-    texte : `Vous voilà dans les mines.`
+    titre : () => `Aller dans les mines.`,
+    texte: () => `Vous voilà dans les mines.`
     ,liens: [
-            {libelle: `Sortir.`,
+            {libelle: () => `Sortir.`,
             chemin: "intro"},
         ]
     ,image: "mine.png"
@@ -137,7 +137,7 @@ creerEpisode({
         if (nombrePossedeDe("pioche") < 1) {
             ajouterTexte(`Vous n'avez rien à faire ici. Il vous faudrait ***une pioche*** pour trouver de l'or.`);
         } else {
-            ajouterLien({libelle: `Piocher.`, chemin: "piocherDansLesMines"});
+            ajouterLien({libelle: () => `Piocher.`, chemin: "piocherDansLesMines"});
         }
     }
 });
@@ -145,10 +145,10 @@ creerEpisode({
 /* Exemple de remplacement d'un lien. */
 creerEpisode({
     clef: "piocherDansLesMines",
-    titre : `Piocher dans les mines.`,
-    texte : `Tac tac tac, vous trouvez une ***pépite d'or*** !`
+    titre : () => `Piocher dans les mines.`,
+    texte: () => `Tac tac tac, vous trouvez une ***pépite d'or*** !`
     ,liens: [
-            {libelle: `Arrêter de piocher.`,
+            {libelle: () => `Arrêter de piocher.`,
             chemin: "allerMines"},
         ]
     ,image: "mine.png"
@@ -167,8 +167,8 @@ creerEpisode({
 /* Exemple d'ajout d'un lien. */
 creerEpisode({
     clef: "avancerFondMine",
-    titre : `Avancer vers le fond de la mine.`,
-    texte :`Oh non, c'est le fantôme de la mine ! Il vous saute dessus et vous tue.
+    titre : () => `Avancer vers le fond de la mine.`,
+    texte: () =>`Oh non, c'est le fantôme de la mine ! Il vous saute dessus et vous tue.
                             ***FIN***`
     ,image: "mine.png"
 });
