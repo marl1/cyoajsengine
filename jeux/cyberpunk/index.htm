@@ -82,6 +82,9 @@ body {
     #general{
         width:50em;
     }
+    #iconeRetour, #iconeSauver, #iconeSupprimerSauvegarde {
+        height:1em;
+    }
 }
 
 @media (max-width: 70em) {
@@ -103,8 +106,9 @@ body {
         justify-content:flex-start;
         flex-wrap: nowrap;
     }
-    
-
+    #iconeRetour, #iconeSauver, #iconeSupprimerSauvegarde {
+        height:2.5em;
+    }
 }
 
 
@@ -203,13 +207,13 @@ text-align:right;
     <div id="conteneurOutilsInventaire">
         <div id="menuOutils">
             <a href="#" onClick="episodePrecedent()">
-                <img src="data/img/retour.svg" style="height:1em;" title ="Retourner à l'épisode précédent.">
+                <img src="data/img/retour.svg" title ="Retourner à l'épisode précédent." id="iconeRetour" >
             </a>
-            <a href="#" onClick="sauvegarder()" id="disquette" title ="Sauvegarder.">
-                <img src="data/img/disquette.svg" style="height:1em;">
+            <a href="#" onClick="sauvegarder()" title ="Sauvegarder.">
+                <img src="data/img/disquette.svg" id="iconeSauver">
             </a>
             <a href="#" onClick="effacerSauvegarde()"  title ="Supprimer la sauvegarde.">
-                <img src="data/img/disquettesuppr.svg" style="height:1em;">
+                <img src="data/img/disquettesuppr.svg" id="iconeSupprimerSauvegarde">
             </a>
         </div>
         <div id="inventaire">
