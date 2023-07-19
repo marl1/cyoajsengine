@@ -5,6 +5,8 @@ Un moteur de LDVELH.
 
 Licence CC0 (sous respect de la loi française).
 
+image::exemple.png[]
+
 ==== Fonctionnalités
 * Sauvegarde/chargement.
 * Inventaire.
