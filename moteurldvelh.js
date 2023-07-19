@@ -14,6 +14,8 @@ Chaque élément du tableau contient un objet {clefEpisode, objets rajouté}.
 Il est parcouru à l'envers lors des retours arrières.
 */
 let historiqueInventaire=[];
+
+/* Inventaire. Est affiché. */
 let inventaire=new Map();
 
 /* Tableau contenant les objets ajoutés durant l'épisode en cours,
@@ -22,6 +24,17 @@ let inventaireAjout=[];
 
 /* Pour détecter les redirections en boucle */
 let historiqueRedirection=[];
+
+/* Indique quelles modifications de variables ont été faites à quel épisode.
+Chaque élément du tableau contient un objet 
+{clefEpisode: clef de l'épisode, variables:[{nomVar:nom de la variable, valeur:valeur}]}.
+Il est parcouru à l'envers lors des retours arrières.
+*/
+let historiqueVariables=[];
+
+/* Map avec pour clef le nom et valeur la valeur de la variable.*/
+let variables=new Map();
+
 
 /* Titre du jeu, pour séparer le local storage entre les jeux sur la même adresse (localhost typiquement).*/
 var titreJeu="";
@@ -140,6 +153,8 @@ function sauvegarder() {
         window.localStorage.setItem("historique"+titreJeu, JSON.stringify(historique));
         window.localStorage.setItem("inventaire"+titreJeu, JSON.stringify(Array.from(inventaire.entries())));
         window.localStorage.setItem("historiqueInventaire"+titreJeu, JSON.stringify(historiqueInventaire));
+        window.localStorage.setItem("variables"+titreJeu, JSON.stringify(Array.from(variables.entries())));
+        window.localStorage.setItem("historiqueVariables"+titreJeu, JSON.stringify(historiqueVariables));
         document.getElementById("disquette").classList.remove('doitAnimerTransition');
         window.setTimeout(function() {
            document.getElementById("disquette").classList.add('doitAnimerTransition');
@@ -158,6 +173,8 @@ function effacerSauvegarde() {
             window.localStorage.removeItem("historique"+titreJeu);
             window.localStorage.removeItem("inventaire"+titreJeu);
             window.localStorage.removeItem("historiqueInventaire"+titreJeu);
+            window.localStorage.removeItem("variables"+titreJeu);
+            window.localStorage.removeItem("historiqueVariables"+titreJeu);
         }
     }
 }
@@ -254,7 +271,10 @@ function titrerJeu(titre) {
 }
 
 function ajouterLien(nouveauLien) {
-    episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
+    if (!episodes.get(clefEpisodeEnCours).liens) {
+        episodes.get(clefEpisodeEnCours).liens = [];
+    }
+        episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
 }
 
 function remplacerLien(nouveauLien) {
@@ -263,6 +283,9 @@ function remplacerLien(nouveauLien) {
 }
 
 function ajouterTexte(nouveauTexte) {
+    if (!episodes.get(clefEpisodeEnCours).texte) {
+        episodes.get(clefEpisodeEnCours).texte = "";
+    }
     if (episodes.get(clefEpisodeEnCours).texte instanceof Function) {
         episodes.get(clefEpisodeEnCours).texte = episodes.get(clefEpisodeEnCours).texte() + nouveauTexte;
     } else {
@@ -272,6 +295,24 @@ function ajouterTexte(nouveauTexte) {
 
 function remplacerTexte(nouveauTexte) {
     episodes.get(clefEpisodeEnCours).texte = nouveauTexte;
+}
+
+function valeurVariable(nomVar) {
+    return variables.get(nomVar);
+}
+
+function modifierVariable(nomVar, valeur) {
+    console.log(nomVar + " valait " + variables.get(nomVar));
+    console.log("on set " + nomVar + " avec " + valeur);
+    if(variables.get(nomVar)) {
+        //on garde l'ancienne var en mémoire
+        historiqueVariables.push({clefEpisode:historique[historique.length-1], variables:[{nomVar: nomVar, valeur: valeur}]});
+    } else {
+        //on mémorise qu'elle n'existait pas
+        historiqueVariables.push({clefEpisode:historique[historique.length-1], variables:[{nomVar: nomVar, valeur: undefined}]});
+    }
+    variables.set(nomVar, valeur);
+    console.log("historiqueVariables", historiqueVariables);
 }
 
 function nombrePossedeDe(objet) {
@@ -337,8 +378,9 @@ function afficherInventaire() {
 }
 
 function episodePrecedent() {
-    if(historique.length>0) {
+    if(historique.length>1) {
         enleverDerniersObjetsAcquis();
+        remplacerParVariablesPrecedentes(historique[historique.length-2]);
         historique.pop(); // supprime l'épisode en cours de l'historique
         enleverDerniersObjetsAcquis();
         afficherEpisode(historique.pop()); //on repart sur la clef précédente+la supprime
@@ -347,16 +389,34 @@ function episodePrecedent() {
 
 //Pour éviter que la fonction "retour" ne permette d'avoir une infinité d'objets
 function enleverDerniersObjetsAcquis() {
-    const tabObjetsARetirer = historiqueInventaire.pop().modifObjets.tabObjetspourHistorique;
-    if (tabObjetsARetirer) {
-        for (const objetARetirer of tabObjetsARetirer) {
-            if (inventaire.get(objetARetirer.clef)) {
-                if((inventaire.get(objetARetirer.clef).nombre - objetARetirer.nombre) === 0) {
-                    inventaire.delete(objetARetirer.clef);
-                } else {
-                   inventaire.get(objetARetirer.clef).nombre -= objetARetirer.nombre;
+    if (historiqueInventaire.length > 0) {
+        const tabObjetsARetirer = historiqueInventaire.pop().modifObjets.tabObjetspourHistorique;
+        if (tabObjetsARetirer) {
+            for (const objetARetirer of tabObjetsARetirer) {
+                if (inventaire.get(objetARetirer.clef)) {
+                    if((inventaire.get(objetARetirer.clef).nombre - objetARetirer.nombre) === 0) {
+                        inventaire.delete(objetARetirer.clef);
+                    } else {
+                    inventaire.get(objetARetirer.clef).nombre -= objetARetirer.nombre;
+                    }
                 }
             }
+        }
+    }
+}
+
+//Pour éviter que la fonction "retour" ne permette d'avoir une infinité d'objets
+function remplacerParVariablesPrecedentes(clefEpisodeVerifVarASupprimer) {
+    if (historiqueVariables.length > 0) {
+        const variablesARemplacer = historiqueVariables[historiqueVariables.length-1];
+        console.log("de l'épisode " + clefEpisodeVerifVarASupprimer + " faut remplacer ", variablesARemplacer);
+        if (variablesARemplacer && variablesARemplacer.clefEpisode === clefEpisodeVerifVarASupprimer) {
+            for (const variable of variablesARemplacer.variables) {
+                console.log("on remplace " + variable.nomVar + "avec ", variablesARemplacer);
+                //on remplace avec l'ancienne
+                variables.set(variable.nomVar, variable.valeur);
+            }
+            historiqueVariables.pop();
         }
     }
 }
@@ -368,7 +428,10 @@ function demarrerJeu() {
         historique = JSON.parse(window.localStorage.getItem("historique"+titreJeu));
         inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire"+titreJeu)));
         historiqueInventaire = JSON.parse(window.localStorage.getItem("historiqueInventaire"+titreJeu));
+        variables = new Map(JSON.parse(window.localStorage.getItem("variables"+titreJeu)));
+        historiqueVariables = JSON.parse(window.localStorage.getItem("historiqueVariables"+titreJeu));
         enleverDerniersObjetsAcquis(); // Evite bug "sauver sur episode qui donne un truc" + F5 = objet infini.
+        remplacerParVariablesPrecedentes(historique[historique.length-2]);
         afficherEpisode(historique.pop());
     } else {
         afficherEpisode("intro");
