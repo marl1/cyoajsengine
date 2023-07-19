@@ -69,11 +69,8 @@ function afficherEpisode(clefEpisode) {
     animerTransition();
 
 
-    const episodeOriginal = JSON.parse(JSON.stringify(episode));
-    if (episode.callback) {
-        episode.callback();
-        episodeOriginal.callback = episode.callback;
-    }
+    const episodeOriginal = clonerEpisode(episode);
+
     if (episode.commandes) {
         episode.commandes();
         episodeOriginal.commandes = episode.commandes;
@@ -81,13 +78,11 @@ function afficherEpisode(clefEpisode) {
     historique.push(clefEpisode);
     historiqueRedirection = [];
     if (episode.titre instanceof Function) {
-        episodeOriginal.titre = episode.titre;
         document.getElementById("titre").innerHTML=episode.titre();
     } else {
         document.getElementById("titre").innerHTML=episode.titre;
     }
     if (episode.texte instanceof Function) {
-        episodeOriginal.texte = episode.texte;
         document.getElementById("texte").innerHTML=formatterTexte(episode.texte());
     } else {
         document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
@@ -104,12 +99,47 @@ function afficherEpisode(clefEpisode) {
     episodes.set(clefEpisodeEnCours, episodeOriginal);
 }
 
+function clonerEpisode(episode) {
+    let episodeClone = JSON.parse(JSON.stringify(episode));
+    // en parsant on a perdu les fonctions titre, texte, libelle des liens donc il faut les réinjecter
+    episodeClone.titre = episode.titre;
+    episodeClone.texte = episode.texte;
+    if (episode.liens) {
+        let tabLiensOriginaux=[];
+        for (const lien of episode.liens) {
+            let lienOriginal = lien;
+            lienOriginal.libelle = lien.libelle;
+            tabLiensOriginaux.push(lienOriginal);
+        }
+        episodeClone.liens = tabLiensOriginaux;
+    }
+
+    return episodeClone;
+}
+
+/* Génère le texte des liens.
+Quitte à boucler dessus, on sauvegarde les textes originaux qui ne peuvent pas être
+stringifiés car ce sont des fonctions. On les réinjectera en sortie de fonction. */
+function genererLiens(liens) {
+    let htmlLiens = "";
+    if (liens) {
+        for (const lien of liens) {
+            if (lien.libelle instanceof Function) {
+                htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${lien.chemin}')">${lien.libelle()}</a><br>`;
+            } else {
+                htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${lien.chemin}')">${lien.libelle}</a><br>`;
+            }
+        }
+    }
+    document.getElementById("liens").innerHTML=htmlLiens;
+}
+
 function sauvegarder() {
     if (window.localStorage){
-        window.localStorage.setItem("clefEpisodeEnCours"+titrerJeu, clefEpisodeEnCours);
-        window.localStorage.setItem("historique"+titrerJeu, JSON.stringify(historique));
-        window.localStorage.setItem("inventaire"+titrerJeu, JSON.stringify(Array.from(inventaire.entries())));
-        window.localStorage.setItem("historiqueInventaire"+titrerJeu, JSON.stringify(historiqueInventaire));
+        window.localStorage.setItem("clefEpisodeEnCours"+titreJeu, clefEpisodeEnCours);
+        window.localStorage.setItem("historique"+titreJeu, JSON.stringify(historique));
+        window.localStorage.setItem("inventaire"+titreJeu, JSON.stringify(Array.from(inventaire.entries())));
+        window.localStorage.setItem("historiqueInventaire"+titreJeu, JSON.stringify(historiqueInventaire));
         document.getElementById("disquette").classList.remove('doitAnimerTransition');
         window.setTimeout(function() {
            document.getElementById("disquette").classList.add('doitAnimerTransition');
@@ -124,10 +154,10 @@ function sauvegarder() {
 function effacerSauvegarde() {
     if (window.confirm("Effacer la sauvegarde ?")) {
         if (window.localStorage){
-            window.localStorage.removeItem("clefEpisodeEnCours"+titrerJeu);
-            window.localStorage.removeItem("historique"+titrerJeu);
-            window.localStorage.removeItem("inventaire"+titrerJeu);
-            window.localStorage.removeItem("historiqueInventaire"+titrerJeu);
+            window.localStorage.removeItem("clefEpisodeEnCours"+titreJeu);
+            window.localStorage.removeItem("historique"+titreJeu);
+            window.localStorage.removeItem("inventaire"+titreJeu);
+            window.localStorage.removeItem("historiqueInventaire"+titreJeu);
         }
     }
 }
@@ -172,18 +202,6 @@ function formatterTexte(texte) {
 
 
     return texte;
-}
-
-function genererLiens(liens) {
-    let htmlLiens = "";
-    for (const lien in liens) {
-        if (liens[lien].libelle instanceof Function) {
-            htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${liens[lien].chemin}')">${liens[lien].libelle()}</a><br>`;
-        } else {
-            htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${liens[lien].chemin}')">${liens[lien].libelle}</a><br>`;
-        }
-    }
-    document.getElementById("liens").innerHTML=htmlLiens;
 }
 
 // Vérifie que les chemins mènent bien tous quelque part, qu'il n'y a pas eu d'erreur lors de l'écriture.
@@ -232,6 +250,7 @@ function remplacerImage(img) {
 
 function titrerJeu(titre) {
     titreJeu = titre;
+    document.title = titreJeu;
 }
 
 function ajouterLien(nouveauLien) {
@@ -244,7 +263,11 @@ function remplacerLien(nouveauLien) {
 }
 
 function ajouterTexte(nouveauTexte) {
-    episodes.get(clefEpisodeEnCours).texte += nouveauTexte;
+    if (episodes.get(clefEpisodeEnCours).texte instanceof Function) {
+        episodes.get(clefEpisodeEnCours).texte = episodes.get(clefEpisodeEnCours).texte() + nouveauTexte;
+    } else {
+        episodes.get(clefEpisodeEnCours).texte += nouveauTexte;
+    }
 }
 
 function remplacerTexte(nouveauTexte) {
@@ -310,7 +333,7 @@ function afficherInventaire() {
     for (let [key, value] of mapHtmlInventaire) {
         htmlInventaireFinal+=value+"<br>";
     }
-    document.getElementById("inventaire").innerHTML=htmlInventaireFinal;
+    document.getElementById("contenuInventaire").innerHTML=htmlInventaireFinal;
 }
 
 function episodePrecedent() {
@@ -339,12 +362,12 @@ function enleverDerniersObjetsAcquis() {
 }
 
 function demarrerJeu() {
-    if (window.localStorage && window.localStorage.getItem("clefEpisodeEnCours"+titrerJeu)){
+    if (window.localStorage && window.localStorage.getItem("clefEpisodeEnCours"+titreJeu)){
         //Il y a une sauvegarde, on la restore...
-        clefEpisodeEnCours = window.localStorage.getItem("clefEpisodeEnCours"+titrerJeu);
-        historique = JSON.parse(window.localStorage.getItem("historique"+titrerJeu));
-        inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire"+titrerJeu)));
-        historiqueInventaire = JSON.parse(window.localStorage.getItem("historiqueInventaire"+titrerJeu));
+        clefEpisodeEnCours = window.localStorage.getItem("clefEpisodeEnCours"+titreJeu);
+        historique = JSON.parse(window.localStorage.getItem("historique"+titreJeu));
+        inventaire = new Map(JSON.parse(window.localStorage.getItem("inventaire"+titreJeu)));
+        historiqueInventaire = JSON.parse(window.localStorage.getItem("historiqueInventaire"+titreJeu));
         enleverDerniersObjetsAcquis(); // Evite bug "sauver sur episode qui donne un truc" + F5 = objet infini.
         afficherEpisode(historique.pop());
     } else {

@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EPISODE 1 - Transaction dans le club</title>
+<title></title>
 <style>
 *{
 margin:0px;
@@ -14,7 +14,7 @@ html,body {
 }
 
 body { 
-    font-family: BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    font-family: sans-serif;
     background-color: #000011;
     color:white;
     display:flex;
@@ -33,13 +33,11 @@ body {
     justify-content: center;
     display:flex;
     padding:1em;
-    background:rgba(0, 0, 0, 0.8);
-    width:25em;
+    width:24em;
 }
 
 /* présente uniquement pour centrer la colonne du milieu */
 #colonneDroite {
-    background:rgba(0, 0, 0, 0.8);
     flex-direction:column;
     justify-content: center;
     display:flex;
@@ -47,21 +45,26 @@ body {
     padding:1em;
 }
 
+#conteneurOutilsInventaire {
+    background:rgba(0, 0, 0, 0.5);
+    border-radius: 1em;
+    padding: 1em;
+}
+
 #menuOutils {
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    font-family: "DejaVu";
+}
+
+#inventaire {
+    margin-top: 1em;
 }
 
 #menuOutils a {
     text-decoration: none;
     color: white;
     font-size: x-large;
-}
-
-#inventaire {
-    background-color: rgb(22, 38, 100);
 }
 
 .ajoutInventaire {
@@ -74,11 +77,12 @@ body {
 }
 
  #general{
-    background:rgba(0, 0, 0, 0.8);
+    background:rgba(0, 0, 0, 0.5);
     width:50em;
     padding-right:1em;
     padding-left:1em;
     flex-wrap: wrap-reverse;
+    border-radius: 1em;
 }
 
 
@@ -113,24 +117,24 @@ body {
 
 
 #titre{
-padding-top:10%;
-margin-bottom:10%;
-color:#FFFFFF;
-Background-image:url("img/a.gif");
-background-repeat: no-repeat ;
-background-position:bottom; 
-text-shadow: 1px 1px 1px #093293;
+    padding-top:10%;
+    margin-bottom:10%;
+    color:#FFFFFF;
+    Background-image:url("img/a.gif");
+    background-repeat: no-repeat ;
+    background-position:bottom; 
+    text-shadow: 2px 2px 5px black;
 }
 
 #texte {
-font-size:1.15em;
-color:#FFFFFF;
-padding-left:3%; 
-padding-right:15%; 
-margin-bottom:5%;
-text-shadow: 1px 1px 1px #093293;
-line-height: 1.5;
-font-weight: 400;
+    font-size:1.15em;
+    color:#FFFFFF;
+    padding-left:3%; 
+    padding-right:15%; 
+    margin-bottom:5%;
+    text-shadow: 2px 2px 5px black;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 .emphase {
@@ -181,13 +185,24 @@ text-align:center;
 </style>
 </head>
 <div id="colonneGauche">
-    <div id="menuOutils">
-        <a href="#" onClick="episodePrecedent()">&#129152;</a><a href="#" onClick="sauvegarder()" id="disquette">&#128426;</a><a href="#" onClick="effacerSauvegarde()">&#128446;</a>
+    <div id="conteneurOutilsInventaire">
+        <div id="menuOutils">
+            <a href="#" onClick="episodePrecedent()">
+                <img src="data/img/retour.svg" style="height:1em;" title ="Retourner à l'épisode précédent.">
+            </a>
+            <a href="#" onClick="sauvegarder()" id="disquette" title ="Sauvegarder.">
+                <img src="data/img/disquette.svg" style="height:1em;">
+            </a>
+            <a href="#" onClick="effacerSauvegarde()"  title ="Supprimer la sauvegarde.">
+                <img src="data/img/disquettesuppr.svg" style="height:1em;">
+            </a>
+        </div>
+        <div id="inventaire">
+        <h2> Inventaire :</h2>
+            <div id="contenuInventaire">
+            </div>    
+        </div>    
     </div>
-    <h2> Inventaire</h2>
-    <div id="inventaire">
-    blah
-    </div>    
 </div>
 <div id="general">
     <H1 id="titre"></H1>

@@ -200,13 +200,24 @@ text-align:right;
 </style>
 </head>
 <div id="colonneGauche">
-    <div id="menuOutils">
-        <a href="#" onClick="episodePrecedent()">&#129152;</a><a href="#" onClick="sauvegarder()" id="disquette">&#128426;</a><a href="#" onClick="effacerSauvegarde()">&#128446;</a>
+    <div id="conteneurOutilsInventaire">
+        <div id="menuOutils">
+            <a href="#" onClick="episodePrecedent()">
+                <img src="data/img/retour.svg" style="height:1em;" title ="Retourner à l'épisode précédent.">
+            </a>
+            <a href="#" onClick="sauvegarder()" id="disquette" title ="Sauvegarder.">
+                <img src="data/img/disquette.svg" style="height:1em;">
+            </a>
+            <a href="#" onClick="effacerSauvegarde()"  title ="Supprimer la sauvegarde.">
+                <img src="data/img/disquettesuppr.svg" style="height:1em;">
+            </a>
+        </div>
+        <div id="inventaire">
+        <h2> Inventaire :</h2>
+            <div id="contenuInventaire">
+            </div>    
+        </div>    
     </div>
-    <h2> Inventaire</h2>
-    <div id="inventaire">
-    blah
-    </div>    
 </div>
 <div id="general">
     <H1 id="titre"></H1>

@@ -1689,16 +1689,16 @@ creerEpisode({
     clef: "couperCourantNouveau",
     titre : `Trouver un moyen de couper le courant`,
     texte :
-    `Très bien, mais où se trouve le disjoncteur...? Certainement dans les coulisses. Vous faites demi-tour et arrivez à une intersection.
+    `Très bien, mais où se trouve le ***disjoncteur***...? Certainement dans les coulisses. Vous faites demi-tour et arrivez à une intersection.
     
 Un conduit mène vers la sortie, vu l'air frais. L'autre retourne vers les toilettes du club. Vous prenez le 3e chemin.
     
 Vous débouchez dans les toilettes des artistes. Personne en vue.
 
-Vous sortez dans les loges, à la recherche d'un dijoncteur, que vous finissez par trouver sous l'escalier du fond. Vous l'arrachez sans ménagement du mur.
+Vous sortez dans les loges, à la recherche d'un dijoncteur, que vous finissez par trouver sous l'escalier du fond. Vous ***l'arrachez sans ménagement du mur***.
 Noir. Bruits de panique.
 
-Aidé par la vision infrarouge de vos lunettes, vous retournez dans les conduits aussi vite que possible, remontez, éclatez la grille et vous voilà enfin dans le bureau du directeur.`
+Aidé par la vision infrarouge de vos lunettes, vous ***retournez dans les conduits*** aussi vite que possible, remontez, éclatez la grille et vous ***voilà enfin dans le bureau du directeur***.`
             ,
             liens: [
                 {libelle: `Fouiller le bureau.`,
