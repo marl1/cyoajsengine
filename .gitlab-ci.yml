@@ -17,7 +17,7 @@ build:
     - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/jeux/1_jeu_exemple/index.htm
     - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/jeux/cyberpunk/index.htm
     - mkdir .public
-    - cp -r * .public
+    - cp -r ./www/* .public
     - mv .public public
   artifacts:
     paths:
