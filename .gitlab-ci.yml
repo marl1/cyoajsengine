@@ -17,6 +17,9 @@ build:
     - mkdir .public
     - cp -r * .public
     - mv .public public
+  artifacts:
+    paths:
+      - public
 
 pages:
   dependencies:
@@ -25,6 +28,3 @@ pages:
   stage: deploy
   script:
     - echo "The site will be deployed to $CI_PAGES_URL"
-  artifacts:
-    paths:
-      - public
