@@ -16,7 +16,7 @@ job1:
     - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./jeux/cyberpunk/index.htm
     
 pages:
-image: busybox
+  image: busybox
   stage: deploy
   script:
     - mkdir .public
