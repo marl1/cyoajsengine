@@ -14,14 +14,14 @@ job1:
     - echo "Modification des chemins dans les index.htm..."
     - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./jeux/1_jeu_exemple/index.htm
     - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./jeux/cyberpunk/index.htm
-    
+    - mkdir .public
+    - cp -r * .public
+    - mv .public public
+
 pages:
   image: busybox
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
     - echo "The site will be deployed to $CI_PAGES_URL"
   artifacts:
     paths:
