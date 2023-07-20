@@ -2,8 +2,9 @@ stages:
   - build
   - deploy
 
+image: busybox
+
 build:
-  image: busybox
   stage: build
   script:
     - echo "Creation d'un timestamp pour eviter le cache..."
@@ -21,10 +22,9 @@ build:
     paths:
       - public
 
-pages: #GitLab détecte ce mot "page" et fait l'upload, cf https://stackoverflow.com/questions/53953919/
+pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy derrière, cf https://stackoverflow.com/questions/53953919/
   dependencies:
     - build
-  image: busybox
   stage: deploy
   script:
     - echo "The site will be deployed to $CI_PAGES_URL"
