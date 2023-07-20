@@ -1,7 +1,10 @@
-image: busybox
+stages:
+  - build
+  - deploy
 
-pages:
-  stage: deploy
+job1:
+image: busybox
+  stage: build
   script:
     - echo "Creation d'un timestamp pour eviter le cache..."
     - timestamp=$(date +%s)
@@ -11,6 +14,11 @@ pages:
     - echo "Modification des chemins dans les index.htm..."
     - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./jeux/1_jeu_exemple/index.htm
     - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./jeux/cyberpunk/index.htm
+    
+pages:
+image: busybox
+  stage: deploy
+  script:
     - mkdir .public
     - cp -r * .public
     - mv .public public
@@ -18,6 +26,3 @@ pages:
   artifacts:
     paths:
       - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    
