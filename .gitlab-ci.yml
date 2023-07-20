@@ -1,5 +1,6 @@
 stages:
   - build
+  - e2e
   - deploy
 
 image: busybox
@@ -23,12 +24,12 @@ build:
       - public
 
 e2e tests:
-stage: e2e
+  stage: e2e
   image: mcr.microsoft.com/playwright:v1.36.0-jammy
-  parallel: 7
+  parallel: 1
   script:
-    - npm run start
     - npm ci
+    - (npm run start&)
     - npx playwright test
 
 pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy derrière, cf https://stackoverflow.com/questions/53953919/
@@ -40,3 +41,5 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
   artifacts:
     paths:
       - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
