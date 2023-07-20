@@ -21,10 +21,13 @@ build:
     paths:
       - public
 
-pages:
+pages: #GitLab détecte ce mot "page" et fait l'upload, cf https://stackoverflow.com/questions/53953919/
   dependencies:
     - build
   image: busybox
   stage: deploy
   script:
     - echo "The site will be deployed to $CI_PAGES_URL"
+  artifacts:
+    paths:
+      - public
