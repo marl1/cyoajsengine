@@ -1,13 +1,25 @@
 {
   "name": "ldvelhjs",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": ":toc:",
   "main": "moteurldvelh.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node serveur-node.js"
+  },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "trotter.poulpe",
+  "license": "CC0-1.0",
   "devDependencies": {
     "@playwright/test": "^1.36.1"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "playwright-core": "^1.36.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remote -v"
   }
 }
