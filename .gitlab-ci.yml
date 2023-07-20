@@ -3,7 +3,7 @@ stages:
   - deploy
 
 job1:
-image: busybox
+  image: busybox
   stage: build
   script:
     - echo "Creation d'un timestamp pour eviter le cache..."
