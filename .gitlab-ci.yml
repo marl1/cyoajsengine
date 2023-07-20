@@ -2,9 +2,8 @@ stages:
   - build
   - deploy
 
-image: busybox
-
-job1:
+build:
+  image: busybox
   stage: build
   script:
     - echo "Creation d'un timestamp pour eviter le cache..."
@@ -20,6 +19,9 @@ job1:
     - mv .public public
 
 pages:
+  dependencies:
+    - build
+  image: busybox
   stage: deploy
   script:
     - echo "The site will be deployed to $CI_PAGES_URL"
