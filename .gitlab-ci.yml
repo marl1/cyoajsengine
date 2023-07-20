@@ -22,6 +22,15 @@ build:
     paths:
       - public
 
+e2e tests:
+stage: e2e
+  image: mcr.microsoft.com/playwright:v1.36.0-jammy
+  parallel: 7
+  script:
+    - npm run start
+    - npm ci
+    - npx playwright test
+
 pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy derrière, cf https://stackoverflow.com/questions/53953919/
   dependencies:
     - build
