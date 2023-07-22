@@ -46,7 +46,7 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 release_job:
- variables:
+  variables:
     VERSION_POUR_GITLAB: $(read -r version < ./www/moteurldvelh.js)
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
