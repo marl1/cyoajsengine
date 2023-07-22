@@ -38,6 +38,8 @@ e2e tests:
     - (npm run start&)
     - npx playwright test
   artifacts:
+    paths:
+      - public
     reports:
       dotenv: mesVariables.env
 
@@ -53,6 +55,8 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   artifacts:
+    paths:
+      - public
     reports:
       dotenv: mesVariables.env
 
