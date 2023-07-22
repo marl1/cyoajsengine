@@ -20,18 +20,26 @@ build:
     - mkdir .public
     - cp -r ./www/* .public
     - mv .public public
+    - echo ID_DU_JOB_DE_BUILD=$CI_JOB_ID >> mesVariables.env
   artifacts:
     paths:
       - public
+    reports:
+      dotenv: mesVariables.env
 
 e2e tests:
   stage: e2e
   image: mcr.microsoft.com/playwright:v1.36.0-jammy
   parallel: 1
   script:
+    - echo 'Previous Job ID is printed below'
+    - echo $ID_DU_JOB_DE_BUILD
     - npm ci
     - (npm run start&)
     - npx playwright test
+  artifacts:
+    reports:
+      dotenv: mesVariables.env
 
 pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy derrière, cf https://stackoverflow.com/questions/53953919/
   dependencies:
@@ -44,24 +52,18 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
       - public
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  artifacts:
+    reports:
+      dotenv: mesVariables.env
 
 release_job:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   when: manual
   script:
+    - echo 'Previous Job ID is printed below'
+    - echo $ID_DU_JOB_DE_BUILD
     - read -r version < ./www/moteurldvelh.js
     - version=${version:2} #enlève "//"
     - echo "Lancement de la release de la version $version..."
-    - echo "Creation d'un timestamp pour eviter le cache..."
-    - timestamp=$(date +%s)
-    - echo "Copie du moteur dans les dossiers des jeux..."
-    - cp ./www/moteurldvelh.js ./www/jeux/1_jeu_exemple/data/
-    - cp ./www/moteurldvelh.js ./www/jeux/cyberpunk/data/
-    - echo "Modification des chemins dans les index.htm..."
-    - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/jeux/1_jeu_exemple/index.htm
-    - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/jeux/cyberpunk/index.htm
-    - mkdir .public
-    - cp -r ./www/* .public
-    - mv .public public
-    - release-cli create --description "blah !" --tag-name $version
+    - release-cli create --description "blah !" --tag-name $version --assets-link "{\"name\":\"Exemples\",\"url\":\"https://gitlab.com/trotter.poulpe/ldvelhjs/-/jobs/${ID_DU_JOB_DE_BUILD}/artifacts/download?file_type=archive\"}"
