@@ -8,7 +8,7 @@ creerEpisode({
     <img src="data/img/perso.png" style="float:right; padding:0.5em;">
     VOUS êtes ***Aiden Shaw***, 34 ans.
 
-    Ce fut à 19 ans, après des années de déscolarisation, que vous avez rejoint l'armée par dépit. Votre parcours y fut (à votre grande surprise) brillant. Mais, dégouté de l'institution militaire, vous le stoppez 6 ans plus tard, non sans avoir reçu vos premiers implants.
+    Ce fut à 19 ans, après des années de déscolarisation, que vous avez rejoint l'armée par dépit. Votre parcours y fut (à votre grande surprise) brillant. Mais, dégouté de l'institution militaire, vous la quittez 6 ans plus tard, non sans avoir reçu vos premiers implants.
 
     A 30 ans, vous êtes recruté par la branche "sécurité privée" de la société de biotechnologie Premanod. La dernière mission chez eux vous a laissé un goût particulièrement amer au point d'abandonner votre poste.
 
