@@ -1,4 +1,4 @@
-//V0.1.2
+//V0.1.3
 "use strict";
 
 /* Utilisé globalement dans l'appli pour savoir 
