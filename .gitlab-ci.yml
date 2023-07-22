@@ -69,5 +69,6 @@ release_job:
     - echo $ID_DU_JOB_DE_BUILD
     - read -r version < ./www/moteurldvelh.js
     - version=${version:2} #enlève "//"
+    - version=${version://$-DEV/} #enlève "-DEV"
     - echo "Lancement de la release de la version $version..."
     - release-cli create --description "blah !" --tag-name $version --assets-link "{\"name\":\"Exemples\",\"url\":\"https://gitlab.com/trotter.poulpe/ldvelhjs/-/jobs/${ID_DU_JOB_DE_BUILD}/artifacts/download?file_type=archive\"}"
