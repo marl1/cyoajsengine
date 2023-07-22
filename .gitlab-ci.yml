@@ -52,7 +52,7 @@ release_job:
   script:
     - read -r version < ./www/moteurldvelh.js
     - substr( $version, 3 ) } #enlève "//"
-    - echo "running release_job"
+    - echo "Lancement de la release de la version $version..."
   release:
-    tag_name: ${MAJOR}_${MINOR}_${REVISION}
-    description: '$CI_COMMIT_TAG'
+    tag_name: $version
+    description: ''
