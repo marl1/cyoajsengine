@@ -51,7 +51,7 @@ release_job:
   when: manual
   script:
     - read -r version < ./www/moteurldvelh.js
-    - substr( $version, 3 ) } #enlève "//"
+    - version=${version:2} #enlève "//"
     - echo "Lancement de la release de la version $version..."
   release:
     tag_name: $version
