@@ -810,9 +810,9 @@ creerEpisode({
     clef: "passerEnForceLogesClub",
     titre : `Passer en force le garde devant la porte des loges.`,
     texte :
-    `Vous lui donnez un rapide coup de coude juste sous le crane puis lui écrasez la tête contre la porte. Il s'effondre dans vos bras, KO. Personne ne semble vous avoir vu. Vous le posez plus ou moins assis sur le sol et entrez dans les loges.
+    `Vous lui donnez un rapide coup de coude juste sous le crane puis lui écrasez la tête contre la porte. Il s'effondre dans vos bras, ***KO***. Personne ne semble vous avoir vu. Vous le posez plus ou moins assis sur le sol et ***entrez dans les loges***.
 
-Des petites pièces, certaines avec portes et d'autres avec un simple rideau, disposées sur les côtés d'un long couloir qui mène directement à la sortie.`
+Des petites pièces, certaines avec portes et d'autres avec un simple rideau, disposées sur les côtés d'un long couloir qui mène directement à la ***sortie***.`
             ,
             liens: [
                 {libelle: `Traverser le couloir et sortir.`,
@@ -1310,7 +1310,7 @@ creerEpisode({
     clef: "45",
     titre : `Les toilettes des artistes`,
     texte :
-    `Vous tombez nez à nez avec un type en train de se recoiffer devant la glace. Il vous salue vaguement de la tête avant de vous ignorer.
+    `Vous tombez nez à nez avec ***un type en train de se recoiffer*** devant la glace. Il vous salue vaguement de la tête avant de vous ignorer.
 
 Les toilettes sont propres. Trois cabines et des pissotières. Vous remarquez ***un conduit d'aération*** au dessus de l'une des cabines. Impossible d'y accéder tant que l'autre type est là.
 `
@@ -1635,7 +1635,7 @@ creerEpisode({
     clef: "22",
     titre : `Visiter les pièces`,
     texte :
-    `Vous jetez un rapide coup d'oeil derrière les rideaux, rien d'intéressant si ce n'est du matériel son et lumière. Les pièces avec portes sont toutes fermées, excepté les toilettes.`
+    `Vous jetez un rapide coup d'oeil derrière les rideaux, rien d'intéressant si ce n'est du matériel son et lumière. Les pièces avec portes sont ***toutes fermées***, excepté ***les toilettes***.`
             ,
             liens: [
                 {libelle: `Traverser le couloir et sortir.`,
