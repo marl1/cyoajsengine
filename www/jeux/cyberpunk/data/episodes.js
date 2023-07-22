@@ -2,6 +2,28 @@ titrerJeu("cyberpunk");
 
 creerEpisode({
     clef: "intro",
+    titre : `Introduction`,
+    texte :
+    `<h2>2087.</h2>
+    <img src="data/img/perso.png" style="float:right; padding:0.5em;">
+    VOUS êtes ***Aiden Shaw***, 34 ans.
+
+    Ce fut à 19 ans, après des années de déscolarisation, que vous avez rejoint l'armée par dépit. Votre parcours y fut (à votre grande surprise) brillant. Mais, dégouté de l'institution militaire, vous le stoppez 6 ans plus tard, non sans avoir reçu vos premiers implants.
+
+    A 30 ans, vous êtes recruté par la branche "sécurité privée" de la société de biotechnologie Premanod. La dernière mission chez eux vous a laissé un goût particulièrement amer au point d'abandonner votre poste.
+
+    Depuis quelques mois, vous errez, sans but, votre corps charcuté pour faire la guerre hurlant douloureusement son besoin de maintenance.
+
+    Vos besoins croissants en drogues pour lutter contre les tremblement liées aux désynchronisations vous ont mené ***dans cette boite de nuit***...
+            `,
+    liens: [
+            {libelle: `Commencez votre aventure.`,
+            chemin: "intro2"}
+        ]
+});
+
+creerEpisode({
+    clef: "intro2",
     titre : `Transaction dans le club`,
     texte :
     `La piste de danse d'une boîte de nuit. Meilleur endroit pour faire une transaction discrète : là où on n'arrive même pas à entendre quelqu'un nous criant dans l'oreille.
@@ -221,6 +243,9 @@ Vous n'avez même pas le temps de le voir attaquer. Vous le voyez juste... Dispa
                 {libelle: `Noir`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -450,6 +475,9 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -473,6 +501,9 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -1018,7 +1049,7 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
 });
 
 creerEpisode({
-    clef: "134Revisite", //TODO on ne peux prendre le pistolet qu'une fois
+    clef: "134Revisite",
     titre : `Fouiller le bureau en bois`,
     texte :
     `Rien de plus dans le bureau. Vous avez déjà bien fouillé.`
@@ -1351,11 +1382,11 @@ L'un d'entre eux passe derrière vous et...
         ]
 });
 
-creerEpisode({ //TODO: si arme alors utiliser arme, sinon non
+creerEpisode({
     clef: "87",
-    titre : `Se rendre aux gardes dans le conduit`,
+    titre : `Affronter le personnel de sécurité dans le conduit`,
     texte :
-    `"Malgré l'espace minuscule, vous arrivez à dégommer un poursuivant avec votre arme toute neuve, mais c'est inutile, ils vous bloquent complêtement l'arrière de toute manières, il va falloir sortir...
+    `"Malgré l'espace minuscule, vous arrivez assommer un poursuivant mais c'est inutile, ils vous bloquent complêtement l'arrière de toute manières, il va falloir sortir...
 
 Soudain, le conduit s'effondre et vous chutez lourdement sur le dos.
 
@@ -1369,6 +1400,9 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 {libelle: `Noir.`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({ //TODO: si arme alors utiliser arme, sinon non
@@ -1407,6 +1441,9 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 {libelle: `Noir.`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -1423,6 +1460,9 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 {libelle: `Noir.`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -1530,6 +1570,9 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 {libelle: `Noir.`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -1549,6 +1592,9 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 {libelle: `Noir.`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -1946,6 +1992,9 @@ Vous n'avez ***même pas le temps*** de le voir se déplacer. Vous le voyez just
                 {libelle: `Noir`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -2041,6 +2090,9 @@ Vous n'avez même pas le temps de le voir attaquer. Vous le voyez juste... Dispa
                 {libelle: `Noir`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -2059,6 +2111,9 @@ Vous n'avez même ***pas le temps de le voir*** se déplacer. Vous n'avez aucune
                 {libelle: `Noir`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -2077,6 +2132,9 @@ Vous n'avez ***même pas le temps de le voir*** se déplacer. Vous n'avez aucune
                 {libelle: `Noir`,
                 chemin: "96"}
         ]
+        ,commandes: () => {
+            modifierVariable("augmenteClubVu", true);
+        }
 });
 
 creerEpisode({
@@ -2116,13 +2174,13 @@ Vous sortez de la salle et débouchez au milieu d'un court couloir plutôt chic,
 creerEpisode({ //TODO conditionné la vue de l'augmenté au club ou non
     clef: "115",
     titre : `Prendre l'ascenseur`,
-    texte :
+    texte : () =>
     `
     Vous appelez l'ascenseur et appuyez sur le chiffre 3.
 
     La cabine est plutôt clean elle aussi. De la musique, des fausses plantes vertes. Rien à voir avec les préfabriqués et les entrepots reconvertis où vous aviez l'habitude de travailler.
     
-    Vous voilà au troisième étage. Le bureau d'Alice est juste en face, sa porte vitrée ouverte vous invite à rentrer. ***Le gros Alice*** est derrière son bureau en train de lire un dossier. Il n'a pas changé. Son visage poupin chauve et imberbe restera certainement le même jusqu'à sa mort. A côté de lui se tient ***un énorme augmenté*** en train de vous regarder. Vous vous souvenez l'avoir vu au club. Il vous fait un signe de sa tête blanche presque aveuglante. Alice se réveille.
+    Vous voilà au troisième étage. Le bureau d'Alice est juste en face, sa porte vitrée ouverte vous invite à rentrer. ***Le gros Alice*** est derrière son bureau en train de lire un dossier. Il n'a pas changé. Son visage poupin chauve et imberbe restera certainement le même jusqu'à sa mort. A côté de lui se tient ***un énorme augmenté*** en train de vous regarder.${variable("insertion")} Il vous fait un signe de sa tête blanche presque aveuglante. Alice se réveille.
     
     "Ah ! Te voilà ! Entre, entre." Il est tellement content de vous voir qu'il en manque de tomber de son fauteil à force de gesticulations.
     
@@ -2151,6 +2209,11 @@ creerEpisode({ //TODO conditionné la vue de l'augmenté au club ou non
     {libelle: `Demander du temps pour réfléchir.`,
     chemin: "121"}
 ]
+,commandes: () => {
+    if (variable("augmenteClubVu")) {
+        variable("insertion", ` Vous vous souvenez l'avoir vu au club.`);
+    }
+}
 });
 
 creerEpisode({
