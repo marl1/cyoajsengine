@@ -20,10 +20,12 @@ build:
     - mkdir .public
     - cp -r ./www/* .public
     - mv .public public
-    - echo ID_DU_JOB_DE_BUILD=$CI_JOB_ID >> mesVariables.env
+    - echo ID_DU_JOB_DE_BUILD=$ID_DU_JOB_DE_BUILD >> mesVariables.env
   artifacts:
     paths:
       - public
+    name:
+      - exemples
     reports:
       dotenv: mesVariables.env
 
@@ -40,6 +42,8 @@ e2e tests:
   artifacts:
     paths:
       - public
+    name:
+      - exemples
     reports:
       dotenv: mesVariables.env
 
@@ -49,14 +53,13 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
   stage: deploy
   script:
     - echo "The site will be deployed to $CI_PAGES_URL"
-  artifacts:
-    paths:
-      - public
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   artifacts:
     paths:
       - public
+    name:
+      - exemples
     reports:
       dotenv: mesVariables.env
 
