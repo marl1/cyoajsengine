@@ -47,7 +47,7 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
 
 release_job:
   variables:
-    VERSION_POUR_GITLAB: $(grep -m1 "" ./www/moteurldvelh.js)
+    VERSION_POUR_GITLAB: $(grep -m1 "" ${CI_PROJECT_DIRECTORY}/www/moteurldvelh.js)
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   when: manual
