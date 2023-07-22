@@ -25,7 +25,7 @@ build:
     paths:
       - public
     name:
-      - exemples
+      - "exemples"
     reports:
       dotenv: mesVariables.env
 
@@ -43,7 +43,7 @@ e2e tests:
     paths:
       - public
     name:
-      - exemples
+      - "exemples"
     reports:
       dotenv: mesVariables.env
 
@@ -59,7 +59,7 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
     paths:
       - public
     name:
-      - exemples
+      - "exemples"
     reports:
       dotenv: mesVariables.env
 
