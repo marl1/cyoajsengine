@@ -55,4 +55,4 @@ release_job:
     - echo "Lancement de la release de la version $version..."
   release:
     tag_name: $version
-    description: ''
+    description: "$version"
