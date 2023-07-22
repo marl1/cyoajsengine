@@ -63,7 +63,9 @@ creerEpisode({
 
 *remplacerTexte* : ``remplacerTexte(`Nouveau texte !`);``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
 
-*valeurVariable* : ``valeurVariable("astuceFantomeDite")``. Retourne la valeur d'une variable.
+*valeurVariable* : ``valeurVariable("nomVariable")``. Retourne la valeur d'une variable.
+
+*variable* : ``variable("nomVariable")`` ou ``variable("nomVariable", "nouvelleValeur")``. Retourne la valeur d'une variable OU modifie une variable. Notation raccourcie de valeurVariable et modifierVariable.
 
 == ENGLISH
 
