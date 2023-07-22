@@ -53,5 +53,4 @@ release_job:
     - read -r version < ./www/moteurldvelh.js
     - version=${version:2} #enlève "//"
     - echo "Lancement de la release de la version $version..."
-    - release-cli create --description "blah !" --tag-name version
-    
+    - release-cli create --description "blah !" --tag-name $version
