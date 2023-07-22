@@ -2,6 +2,7 @@ stages:
   - build
   - e2e
   - deploy
+  - release
 
 image: busybox
 
