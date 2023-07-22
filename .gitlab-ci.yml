@@ -49,10 +49,11 @@ release_job:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   when: manual
+  before_script:
+      - read -r version < ./www/moteurldvelh.js
+      - export VERSION_POUR_GITLAB=${version:2} #enlève "//"
   script:
-    - read -r version < ./www/moteurldvelh.js
-    - export VERSION_POUR_GITLAB=${version:2} #enlève "//"
     - echo "Lancement de la release de la version $VERSION_POUR_GITLAB..."
   release:
-    tag_name: "$VERSION_POUR_GITLAB"
+    tag_name: $VERSION_POUR_GITLAB
     description: "blah"
