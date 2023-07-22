@@ -51,8 +51,8 @@ release_job:
   when: manual
   script:
     - read -r version < ./www/moteurldvelh.js
-    - version=${version:2} #enlève "//"
-    - echo "Lancement de la release de la version $version..."
+    - export VERSION_POUR_GITLAB=${version:2} #enlève "//"
+    - echo "Lancement de la release de la version $VERSION_POUR_GITLAB..."
   release:
-    tag_name: tags/$version
-    description: "$version"
+    tag_name: $VERSION_POUR_GITLAB
+    description: "blah"
