@@ -54,5 +54,5 @@ release_job:
     - version=${version:2} #enlève "//"
     - echo "Lancement de la release de la version $version..."
   release:
-    tag_name: $version
+    tag_name: tags/$version
     description: "$version"
