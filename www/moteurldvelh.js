@@ -155,9 +155,9 @@ function sauvegarder() {
         window.localStorage.setItem("historiqueInventaire"+titreJeu, JSON.stringify(historiqueInventaire));
         window.localStorage.setItem("variables"+titreJeu, JSON.stringify(Array.from(variables.entries())));
         window.localStorage.setItem("historiqueVariables"+titreJeu, JSON.stringify(historiqueVariables));
-        document.getElementById("disquette").classList.remove('doitAnimerTransition');
+        document.getElementById("iconeSauver").classList.remove('doitAnimerTransition');
         window.setTimeout(function() {
-           document.getElementById("disquette").classList.add('doitAnimerTransition');
+           document.getElementById("iconeSauver").classList.add('doitAnimerTransition');
         }, 1);
     
     
@@ -297,20 +297,44 @@ function remplacerTexte(nouveauTexte) {
     episodes.get(clefEpisodeEnCours).texte = nouveauTexte;
 }
 
+function variable(nomVar, valeur) {
+    if(!valeur) {
+        return valeurVariable(nomVar);
+    } else {
+        modifierVariable(nomVar, valeur);
+    }
+}
+
 function valeurVariable(nomVar) {
     return variables.get(nomVar);
 }
 
 function modifierVariable(nomVar, valeur) {
-    console.log(nomVar + " valait " + variables.get(nomVar));
-    console.log("on set " + nomVar + " avec " + valeur);
-    if(variables.get(nomVar)) {
-        //on garde l'ancienne var en mémoire
-        historiqueVariables.push({clefEpisode:historique[historique.length-1], variables:[{nomVar: nomVar, valeur: valeur}]});
-    } else {
-        //on mémorise qu'elle n'existait pas
-        historiqueVariables.push({clefEpisode:historique[historique.length-1], variables:[{nomVar: nomVar, valeur: undefined}]});
+    console.log("ajout en histo");
+    let precedenteValeur=undefined;
+    if(historiqueVariables.length>0) {
+    console.log("on teste si " +  historiqueVariables[historiqueVariables.length-1].clefEpisode + " vaut " + historique[historique.length-1])
     }
+    if (historiqueVariables.length>0 && historiqueVariables[historiqueVariables.length-1].clefEpisode === historique[historique.length-1]) {
+        console.log("on a deja cet épisode en mémoire, ça doit être un retour arrière.");
+        for (let vieilleVar of historiqueVariables[historiqueVariables.length-1].variables){
+            if(vieilleVar.nomVar === nomVar){
+                console.log("on a trouvé l'ancienne valeur : " + vieilleVar.valeur);
+                precedenteValeur = vieilleVar.valeur;
+            }
+        }
+    } else {
+        precedenteValeur = variables.get(nomVar);
+        console.log(nomVar + " valait " + precedenteValeur + ", on met ça en historique");
+        if(variables.get(nomVar)) {
+            //on garde l'ancienne var en mémoire
+            historiqueVariables.push({clefEpisode:historique[historique.length-1], variables:[{nomVar: nomVar, valeur: valeur}]});
+        } else {
+            //on mémorise qu'elle n'existait pas
+            historiqueVariables.push({clefEpisode:historique[historique.length-1], variables:[{nomVar: nomVar, valeur: undefined}]});
+        }
+    }
+    console.log("on set " + nomVar + " avec " + valeur);
     variables.set(nomVar, valeur);
     console.log("historiqueVariables", historiqueVariables);
 }
@@ -407,6 +431,7 @@ function enleverDerniersObjetsAcquis() {
 
 //Pour éviter que la fonction "retour" ne permette d'avoir une infinité d'objets
 function remplacerParVariablesPrecedentes(clefEpisodeVerifVarASupprimer) {
+    console.log("remplacerParVariablesPrecedentes");
     if (historiqueVariables.length > 0) {
         const variablesARemplacer = historiqueVariables[historiqueVariables.length-1];
         console.log("de l'épisode " + clefEpisodeVerifVarASupprimer + " faut remplacer ", variablesARemplacer);
