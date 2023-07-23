@@ -266,7 +266,7 @@ creerEpisode({
     clef: "sortirFlicsToilettes",
     titre : `Sortir des toilettes après avoir neutralisé les policiers`,
     texte :
-    `Vous ouvrez la porte et tombez nez à nez avec un ***grand type en imperméable*** qui semble augmenté, comme vous, portant lui aussi des lunettes noires sans branches, directement fusionnées avec ses tempes. Sa peau blanche semble presque fluorescente.
+    `Vous ouvrez la porte et tombez nez à nez avec un ***grand type en imperméable*** qui semble augmenté, comme vous, portant lui aussi des lunettes noires. Sa peau blanche semble presque fluorescente.
 
     Les renforts, cest LUI.
 
@@ -888,6 +888,7 @@ creerEpisode({
             {libelle: `Je préfère rester au milieu de la foule.`,
             chemin: "6"},
         ]
+        ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -904,6 +905,7 @@ creerEpisode({
                 {libelle: `Chercher une autre sortie.`,
                 chemin: "19"}
         ]
+        ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -914,7 +916,7 @@ creerEpisode({
 
 Vous voilà dans la rue de derrière, glauque, faiblement éclairée par les raies des lampadaires jaune pisse dans lesquels viennent danser les volutes de cigarettes de quelques fumeurs en petits groupes. Ils vous ignorent complètement.
 
-Il y a aussi un grand type en imperméable qui semble augmenté, comme vous, portant lui aussi des lunettes noires sans branches, directement fusionnées avec ses tempes. Sa peau blanche semble presque fluorescente.
+Il y a aussi un grand type en imperméable qui semble augmenté, comme vous, portant lui aussi des lunettes noires. Sa peau blanche semble presque fluorescente.
 
 "Merci de me suivre.", dit-il en posant sa main sur votre épaule.`
             ,
@@ -926,6 +928,7 @@ Il y a aussi un grand type en imperméable qui semble augmenté, comme vous, por
                 {libelle: `Fuir.`,
                 chemin: "125"}
         ]
+        ,image:"sortieArriereClub.jpg"
 });
 
 creerEpisode({
@@ -1057,7 +1060,7 @@ creerEpisode({
 
 Vous voilà dans la rue de derrière, glauque, faiblement éclairée par les raies des lampadaires jaune pisse dans lesquels viennent danser les volutes de cigarettes de quelques fumeurs en petits groupes. Ils vous ignorent complètement.
 
-Il y a aussi ***un gros type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires sans branches, directement fusionnées avec ses tempes. Sa peau blanche semble presque fluorescente.
+Il y a aussi ***un gros type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires. Sa peau blanche semble presque fluorescente.
 
 "Merci de me suivre.", dit-il en posant sa main sur votre épaule.`
             ,
@@ -1069,6 +1072,7 @@ Il y a aussi ***un gros type en imperméable qui semble augmenté***, comme vous
                 {libelle: `Fuir.`,
                 chemin: "125"}
         ]
+        ,image:"sortieArriereClub.jpg"
 });
 
 creerEpisode({
@@ -1091,7 +1095,7 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
     ],
     commandes: () => {
         ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
-        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet", description:"", nombre:40 });
+        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
     },
     revisite:"134Revisite"
 });
@@ -1166,7 +1170,7 @@ Vous rampez à toute vitesse vers le conduit menant, vous l'espérez, à la sort
 
 Et en effet, vous voilà derrière le gros bloc climatiseur accroché à un côté du batiment. A travers les interstices, vous pouvez voir la rue, faiblement éclairée par les lampadaires jaune pisse.
 
-Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un ***grand type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires sans branches, directement fusionnées avec ses tempes. Sa peau blanche semble presque fluorescente.
+Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un ***grand type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires. Sa peau blanche semble presque fluorescente.
 
 Pas le temps de gamberger, de toute façon. Vous entendez des bruits derrière vous : on a commencé ***à vous suivre*** dans le conduit.`
             ,
@@ -1188,7 +1192,7 @@ creerEpisode({
 
 Et en effet, vous voilà derrière le gros bloc climatiseur accroché à un côté du batiment. A travers les interstices, vous pouvez voir la rue, faiblement éclairée par les lampadaires jaune pisse.
 
-Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un ***grand type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires sans branches, directement fusionnées avec ses tempes. Sa peau blanche semble presque fluorescente.
+Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un ***grand type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires. Sa peau blanche semble presque fluorescente.
 
 Pas le temps de gamberger, de toute façon. Vous entendez des bruits derrière vous : on a commencé ***à vous suivre*** dans le conduit.`
             ,
@@ -1703,7 +1707,7 @@ creerEpisode({
     `Vous rampez vers ce que vous croyez être la sortie.
 Et en effet, vous voilà derrière le gros bloc climatiseur accroché à un côté du batiment. A travers les interstices, vous pouvez voir la rue, faiblement éclairée par les lampadaires jaune pisse.
 
-Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un grand ***type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires sans branches, directement fusionnées avec ses tempes. Sa peau blanche semble presque fluorescente.
+Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un grand ***type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires. Sa peau blanche semble presque fluorescente.
 
 Peut être n'est-ce qu'une concidence. Peut être n'est-il pas là pour vous. Peut être pas. Et peut être que oui.
 
@@ -1719,6 +1723,7 @@ Bon. Si vous voulez sortir par là, ***il faudra défoncer le climatiseur***, de
                 {libelle: `Faire demi tour complètement et sortir par l'entrée principale.`,
                 chemin: "83"}
         ]
+        ,image:"sortieArriereClub.jpg"
 });
 
 creerEpisode({
@@ -1728,7 +1733,7 @@ creerEpisode({
     `Vous décidez de ne pas prendre de risques inutiles en visitant le bureau et préférez ramper vers ce que vous croyez être la sortie.
 Et en effet, vous voilà derrière le gros bloc climatiseur accroché à un côté du batiment. A travers les interstices, vous pouvez voir la rue, faiblement éclairée par les lampadaires jaune pisse.
 
-Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un grand ***type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires sans branches, directement fusionnées avec ses tempes. Sa peau blanche semble presque fluorescente.
+Vous êtes juste au dessus de l'entrée des artistes. Quelques-un sont d'ailleurs en train de griller une cigarette en discutant. Il y a aussi un grand ***type en imperméable qui semble augmenté***, comme vous, portant lui aussi des lunettes noires. Sa peau blanche semble presque fluorescente.
 
 Peut être n'est-ce qu'une concidence. Peut être n'est-il pas là pour vous. Peut être pas. Et peut être que oui.
 
@@ -1827,7 +1832,7 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
         ]
         ,commandes: () => {
         ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
-        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet", description:"", nombre:40 });
+        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
     }
     ,revisite:"fouillerBureauBoisClubCoupureCourantRevisite"
 });
@@ -1942,7 +1947,7 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
         ],
     commandes: () => {
         ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
-        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet", description:"", nombre:40 });
+        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
     },
     revisite:"76Revisite"
 });
@@ -2079,6 +2084,7 @@ Vous sortez et vous retrouvez dans les loges. La porte de sortie est au fond du 
                 {libelle: `Aller au premier étage.`,
                 chemin: "21"}
             ]
+            ,image: "toilettesClub2.jpg"
 });
 
 creerEpisode({
@@ -2199,10 +2205,20 @@ Un type avec un masque de chirugien se penche sur vous. Vous êtes allongé dans
 Très juste. On ne laissait pas les gens ***partir*** comme ça avec des implants qui ***coutent aussi cher qu'un avion de combat***. Mais au bout de quelques mois, vous aviez presque fini par y croire.
 
 "J'ai démissionné, répétez-vous.
--C'est pas à moi qu'il faut dire ça de toute façon, fait-il en détachant divers cables le long de vos bras, Alice vous attend. Vous pouvez vous lever."
+-C'est pas à moi qu'il faut dire ça de toute façon, fait-il en détachant divers cables le long de vos bras, Alice vous attend. Vous pouvez vous lever."`
+,liens: [
+    {libelle: `Vous lever.`,
+    chemin: "96seLever"}
+]
+,image:"salleImplantation.jpg"
+});
 
-Vous vous asseyez sur le lit. Vous êtes dans une salle d'opération ou, pour être plus précis, d'implantation. Pareille mais bourrée d'électronique. Deux infirmiers s'occupent de ranger le matériel qu'ils ont utilisé pour faire dieu seul sait quoi sur vous. Le médecin enlève son masque et dévoile un visage fatigué qui contraste bizarrement avec sa voix gaie.
-
+creerEpisode({
+    clef: "96seLever",
+    titre : `Lumière`,
+    texte :
+    `Vous vous asseyez sur le lit. Vous êtes dans une salle d'opération ou, pour être plus précis, d'implantation. Pareille mais bourrée d'électronique. Deux infirmiers s'occupent de ranger le matériel qu'ils ont utilisé pour faire dieu seul sait quoi sur vous. Le médecin enlève son masque et dévoile un visage fatigué qui contraste bizarrement avec sa voix gaie.
+    <img src="data/img/salleImplantation.jpg" class="imgDansTexte">
 "Il y a eu du changement ici. Alice a son bureau au troisième étage. Vous y arriverez tout seul ?"
 Vous lui assurez que oui, et que non, vous n'allez pas faire de bêtises.
 
@@ -2218,7 +2234,9 @@ Vous sortez de la salle et débouchez au milieu d'un court couloir plutôt chic,
     {libelle: `Essayer de vous enfuir.`,
     chemin: "118"}
 ]
+,image:"couloirsPremanod.jpg"
 });
+
 
 creerEpisode({
     clef: "115",
@@ -2226,13 +2244,14 @@ creerEpisode({
     texte : () =>
     `
     Vous appelez l'ascenseur et appuyez sur le chiffre 3.
-
+    
     La cabine est plutôt clean elle aussi. De la musique, des fausses plantes vertes. Un grand miroir.
-`
-,liens: [
-    {libelle: `La porte de l'ascenseur s'ouvre.`,
-    chemin: "rencontreAlice"}
-]
+    `
+    ,liens: [
+        {libelle: `La porte de l'ascenseur s'ouvre.`,
+        chemin: "rencontreAlice"}
+    ]
+    ,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2274,6 +2293,7 @@ creerEpisode({
         variable("insertion", ` Vous vous souvenez l'avoir vu au club.`);
     }
 }
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2283,7 +2303,7 @@ creerEpisode({
     `A côté de la salle d'implantation se trouve une pièce fermée à clef : vous pouvez voir à travers l'étroite vitre que du matériel médical y est stocké. La dernière porte le long de ce mur mène aux toilettes.
 
     Sur le mur en face, deux autres portes : l'une, vitrée, est celle d'un bureau. Sur l'autre est indiqué "escaliers".
-    <img src="data/img/planEtageSalleImplantation.png">
+    <img src="data/img/planEtageSalleImplantation.png" class="imgDansTexte">
 `
 ,liens: [
     {libelle: `Aller vers l'ascenseur.`,
@@ -2300,8 +2320,8 @@ creerEpisode({
     chemin: "163"},
     {libelle: `Prendre la porte menant aux escaliers.`,
     chemin: "142"}
-
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2320,6 +2340,7 @@ creerEpisode({
     {libelle: `"Non, rien."`,
     chemin: "145"}
 ]
+,image:"salleImplantation.jpg"
 });
 
 creerEpisode({
@@ -2335,6 +2356,7 @@ creerEpisode({
     {libelle: `Retourner dans le couloir`,
     chemin: "148"}
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2353,6 +2375,7 @@ creerEpisode({
     {libelle: `Retourner dans la salle d'implantation.`,
     chemin: "117"}
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2372,6 +2395,7 @@ Sur la demande d'Alice, vous ré-autorisez son accès à votre module de communi
     {libelle: `Vous arrivez au rez de chaussé..`,
     chemin: "152"}
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2391,6 +2415,7 @@ creerEpisode({
     {libelle: `Demander du temps pour réfléchir.`,
     chemin: "121"}
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2409,6 +2434,7 @@ creerEpisode({
     {libelle: `Vous arrivez au rez de chaussé.`,
     chemin: "152"}
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2595,6 +2621,7 @@ creerEpisode({
     {libelle: `"Je vais y aller..."`,
     chemin: "145"}
 ]
+,image:"salleImplantation.jpg"
 });
 
 creerEpisode({
@@ -2609,6 +2636,7 @@ creerEpisode({
     {libelle: `"Que m'avez-vous fait, au fait ?"`,
     chemin: "143"}
 ]
+,image:"salleImplantation.jpg"
 });
 
 creerEpisode({
@@ -2625,6 +2653,7 @@ creerEpisode({
     {libelle: `Essayer de vous enfuir.`,
     chemin: "118"}
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2643,6 +2672,7 @@ creerEpisode({
     {libelle: `Essayer de vous enfuir.`,
     chemin: "118"}
 ]
+,image:"couloirsPremanod.jpg"
 });
 
 creerEpisode({
@@ -2655,7 +2685,6 @@ creerEpisode({
     Vous éteignez le robinet. L'eau sur vos mains était-elle chaude, ou froide ? Vos capteurs n'ont même pas pu vous le dire. Vos doigts sont un petit miracle d'ingénérie robotique, répondant parfaitement à chacune de vos solicitation, aussi bien pour donner un coup qu'une caresse. Mais vous sentez les articulations frotter. La peau s'écaille sur le dessous des pouces. La couleur de la chair n'est plus aussi uniforme qu'autrefois.
     
     Finalement, c'est une forme de vieillesse, pensez-vous, en retournant dans le couloir.
-    
     `
 ,liens: [
     {libelle: `
@@ -2672,11 +2701,11 @@ creerEpisode({
 
 creerEpisode({
     clef: "163",
-    titre : `Dans les toilettes du deuxième étage`,
+    titre : `Jeter un oeil à la pièce où est stocké le matériel médical`,
     texte :
     `Le stock est fermé par une solide porte de métal. Un étroit panneau de verre blindé vous permet de voir le matériel médical stocké dans la pièce.
 
-    Vous savez déjà que vous n'arriverez à rien sans matériel. Impossible de briser cette porte, même avec vos augmentations.
+    Vous savez déjà que vous n'arriverez à rien sans outil. Impossible de briser cette porte, même avec vos augmentations.
     
     `
 ,liens: [
