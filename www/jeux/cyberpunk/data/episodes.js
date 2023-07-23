@@ -5,7 +5,7 @@ creerEpisode({
     titre : `Introduction`,
     texte :
     `<h2>2087.</h2>
-    <img src="data/img/perso.png" style="float:right; padding:0.5em;">
+    <img src="data/img/perso.png" class="imgDansTexte">
     VOUS êtes ***Aiden Shaw***, 34 ans.
 
     Ce fut à 19 ans, après des années de déscolarisation, que vous avez rejoint l'armée par dépit. Votre parcours y fut (à votre grande surprise) brillant. Mais, dégouté de l'institution militaire, vous la quittez 6 ans plus tard, non sans avoir reçu vos premiers implants.
@@ -43,6 +43,7 @@ creerEpisode({
             {libelle: `Ignorer la notification.`,
             chemin: "ignorerNotifClub"}
         ],
+    image:"dancefloor1.gif",
     commandes: () => {
 		ajouterInventaireDiscretement({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:2000});
 		ajouterInventaire({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:-900});
@@ -67,13 +68,16 @@ creerEpisode({
             {libelle: `Au culot, sortir par l'entrée principale.`,
             chemin: "7"}
         ]
+    ,image:"dancefloor1.gif",
 });
 
 creerEpisode({
     clef: "5",
     titre : `Les toilettes du club`,
     texte :
-    `Vous coupez immédiatement vos récepteurs olfactifs en entrant. L'endroit est dégueulasse, en proie à une guerre de territoire farouche entre les flaques de vomi et celles de pisse.
+    `
+    <img src="data/img/toilettesPubliquesClub.jpg" class="imgDansTexte">
+    Vous coupez immédiatement vos récepteurs olfactifs en entrant. L'endroit est dégueulasse, en proie à une guerre de territoire farouche entre les flaques de vomi et celles de pisse.
 
 Vous remarquez une ***trappe d'aération au dessus d'une cabine***, fermée.`
             ,
@@ -87,6 +91,7 @@ Vous remarquez une ***trappe d'aération au dessus d'une cabine***, fermée.`
             {libelle: `Au culot, sortir par l'entrée principale.`,
             chemin: "7"}
         ]
+    ,image:"toilettesPubliquesClub.jpg"
 });
 
 creerEpisode({
@@ -108,6 +113,7 @@ Vous finissez par remarquer deux personnes, habillées normalement, avancer dans
             {libelle: `Je crois à mon plan. Je continue d'attendre ici.`,
             chemin: "continuerDAttendreClub"}
         ]
+    ,image:"dancefloor1.gif",
 });
 
 creerEpisode({
@@ -127,6 +133,7 @@ Soudain, ils se dirigent droit sur vous. ***Vous êtes repéré***, ça ne fait 
             {libelle: `Je continue d'attendre, j'ai dit !`,
             chemin: "continuerDAttendreEncoreClub"}
         ]
+    ,image:"dancefloor1.gif",
 });
 
 creerEpisode({
@@ -147,6 +154,7 @@ creerEpisode({
             {libelle: `Fuir.`,
             chemin: "FuirFlicsToilettes"}
         ]
+        ,image:"toilettesPubliquesClub.jpg"
 });
 
 creerEpisode({
@@ -162,6 +170,7 @@ Dommage. Dans ces toilettes vides, le policier n'a pas hésité à utiliser son 
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"toilettesPubliquesClub.jpg"
 });
 
 creerEpisode({
@@ -176,6 +185,7 @@ creerEpisode({
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"toilettesPubliquesClub.jpg"
 });
 
 creerEpisode({
@@ -194,6 +204,7 @@ creerEpisode({
             {libelle: `Fuir dans le conduit d'aération.`,
             chemin: "FuirFlicsToilettesConduit"}
         ]
+    ,image:"toilettesPubliquesClub.jpg"
 });
 
 creerEpisode({
@@ -212,6 +223,7 @@ creerEpisode({
             {libelle: `A droite, le conduit semble redescendre.`,
             chemin: "interceptionParAugmente"}
         ]
+    ,image:"toilettesPubliquesClub.jpg"
 });
 
 creerEpisode({
@@ -226,6 +238,7 @@ creerEpisode({
 
     ***FIN***
     `
+    ,image:""
 });
 
 creerEpisode({
@@ -246,6 +259,7 @@ Vous n'avez même pas le temps de le voir attaquer. Vous le voyez juste... Dispa
         ,commandes: () => {
             modifierVariable("augmenteClubVu", true);
         }
+        ,image:"aerationclub.gif"
 });
 
 creerEpisode({
@@ -263,6 +277,7 @@ creerEpisode({
                 {libelle: `Noir`,
                 chemin: "96"}
         ]
+    ,image:"dancefloor1.gif",
 });
 
 creerEpisode({
@@ -277,10 +292,11 @@ creerEpisode({
     Sans cesser de les fixer, vous reculez vers la sortie avec votre otage, lorsque vous sentez un mouvement dans votre dos et...
     `
     ,
-            liens: [
+    liens: [
                 {libelle: `Noir`,
                 chemin: "96"}
         ]
+        ,image:"toilettesPubliquesClub.jpg"
 });
 
 creerEpisode({
@@ -297,6 +313,7 @@ creerEpisode({
             {libelle: `Prendre un otage.`,
             chemin: "114"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -318,6 +335,7 @@ Vous vous faufilez entre les danseurs vers la sortie. Un ***flic en civil***, tr
             {libelle: `Rester au milieu de la foule.`,
             chemin: "6"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -339,6 +357,7 @@ creerEpisode({
             {libelle: `Fuir vers l'intérieur du club.`,
             chemin: "108"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -358,6 +377,7 @@ A votre droite, deux policiers accourent depuis l'intérieur du club. Trois autr
             {libelle: `Fuir.`,
             chemin: "111"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -371,6 +391,7 @@ creerEpisode({
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -386,6 +407,7 @@ Dommage. Vous n'étiez qu'à quelques mètres de la sortie, mais une fois que vo
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -404,6 +426,7 @@ Bon. Pas de panique. Vous n'avez rien fait de mal, juste acheté quelques gélul
             {libelle: `Prendre un otage.`,
             chemin: "114"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -416,6 +439,7 @@ creerEpisode({
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 
@@ -430,6 +454,7 @@ Ca n'empèche pas les policiers de vous plaquer brutalement sur le sol en vous i
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -444,6 +469,7 @@ La scène est surréaliste. Vous êtes sur le sol, blessé par balle, tandis que
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -457,6 +483,7 @@ Un policier vient se placer derrière vous, et commence à dire quelque chose ma
             {libelle: `Noir.`,
             chemin: "96"}
         ]
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -478,6 +505,7 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
         ,commandes: () => {
             modifierVariable("augmenteClubVu", true);
         }
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -504,6 +532,7 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
         ,commandes: () => {
             modifierVariable("augmenteClubVu", true);
         }
+    ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -526,6 +555,7 @@ Le conduit est très étroit, mais vous avez vu pire. Il fait un angle et monte 
             {libelle: `A droite, le conduit semble redescendre.`,
             chemin: "53"}
         ]
+    ,image:"aerationclub.gif"
 });
 
 creerEpisode({
@@ -541,6 +571,7 @@ Vous êtes plus ou moins coincé à la verticale. Vous pouvez...`
             {libelle: `Continuer de progresser les pieds en avant, sans savoir où vous allez.`,
             chemin: "55"}
         ]
+    ,image:"aerationclub.gif"
 });
 
 creerEpisode({
@@ -558,6 +589,7 @@ Vous revoilà à ***l'intersection***.`
             {libelle: `Vous pouvez également continuer tout droit.`,
             chemin: "52"}
         ]
+    ,image:"aerationclub.gif"
 });
 
 creerEpisode({
@@ -566,22 +598,23 @@ creerEpisode({
     texte :
     `C'est plutôt risqué d'avancer comme ça à l'aveugle, mais vous n'avez pas le choix.
 
-En l'occurence, vous n'allez pas bien loin. Vous repoussez une plaque avec vos pieds et vous laissez glisser hors du conduit. Vous revoilà à l'extérieur, dans une cabine d'autres toilettes, propres cette fois.
-
-La porte s'ouvre doucement, pour laisser apparaître un type à la coiffure ridicule qui vous regarde les yeux écarquillés.
-
-"Vous... vous allez bien ?!", vous demande-t-il stupidement.`
-            ,
+    En l'occurence, vous n'allez pas bien loin. Vous repoussez une plaque avec vos pieds et vous laissez glisser hors du conduit. Vous revoilà à l'extérieur, dans une cabine d'autres toilettes, propres cette fois.
+    
+    La porte s'ouvre doucement, pour laisser apparaître un type à la coiffure ridicule qui vous regarde les yeux écarquillés.
+    
+    "Vous... vous allez bien ?!", vous demande-t-il stupidement.`
+    ,
     liens: [
-            {libelle: `L'assommer.`,
-            chemin: "46"},
-            {libelle: `Lui répondre que tout va bien.`,
-            chemin: "57"},
-            {libelle: `Ne pas perdre de temps, sortir des toilettes.`,
-            chemin: "48"},
-            {libelle: `Remonter dans le conduit.`,
-            chemin: "59"}
-        ]
+        {libelle: `L'assommer.`,
+        chemin: "46"},
+        {libelle: `Lui répondre que tout va bien.`,
+        chemin: "57"},
+        {libelle: `Ne pas perdre de temps, sortir des toilettes.`,
+        chemin: "48"},
+        {libelle: `Remonter dans le conduit.`,
+        chemin: "59"}
+    ]
+    ,image:"toilettesClub2.jpg"
 });
 
 creerEpisode({
@@ -596,6 +629,7 @@ creerEpisode({
             {libelle: `Vous lui dites que ça va, vous vous enfermez dans les toilettes et attendez son départ.`,
             chemin: "47"}
         ]
+    ,image:"toilettesClub2.jpg"
 });
 
 creerEpisode({
@@ -614,6 +648,7 @@ Il finit par se ***diviser en trois***.`
             {libelle: `Vous pouvez également continuer tout droit.`,
             chemin: "52"}
         ]
+    ,image:"aerationclub.gif"
 });
 
 creerEpisode({
@@ -634,6 +669,7 @@ Il se divise en trois.`
             {libelle: `Vous pouvez également continuer tout droit.`,
             chemin: "52"}
         ]
+    ,image:"toilettesClub2.jpg"
 });
 
 creerEpisode({
@@ -648,6 +684,7 @@ creerEpisode({
             {libelle: `Aller au premier étage.`,
             chemin: "21"}
         ]
+    ,image:"arriereClub.jpg"
 });
 
 creerEpisode({
@@ -664,6 +701,7 @@ Il n'a pas l'air très convaincu. Il vous fait une petite moue et part essayer d
             {libelle: `Remonter dans le conduit.`,
             chemin: "59"}
         ]
+        ,image:"toilettesClub2.jpg"
 });
 
 creerEpisode({
@@ -688,6 +726,7 @@ Et à gauche...?`
             {libelle: `Vous pouvez également rebrousser chemin et retourner dans les toilettes du club.`,
             chemin: "7"}
         ]
+        ,image:"aerationclub.gif"
 });
 
 creerEpisode({
@@ -708,6 +747,7 @@ Bon, il n'empêche qu'il faut quand même sortir d'ici.`
             {libelle: `Sortir par l'entrée principale.`,
             chemin: "7"}
         ]
+        ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -727,6 +767,7 @@ Vous remarquez qu'il porte des ***lunettes noires de réalité augmentée*** Ect
             {libelle: `Chercher une autre sortie.`,
             chemin: "19"}
         ]
+        ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -738,7 +779,9 @@ Largement assez de temps pour vous permettre de vous ***glisser derrière***.
 
 Espérons que ça lui apprenne à utiliser des lunettes mono-écran à l'avenir.
 
-Vous voilà dans les loges : des petites pièces, certaines avec portes et d'autres avec un simple rideau, disposées sur les côtés d'un long couloir qui ***mène directement à la sortie***.`
+<img src="data/img/arriereClub.jpg" class="imgDansTexte">
+Vous voilà dans les loges : des petites pièces, certaines avec portes et d'autres avec un simple rideau, disposées sur les côtés d'un long couloir qui ***mène directement à la sortie***.
+`
             ,
     liens: [
             {libelle: `Traverser le couloir et sortir.`,
@@ -748,6 +791,7 @@ Vous voilà dans les loges : des petites pièces, certaines avec portes et d'aut
             {libelle: `Visiter les pièces.`,
             chemin: "22"}
         ]
+        ,image:"arriereClub.jpg"
 });
 
 creerEpisode({
@@ -768,6 +812,7 @@ Quelle approche allez-vous tenter ?`
             {libelle: `Non, il n'a pas l'air d'être quelqu'un qui se laisse convaincre facilement. Rebrousser chemin pour trouver une autre sortie.`,
             chemin: "19"}
         ]
+        ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -786,6 +831,7 @@ creerEpisode({
                 {libelle: `Chercher une autre sortie.`,
                 chemin: "19"}
         ]
+        ,image:"dancefloor1.gif"
 });
 
 creerEpisode({
@@ -804,6 +850,7 @@ creerEpisode({
                 {libelle: `Chercher une autre sortie.`,
                 chemin: "19"}
         ]
+        ,image:"dancefloor1.gif",
 });
 
 creerEpisode({
@@ -822,6 +869,7 @@ Des petites pièces, certaines avec portes et d'autres avec un simple rideau, di
                 {libelle: `Visiter les pièces.`,
                 chemin: "22"}
         ]
+        ,image:"arriereClub.jpg"
 });
 
 creerEpisode({
@@ -908,7 +956,7 @@ creerEpisode({
             ,
             liens: [
                 {libelle: `Redescendre.`,
-                chemin: "22"},
+                chemin: "redescendreLoges"},
                 {libelle: `Passer en force.`,
                 chemin: "128"}
         ]
@@ -1613,6 +1661,7 @@ Pas moyen de passer sans vous faire voir.
                 {libelle: `Passer en force.`,
                 chemin: "128"}
         ]
+        ,image:"arriereClub.jpg"
 });
 
 creerEpisode({
@@ -2171,15 +2220,26 @@ Vous sortez de la salle et débouchez au milieu d'un court couloir plutôt chic,
 ]
 });
 
-creerEpisode({ //TODO conditionné la vue de l'augmenté au club ou non
+creerEpisode({
     clef: "115",
     titre : `Prendre l'ascenseur`,
     texte : () =>
     `
     Vous appelez l'ascenseur et appuyez sur le chiffre 3.
 
-    La cabine est plutôt clean elle aussi. De la musique, des fausses plantes vertes. Rien à voir avec les préfabriqués et les entrepots reconvertis où vous aviez l'habitude de travailler.
-    
+    La cabine est plutôt clean elle aussi. De la musique, des fausses plantes vertes. Un grand miroir.
+`
+,liens: [
+    {libelle: `La porte de l'ascenseur s'ouvre.`,
+    chemin: "rencontreAlice"}
+]
+});
+
+creerEpisode({
+    clef: "rencontreAlice",
+    titre : `Prendre l'ascenseur`,
+    texte : () =>
+    `   
     Vous voilà au troisième étage. Le bureau d'Alice est juste en face, sa porte vitrée ouverte vous invite à rentrer. ***Le gros Alice*** est derrière son bureau en train de lire un dossier. Il n'a pas changé. Son visage poupin chauve et imberbe restera certainement le même jusqu'à sa mort. A côté de lui se tient ***un énorme augmenté*** en train de vous regarder.${variable("insertion")} Il vous fait un signe de sa tête blanche presque aveuglante. Alice se réveille.
     
     "Ah ! Te voilà ! Entre, entre." Il est tellement content de vous voir qu'il en manque de tomber de son fauteil à force de gesticulations.
@@ -2259,6 +2319,21 @@ creerEpisode({
     chemin: "144"},
     {libelle: `"Non, rien."`,
     chemin: "145"}
+]
+});
+
+creerEpisode({
+    clef: "142",
+    titre : `Escalier`,
+    texte :
+    `Larges et chichement éclairés par les ampoules de secours.
+    La cage d'escalier est bercée par le vombrissement hypnotique d'un aérateur. Par réflexe, vous prenez mentalement note de l'existence probable de conduits où vous pourriez vous faufiler pour explorer le bâtiment.
+    `
+,liens: [
+    {libelle: `Monter l'escalier pour rencontre Alice.`,
+    chemin: "rencontreAlice"},
+    {libelle: `Retourner dans le couloir`,
+    chemin: "148"}
 ]
 });
 

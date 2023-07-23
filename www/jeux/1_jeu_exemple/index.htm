@@ -22,13 +22,26 @@ body {
     justify-content:center;
     align-items: stretch ;
     flex-wrap: wrap;
-    font-size: medium;
-    background-image: url("data/img/exterieur.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     font-size: large;
 }
+
+#fond {
+    background-image:url("data/img/dancefloor1.gif");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    content: "";
+    background-color: black;
+    opacity: 0.6;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;
+    filter: blur(4px);
+}
+
 #colonneGauche {
     flex-direction:column;
     justify-content: center;
@@ -189,6 +202,7 @@ text-align:center;
 
 </style>
 </head>
+<div id="fond"></div>
 <div id="colonneGauche">
     <div id="conteneurOutilsInventaire">
         <div id="menuOutils">

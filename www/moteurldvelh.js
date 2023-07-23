@@ -1,4 +1,4 @@
-//V0.1.5-DEV
+//V0.1.6-DEV
 "use strict";
 
 /* Utilisé globalement dans l'appli pour savoir 
@@ -103,6 +103,8 @@ function afficherEpisode(clefEpisode) {
     }
     if(episode.image) {
          remplacerImage(episode.image);
+    } else {
+        remplacerImage("");
     }
 
     genererLiens(episode.liens);
@@ -263,7 +265,7 @@ function nombreVisites() {
 }
 
 function remplacerImage(img) {
-    document.body.style.backgroundImage = "url('data/img/" + img +"')"; 
+    document.getElementById("fond").style.backgroundImage="url('data/img/" + img +"')";
 }
 
 function titrerJeu(titre) {
