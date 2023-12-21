@@ -3,17 +3,17 @@ titrerJeu("Jeu exemple");
 /* Exemple d'affichage de variables */
 creerEpisode({
     clef: "intro",
-    titre : () => `Un village simple`,
+    titre : () => `A simple village`,
     texte: () =>
-        `Vous êtes dans ***un tout petit village***.`
+        `You are in a ***very small village***.`
     ,liens: [
-            {libelle: () => `Aller dans la ferme.`,
+            {libelle: () => `Go to the farm.`,
             chemin: "allerFerme"},
-            {libelle: () => `Aller à l'agence d'interim.`,
+            {libelle: () => `Go to the temp agency.`,
             chemin: "allerInterim"},
-            {libelle: () => `Aller dans le magasin.`,
+            {libelle: () => `Go to the shop.`,
             chemin: "allerMagasin"},
-            {libelle: () => `Aller dans les mines d'or.`,
+            {libelle: () => `Go to the gold mine.`,
             chemin: "allerMines"}
         ]
     ,image: "exterieur.png"
@@ -22,14 +22,14 @@ creerEpisode({
 /* Exemple redirection en cas de nouvelle visite ("revisite") de l'épisode. */
 creerEpisode({
     clef: "allerFerme",
-    titre : () => `Dans la ferme.`,
+    titre : () => `In the farm.`,
     texte: () =>
-    `Vous frappez à la porte de la ferme. Celle-ci s'ouvre doucement d'elle-même. L'intérieur est rustique et dépouillé.
+    `You knock at the farm's door. It opens slowly by itself. The interior is old and bare.
     
-    Il y a un papier à l'intérieur :
-    "Je reviens plus tard. -Mimi"`
+    You see a note there:
+    "Coming back later. -Mimi"`
     ,liens: [
-            {libelle: () => `Sortir.`,
+            {libelle: () => `Get out.`,
             chemin: "intro"},
         ]
     ,image: "ferme.png"
@@ -39,13 +39,12 @@ creerEpisode({
 /* Exemple de chainage de redirection.*/
 creerEpisode({
     clef: "deuxiemeVisiteFerme",
-    titre : () => `Retour dans la ferme.`,
+    titre : () => `Back in the farm.`,
     texte: () =>
-    `Cette fois-ci, à l'intérieur, vous voyez Mimi, ***une femme entre deux âge*** en train de ranger des bacs de légumes.
-    
-    "Bonjour !, dit-elle, ***repassez plus tard***, je suis un peu occupée."`
+    `This time, inside, you see Mimi, ***a middle age lady*** stacking up vegetable crates.
+    "Hello!, she says, please ***come back later***, I'm a bit busy."`
     ,liens: [
-            {libelle: () => `Sortir.`,
+            {libelle: () => `Get out.`,
             chemin: "intro"},
         ]
     ,image: "ferme.png"
@@ -55,11 +54,11 @@ creerEpisode({
 /* Exemple de redirection en boucle.*/
 creerEpisode({
     clef: "troisiemeVisiteFerme",
-    titre : () => `Nouveau retour dans la ferme.`,
+    titre : () => `Back again in the farm.`,
     texte: () =>
-    `Mimi vous accueille chaleureusement. Elle vous offre à manger et vous parlez de choses et d'autres. Vous passez un ***très agréable moment***.`
+    `Mimi welcomes you warmly. She offers you food and you speak about various things. You have a ***wonderful time***.`
     ,liens: [
-            {libelle: () => `Sortir.`,
+            {libelle: () => `Get out.`,
             chemin: "intro"},
         ]
     ,image: "ferme.png"
@@ -67,7 +66,7 @@ creerEpisode({
     ,commandes: () => {
         if (valeurVariable("astuceFantomeDite") !== true) {
 		    modifierVariable("astuceFantomeDite", true);
-            remplacerTexte(`Mimi vous accueille chaleureusement.  Elle vous parle du fantôme de la mine et du secret pour le faire disparaitre : Crier "***c'est l'inspecteur des impôts***" !`);
+            remplacerTexte(`Mimi welcomes your warmly.  She talks about the ghost in the mine and the trick to make him disappear : scream "***it's the tax collector***" !`);
         }
     }
 });
@@ -75,19 +74,19 @@ creerEpisode({
 /* Exemple d'ajout d'un objet + détection du nombre de visite. */
 creerEpisode({
     clef: "allerInterim",
-    titre : () => `Aller à l'agence d'interim.`,
+    titre : () => `Go in the temp agency.`,
     texte: () =>
-    `Vous travaillez avec l'agence et gagnez ***50 euros***.`
+    `You work with the temp agency and earn ***50 euros***.`
     ,liens: [
-            {libelle: () => `Sortir.`,
+            {libelle: () => `Get out.`,
             chemin: "intro"},
         ]
     ,image: "interim.png"
     ,commandes: () => {
 		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
         if (nombreVisites() === 0) {
-            ajouterTexte(` Comme c'est la première fois que vous venez, on vous donne des ***chaussures de sécurité***.`);
-            ajouterInventaire({clef:"chaussuresSecu", nom:"Paire de chaussures de sécurité", description:"Chaussures de sécurité.", nombre:1});
+            ajouterTexte(` Since it's your first time here they give you ***security shoes***.`);
+            ajouterInventaire({clef:"chaussuresSecu", nom:"Pair of security shoes", description:"Pair of security shoes.", nombre:1});
         }
     }
 });
@@ -95,15 +94,15 @@ creerEpisode({
 /* Exemple d'affichage de variables.Penser à utiliser "() =>" ! */
 creerEpisode({
     clef: "allerMagasin",
-    titre : () => `Aller au magasin (avec ${nombrePossedeDe("euros")} euros).`,
+    titre : () => `Go to the store (with ${nombrePossedeDe("euros")} euros).`,
     texte: () =>
-        `Le magasin vend une belle ***pioche***. Vous avez ${nombrePossedeDe("euros")} euros en poche.
-        Une horloge au mur indique qu'il est ${new Date().getHours()} heures, ${new Date().getMinutes()}min et ${new Date().getSeconds()}s.`
+        `The store is selling a beautiful ***pickaxe***. You have ${nombrePossedeDe("euros")} euros on you.
+        A clock on the wall gives the time: ${new Date().getHours()} hours, ${new Date().getMinutes()}min and ${new Date().getSeconds()}s.`
     ,image: "magasin.png"
     ,liens: [
-            {libelle: () => `Acheter pioche (200 euros).`,
+            {libelle: () => `Buy the pickaxe (200 euros).`,
             chemin: "acheterPioche"},
-            {libelle: () => `Sortir.`,
+            {libelle: () => `Get out.`,
             chemin: "intro"},
         ]
 });
@@ -111,20 +110,20 @@ creerEpisode({
 /* Exemple d'ajout d'un objet. */
 creerEpisode({
     clef: "acheterPioche",
-    titre : () => `Acheter pioche.`,
+    titre : () => `Buy the pickaxe.`,
     texte: () =>``
     ,liens: [
-            {libelle: () => `Sortir.`,
+            {libelle: () => `Get out.`,
             chemin: "intro"},
         ]
     ,commandes: () => {
         if (nombrePossedeDe("euros") < 200) {
-            remplacerTexte(`Vous n'avez pas assez d'argent.`);
+            remplacerTexte(`You don't have enough money.`);
         }
         if (nombrePossedeDe("euros") >= 200) {
-            remplacerTexte(`Vous achetez ***une belle pioche***.`);
-            ajouterInventaire({clef:"pioche", nom:"Pioche", description:"Une pioche.", nombre:1});
-            ajouterInventaire({clef:"euros", nom:"Euros", description:"De l'argent.", nombre:-200});
+            remplacerTexte(`You buy ***a beautiful pickaxe***.`);
+            ajouterInventaire({clef:"pickaxe", nom:"Pickaxe", description:"A beautiful pickaxe.", nombre:1});
+            ajouterInventaire({clef:"euros", nom:"Euros", description:"Money.", nombre:-200});
         }
     }
 });
@@ -132,18 +131,18 @@ creerEpisode({
 /* Exemple d'ajout d'un lien. */
 creerEpisode({
     clef: "allerMines",
-    titre : () => `Aller dans les mines.`,
-    texte: () => `Vous voilà dans les mines.`
+    titre : () => `Go into the mines.`,
+    texte: () => `You are in the mines.`
     ,liens: [
-            {libelle: () => `Sortir.`,
+            {libelle: () => `Get out.`,
             chemin: "intro"},
         ]
     ,image: "mine.png"
     ,commandes: () => {
-        if (nombrePossedeDe("pioche") < 1) {
-            ajouterTexte(` Vous n'avez rien à faire ici. Il vous faudrait ***une pioche*** pour trouver de l'or.`);
+        if (nombrePossedeDe("pickaxe") < 1) {
+            ajouterTexte(` You have nothing to do here. You would need a ***pickaxe*** to find gold.`);
         } else {
-            ajouterLien({libelle: () => `Piocher.`, chemin: "piocherDansLesMines"});
+            ajouterLien({libelle: () => `Dig with the pickaxe.`, chemin: "piocherDansLesMines"});
         }
     }
 });
@@ -151,21 +150,21 @@ creerEpisode({
 /* Exemple de remplacement d'un lien. */
 creerEpisode({
     clef: "piocherDansLesMines",
-    titre : () => `Piocher dans les mines.`,
-    texte: () => `Tac tac tac, vous trouvez une ***pépite d'or*** !`
+    titre : () => `Dig with the pickaxe.`,
+    texte: () => `Tac tac tac, you found a ***golden nugget***!`
     ,liens: [
-            {libelle: () => `Arrêter de piocher.`,
+            {libelle: () => `Stop digging.`,
             chemin: "allerMines"},
         ]
     ,image: "mine.png"
     ,commandes: () => {
-        ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:1});
+        ajouterInventaire({clef:"goldenNugget", nom:"Golder nugget d'or", description:"A golden nugget.", nombre:1});
         if (nombreVisites() > 2) {
             ajouterTexte(
-                ` L'entrée de la mine ***s'écroule !*** Vous entendez un ***rire***.
-                "Tu es venu ${nombreVisites()} fois ! Hahaha ! Tu es cupide !!"
+                ` The entrance of the cave ***collapses!*** You hear a ***laughter***.
+                "You came ${nombreVisites()} times! Hahaha! You are cupid!"
             `);
-            remplacerLien({libelle: () => `Avancer vers le fond de la mine avec vos ${nombrePossedeDe("pepiteOr")} pépites.`, chemin: "avancerFondMine"});
+            remplacerLien({libelle: () => `Go to the back of the mine with your ${nombrePossedeDe("goldenNugget")} nuggets.`, chemin: "avancerFondMine"});
         }
     }
 });
@@ -173,15 +172,15 @@ creerEpisode({
 /* Exemple d'ajout d'un lien. */
 creerEpisode({
     clef: "avancerFondMine",
-    titre : () => `Avancer vers le fond de la mine.`,
-    texte: () =>`Oh non, c'est le fantôme de la mine !`
+    titre : () => `Go to the back of the mine.`,
+    texte: () =>`Oh no, it's the ***ghost*** of the mine!`
     ,image: "mine.png"
     ,commandes: () => {
         if (valeurVariable("astuceFantomeDite") !== true) {
-            ajouterTexte(` Il vous saute dessus et vous tue.
+            ajouterTexte(` He jumps on you and kills you.
                 ***FIN***`);
         }else {
-            ajouterLien({libelle: () => `Crier "C'est l'inspecteur des impôts !" comme Mimi vous a appris.`, chemin: "crierImpots"});
+            ajouterLien({libelle: () => `Scream "It's the tax collector"! like Mimi taught you.`, chemin: "crierImpots"});
         }
     }
 });
@@ -190,15 +189,15 @@ creerEpisode({
 creerEpisode({
     clef: "crierImpots",
     titre : () => `Crier la phrase magique.`,
-    texte: () =>`Vous criez "C'est l'inspecteur des impôts !" et le fantôme disparait aussitôt avec un cri de panique.
+    texte: () =>`You scream "it's the tax collector!!!" and the ghost dissipate with a panicky scream.
     
-    Vous creusez un chemin vers la sortie et trouvez ***beaucoup de pépites d'or***.
+    You carve a way out, finding ***lot of golden nuggets***.
     
-    En sortant de la mine, vous êtes désormais riche !
+    You are now rich!
     
-    ***Bravo, vous avez gagné !***`
+    ***Congratulations, you won!***`
     ,image: "victoire.png"
     ,commandes: () => {
-        ajouterInventaire({clef:"pepiteOr", nom:"Pépite d'or", description:"Une pépite d'or.", nombre:20});
+        ajouterInventaire({clef:"goldenNugget", nom:"Golder nugget d'or", description:"A golden nugget.", nombre:1});
     }
 });
