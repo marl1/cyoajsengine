@@ -1,5 +1,26 @@
 :toc:
 
+== ENGLISH
+
+A CYOA Javascript framework.
+
+CC0 Licence under French law.
+
+Have fun with it.
+
+==== FEATURES
+* Load/save system.
+* Inventory.
+* Redirect on already visited episode (and can manage circular redirects).
+* Go backward (adjusting inventory accordingly!).
+* Safeguards (duplicates detections, detect paths that leads nowhere...)
+* Vanilla Javascript.
+
+==== Demo
+A sample game that illustrate all the features:
+https://marclv.gitlab.io/cyoajsengine/jeux/1_jeu_exemple/index.htm
+
+
 == FRANCAIS ==
 Un moteur de LDVELH.
 
@@ -19,10 +40,7 @@ image::exemple.png[]
 ==== Exemples
 
 Jeu d'exemple servant de démo des fonctionnalités :
-http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
-
-Jeu sur lequel je bosse :
-http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm
+https://marclv.gitlab.io/cyoajsengine/jeux/1_jeu_exemple/index.htm
 
 ==== Fonctions de base
 
@@ -66,27 +84,3 @@ creerEpisode({
 *valeurVariable* : ``valeurVariable("nomVariable")``. Retourne la valeur d'une variable.
 
 *variable* : ``variable("nomVariable")`` ou ``variable("nomVariable", "nouvelleValeur")``. Retourne la valeur d'une variable OU modifie une variable. Notation raccourcie de valeurVariable et modifierVariable.
-
-== ENGLISH
-
-A CYOA Javascript engine.
-
-CC0 Licence under French law.
-
-Have fun with it.
-
-==== FEATURES
-* Load/save system.
-* Inventory.
-* Redirect on already visited episode (and can manage circular redirects).
-* Go backward (adjusting inventory accordingly !).
-* Safeguards (detect duplicates, detect paths that leads nowhere...)
-* Vanilla Javascript.
-
-==== Examples
-
-A sample game that serve as a demo of the features:
-http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/1_jeu_exemple/index.htm
-
-Game I'm working on:
-http://trotter.poulpe.gitlab.io/ldvelhjs/jeux/cyberpunk/index.htm

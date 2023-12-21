@@ -1,4 +1,4 @@
-titrerJeu("Jeu exemple");
+titrerJeu("Sample game");
 
 /* Exemple d'affichage de variables */
 creerEpisode({
@@ -7,13 +7,13 @@ creerEpisode({
     texte: () =>
         `You are in a ***very small village***.`
     ,liens: [
-            {libelle: () => `Go to the farm.`,
+            {libelle: () => `Visit the farm.`,
             chemin: "allerFerme"},
             {libelle: () => `Go to the temp agency.`,
             chemin: "allerInterim"},
-            {libelle: () => `Go to the shop.`,
+            {libelle: () => `Enter the shop.`,
             chemin: "allerMagasin"},
-            {libelle: () => `Go to the gold mine.`,
+            {libelle: () => `Explore the gold mine.`,
             chemin: "allerMines"}
         ]
     ,image: "exterieur.png"
@@ -188,7 +188,7 @@ creerEpisode({
 /* Exemple d'ajout d'un lien. */
 creerEpisode({
     clef: "crierImpots",
-    titre : () => `Crier la phrase magique.`,
+    titre : () => `Scream the magical words.`,
     texte: () =>`You scream "it's the tax collector!!!" and the ghost dissipate with a panicky scream.
     
     You carve a way out, finding ***lot of golden nuggets***.
