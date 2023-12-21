@@ -54,6 +54,7 @@ pages: #GitLab détecte ce mot "page" et fait l'upload avec un job pages:deploy 
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   artifacts:
+    expire_in: never
     paths:
       - public
     name: "exemples"
@@ -72,4 +73,4 @@ release_job:
     - version=${version//-DEV/} #enlève "-DEV"
     #Il faut encore bumper la version et commiter...
     - echo "Lancement de la release de la version $version..."
-    - release-cli create --description "todo" --tag-name $version --assets-link "{\"name\":\"Exemples\",\"url\":\"https://gitlab.com/trotter.poulpe/ldvelhjs/-/jobs/${ID_DU_JOB_DE_BUILD}/artifacts/download?file_type=archive\"}"
+    - release-cli create --description "todo" --tag-name $version --assets-link "{\"name\":\"Exemples\",\"url\":\"${CI_PROJECT_URL}/-/jobs/${ID_DU_JOB_DE_BUILD}/artifacts/download?file_type=archive\"}"
