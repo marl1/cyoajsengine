@@ -59,7 +59,9 @@ body {
 }
 
 #conteneurOutilsInventaire {
-    padding-top: 3em;
+    padding: 1em;
+    margin-top: 3em;
+    background-color: rgb(31, 31, 31);
 }
 #menuOutils {
     display:flex;
@@ -73,8 +75,31 @@ body {
     font-size: x-large;
 }
 
+#statut {
+    margin-top:0.5em;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    clip-path: polygon(90% 0, 100% 10%, 100% 90%, 100% 100%, 10% 100%, 0% 100%, 0 0%);
+    background:black;
+    border-right:0.1em solid rgb(95, 95, 95);
+    border-bottom:0.1em solid rgb(95, 95, 95);
+}
+
 #inventaire {
-    background-color: rgb(22, 38, 100);
+    color:grey;
+}
+
+#contenuInventaire {
+    min-height: 10em;
+    margin-top:0.5em;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    clip-path: polygon(90% 0, 100% 10%, 100% 90%, 100% 100%, 10% 100%, 0% 100%, 0 0%);
+    background:black;
+    border-right:0.1em solid rgb(95, 95, 95);
+    border-bottom:0.1em solid rgb(95, 95, 95);
 }
 
 .ajoutInventaire {
@@ -130,24 +155,24 @@ body {
 
 
 #titre{
-padding-top:10%;
-margin-bottom:10%;
-color:#FFFFFF;
-Background-image:url("img/a.gif");
-background-repeat: no-repeat ;
-background-position:bottom; 
-text-shadow: 1px 1px 1px #093293;
+    padding-top:10%;
+    margin-bottom:10%;
+    color:#FFFFFF;
+    Background-image:url("img/a.gif");
+    background-repeat: no-repeat ;
+    background-position:bottom; 
+    text-shadow: 1px 1px 1px #093293;
 }
 
 #texte {
-font-size:1.15em;
-color:#FFFFFF;
-padding-left:3%; 
-padding-right:15%; 
-margin-bottom:5%;
-text-shadow: 1px 1px 1px #093293;
-line-height: 1.5;
-font-weight: 400;
+    font-size:1.15em;
+    color:#FFFFFF;
+    padding-left:3%; 
+    padding-right:15%; 
+    margin-bottom:5%;
+    text-shadow: 1px 1px 1px #093293;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 .imgDansTexte {
@@ -223,6 +248,8 @@ text-align:right;
     }
 }
 
+
+
 </style>
 </head>
 <div id="fond"></div>
@@ -239,8 +266,14 @@ text-align:right;
                 <img src="data/img/disquettesuppr.svg" id="iconeSupprimerSauvegarde">
             </a>
         </div>
-        <div id="inventaire">
-        <h2> Inventaire :</h2>
+        <div id="statut">
+            <hr>
+             <h2>Status</h2>
+            <img src="data/img/holoCorps.png">
+        </div>
+        <div id="inventaire" >
+            <hr>
+             <h2>Inventaire</h2>
             <div id="contenuInventaire">
             </div>    
         </div>    

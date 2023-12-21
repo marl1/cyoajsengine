@@ -2291,6 +2291,8 @@ creerEpisode({
 ,commandes: () => {
     if (variable("augmenteClubVu")) {
         variable("insertion", ` Vous vous souvenez l'avoir vu au club.`);
+    } else {
+        variable("insertion", ` `);
     }
 }
 ,image:"couloirsPremanod.jpg"
