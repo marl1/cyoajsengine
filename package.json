@@ -7,7 +7,7 @@
     "start": "node serveur-node.js"
   },
   "keywords": [],
-  "author": "trotter.poulpe",
+  "author": "marclv",
   "license": "CC0-1.0",
   "devDependencies": {
     "@playwright/test": "^1.36.1"
