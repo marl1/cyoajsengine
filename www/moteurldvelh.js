@@ -43,18 +43,18 @@ var titreJeu="";
 // Map contenant tous les épisodes, avec en clef la clef de l'épisode et en valeur l'intégralité de l'épisode
 var episodes = new Map();
 
-function creerEpisode(nouvelEpisode) {
+function episode(nouvelEpisode) {
     if(episodes.get(nouvelEpisode.clef)) {
-        alert(`L'épisode `+ nouvelEpisode.clef + ` existe déjà !`)
+        alert(`The episode `+ nouvelEpisode.clef + ` already exist!`)
     } else {
         episodes.set(nouvelEpisode.clef, nouvelEpisode);
     }
 }
 
 // Affiche l'épisode à l'écran et le positionne comme celui en cours.
-function afficherEpisode(clefEpisode) {
+function playEpisode(clefEpisode) {
     let episode = episodes.get(clefEpisode);
-    if (!episode) {alert("Episode " + clefEpisode + " introuvable."); return;}
+    if (!episode) {alert("Episode " + clefEpisode + " not found."); return;}
 
     if(episode.revisite && historique.includes(episode.clef)) { // gestion des redirections
         //cet épisode redirige vers un autre
@@ -73,7 +73,7 @@ function afficherEpisode(clefEpisode) {
 
         } else { // pas une boucle infinie
             historiqueRedirection.push(episode.revisite);
-            afficherEpisode(episode.revisite);
+            playEpisode(episode.revisite);
             return;
         }
     }
@@ -141,9 +141,9 @@ function genererLiens(liens) {
     if (liens) {
         for (const lien of liens) {
             if (lien.libelle instanceof Function) {
-                htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${lien.chemin}')">${lien.libelle()}</a><br>`;
+                htmlLiens = htmlLiens + `<a href="#" onClick="playEpisode('${lien.chemin}')">${lien.libelle()}</a><br>`;
             } else {
-                htmlLiens = htmlLiens + `<a href="#" onClick="afficherEpisode('${lien.chemin}')">${lien.libelle}</a><br>`;
+                htmlLiens = htmlLiens + `<a href="#" onClick="playEpisode('${lien.chemin}')">${lien.libelle}</a><br>`;
             }
         }
     }
@@ -254,7 +254,7 @@ function analyserLiens() {
     }
 }
 
-function nombreVisites() {
+function getNumberOfVisitss() {
     let compteur=0;
     for (const clefEpisode of historique) {
         if (clefEpisode === clefEpisodeEnCours) {
@@ -268,24 +268,24 @@ function remplacerImage(img) {
     document.getElementById("fond").style.backgroundImage="url('data/img/" + img +"')";
 }
 
-function titrerJeu(titre) {
+function setGameTitle(titre) {
     titreJeu = titre;
     document.title = titreJeu;
 }
 
-function ajouterLien(nouveauLien) {
+function addLink(nouveauLien) {
     if (!episodes.get(clefEpisodeEnCours).liens) {
         episodes.get(clefEpisodeEnCours).liens = [];
     }
         episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
 }
 
-function remplacerLien(nouveauLien) {
+function replaceAllLinks(nouveauLien) {
     episodes.get(clefEpisodeEnCours).liens = [];
     episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
 }
 
-function ajouterTexte(nouveauTexte) {
+function addText(nouveauTexte) {
     if (!episodes.get(clefEpisodeEnCours).texte) {
         episodes.get(clefEpisodeEnCours).texte = "";
     }
@@ -296,23 +296,23 @@ function ajouterTexte(nouveauTexte) {
     }
 }
 
-function remplacerTexte(nouveauTexte) {
+function remplaceAllText(nouveauTexte) {
     episodes.get(clefEpisodeEnCours).texte = nouveauTexte;
 }
 
 function variable(nomVar, valeur) {
     if(!valeur) {
-        return valeurVariable(nomVar);
+        return showVariable(nomVar);
     } else {
-        modifierVariable(nomVar, valeur);
+        setVariable(nomVar, valeur);
     }
 }
 
-function valeurVariable(nomVar) {
+function showVariable(nomVar) {
     return variables.get(nomVar);
 }
 
-function modifierVariable(nomVar, valeur) {
+function setVariable(nomVar, valeur) {
     console.log("ajout en histo");
     let precedenteValeur=undefined;
     if(historiqueVariables.length>0) {
@@ -342,15 +342,15 @@ function modifierVariable(nomVar, valeur) {
     console.log("historiqueVariables", historiqueVariables);
 }
 
-function nombrePossedeDe(objet) {
+function getNumberOf(objet) {
     return inventaire.get(objet)?inventaire.get(objet).nombre:0;
 }
 
-function ajouterInventaireDiscretement(objet) {
+function giveSilentlyToPlayer(objet) {
     inventaireAjout.push({clef:objet.clef, nom:objet.nom, description:objet.description, nombre:objet.nombre, discret: true });
 }
 
-function ajouterInventaire(objet) {
+function giveToPlayer(objet) {
     inventaireAjout.push({clef:objet.clef, nom:objet.nom, description:objet.description, nombre:objet.nombre });
 }
 
@@ -410,7 +410,7 @@ function episodePrecedent() {
         remplacerParVariablesPrecedentes(historique[historique.length-2]);
         historique.pop(); // supprime l'épisode en cours de l'historique
         enleverDerniersObjetsAcquis();
-        afficherEpisode(historique.pop()); //on repart sur la clef précédente+la supprime
+        playEpisode(historique.pop()); //on repart sur la clef précédente+la supprime
     }
 }
 
@@ -460,9 +460,9 @@ function demarrerJeu() {
         historiqueVariables = JSON.parse(window.localStorage.getItem("historiqueVariables"+titreJeu));
         enleverDerniersObjetsAcquis(); // Evite bug "sauver sur episode qui donne un truc" + F5 = objet infini.
         remplacerParVariablesPrecedentes(historique[historique.length-2]);
-        afficherEpisode(historique.pop());
+        playEpisode(historique.pop());
     } else {
-        afficherEpisode("intro");
+        playEpisode("intro");
     }
 }
 

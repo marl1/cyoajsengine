@@ -1,7 +1,7 @@
-titrerJeu("Sample game");
+setGameTitle("Sample game");
 
 /* Exemple d'affichage de variables */
-creerEpisode({
+episode({
     clef: "intro",
     titre : () => `A simple village`,
     texte: () =>
@@ -20,7 +20,7 @@ creerEpisode({
 });
 
 /* Exemple redirection en cas de nouvelle visite ("revisite") de l'épisode. */
-creerEpisode({
+episode({
     clef: "allerFerme",
     titre : () => `In the farm.`,
     texte: () =>
@@ -37,7 +37,7 @@ creerEpisode({
 });
 
 /* Exemple de chainage de redirection.*/
-creerEpisode({
+episode({
     clef: "deuxiemeVisiteFerme",
     titre : () => `Back in the farm.`,
     texte: () =>
@@ -52,7 +52,7 @@ creerEpisode({
 });
 
 /* Exemple de redirection en boucle.*/
-creerEpisode({
+episode({
     clef: "troisiemeVisiteFerme",
     titre : () => `Back again in the farm.`,
     texte: () =>
@@ -64,15 +64,15 @@ creerEpisode({
     ,image: "ferme.png"
     ,revisite:"allerFerme"
     ,commandes: () => {
-        if (valeurVariable("astuceFantomeDite") !== true) {
-		    modifierVariable("astuceFantomeDite", true);
-            remplacerTexte(`Mimi welcomes your warmly.  She talks about the ghost in the mine and the trick to make him disappear : scream "***it's the tax collector***" !`);
+        if (showVariable("astuceFantomeDite") !== true) {
+		    setVariable("astuceFantomeDite", true);
+            remplaceAllText(`Mimi welcomes your warmly.  She talks about the ghost in the mine and ***gives you the trick*** to make him disappear : scream "***it's the tax collector***" !`);
         }
     }
 });
 
 /* Exemple d'ajout d'un objet + détection du nombre de visite. */
-creerEpisode({
+episode({
     clef: "allerInterim",
     titre : () => `Go in the temp agency.`,
     texte: () =>
@@ -83,20 +83,20 @@ creerEpisode({
         ]
     ,image: "interim.png"
     ,commandes: () => {
-		ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
-        if (nombreVisites() === 0) {
-            ajouterTexte(` Since it's your first time here they give you ***security shoes***.`);
-            ajouterInventaire({clef:"chaussuresSecu", nom:"Pair of security shoes", description:"Pair of security shoes.", nombre:1});
+		giveToPlayer({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
+        if (getNumberOfVisitss() === 0) {
+            addText(` Since it's your first time here they give you ***security shoes***.`);
+            giveToPlayer({clef:"chaussuresSecu", nom:"Pair of security shoes", description:"Pair of security shoes.", nombre:1});
         }
     }
 });
 
 /* Exemple d'affichage de variables.Penser à utiliser "() =>" ! */
-creerEpisode({
+episode({
     clef: "allerMagasin",
-    titre : () => `Go to the store (with ${nombrePossedeDe("euros")} euros).`,
+    titre : () => `Go to the store (with ${getNumberOf("euros")} euros).`,
     texte: () =>
-        `The store is selling a beautiful ***pickaxe***. You have ${nombrePossedeDe("euros")} euros on you.
+        `The store is selling a beautiful ***pickaxe***. You have ${getNumberOf("euros")} euros on you.
         A clock on the wall gives the time: ${new Date().getHours()} hours, ${new Date().getMinutes()}min and ${new Date().getSeconds()}s.`
     ,image: "magasin.png"
     ,liens: [
@@ -108,7 +108,7 @@ creerEpisode({
 });
 
 /* Exemple d'ajout d'un objet. */
-creerEpisode({
+episode({
     clef: "acheterPioche",
     titre : () => `Buy the pickaxe.`,
     texte: () =>``
@@ -117,19 +117,19 @@ creerEpisode({
             chemin: "intro"},
         ]
     ,commandes: () => {
-        if (nombrePossedeDe("euros") < 200) {
-            remplacerTexte(`You don't have enough money.`);
+        if (getNumberOf("euros") < 200) {
+            remplaceAllText(`You don't have enough money.`);
         }
-        if (nombrePossedeDe("euros") >= 200) {
-            remplacerTexte(`You buy ***a beautiful pickaxe***.`);
-            ajouterInventaire({clef:"pickaxe", nom:"Pickaxe", description:"A beautiful pickaxe.", nombre:1});
-            ajouterInventaire({clef:"euros", nom:"Euros", description:"Money.", nombre:-200});
+        if (getNumberOf("euros") >= 200) {
+            remplaceAllText(`You buy ***a beautiful pickaxe***.`);
+            giveToPlayer({clef:"pickaxe", nom:"Pickaxe", description:"A beautiful pickaxe.", nombre:1});
+            giveToPlayer({clef:"euros", nom:"Euros", description:"Money.", nombre:-200});
         }
     }
 });
 
 /* Exemple d'ajout d'un lien. */
-creerEpisode({
+episode({
     clef: "allerMines",
     titre : () => `Go into the mines.`,
     texte: () => `You are in the mines.`
@@ -139,16 +139,16 @@ creerEpisode({
         ]
     ,image: "mine.png"
     ,commandes: () => {
-        if (nombrePossedeDe("pickaxe") < 1) {
-            ajouterTexte(` You have nothing to do here. You would need a ***pickaxe*** to find gold.`);
+        if (getNumberOf("pickaxe") < 1) {
+            addText(` You have nothing to do here. You would need a ***pickaxe*** to find gold.`);
         } else {
-            ajouterLien({libelle: () => `Dig with the pickaxe.`, chemin: "piocherDansLesMines"});
+            addLink({libelle: () => `Dig with the pickaxe.`, chemin: "piocherDansLesMines"});
         }
     }
 });
 
 /* Exemple de remplacement d'un lien. */
-creerEpisode({
+episode({
     clef: "piocherDansLesMines",
     titre : () => `Dig with the pickaxe.`,
     texte: () => `Tac tac tac, you found a ***golden nugget***!`
@@ -158,35 +158,35 @@ creerEpisode({
         ]
     ,image: "mine.png"
     ,commandes: () => {
-        ajouterInventaire({clef:"goldenNugget", nom:"Golder nugget d'or", description:"A golden nugget.", nombre:1});
-        if (nombreVisites() > 2) {
-            ajouterTexte(
+        giveToPlayer({clef:"goldenNugget", nom:"Golder nugget d'or", description:"A golden nugget.", nombre:1});
+        if (getNumberOfVisitss() > 2) {
+            addText(
                 ` The entrance of the cave ***collapses!*** You hear a ***laughter***.
-                "You came ${nombreVisites()} times! Hahaha! You are cupid!"
+                "You dug ${getNumberOfVisitss()} times! Hahaha! You are cupid!"
             `);
-            remplacerLien({libelle: () => `Go to the back of the mine with your ${nombrePossedeDe("goldenNugget")} nuggets.`, chemin: "avancerFondMine"});
+            replaceAllLinks({libelle: () => `Go to the back of the mine with your ${getNumberOf("goldenNugget")} nuggets.`, chemin: "avancerFondMine"});
         }
     }
 });
 
 /* Exemple d'ajout d'un lien. */
-creerEpisode({
+episode({
     clef: "avancerFondMine",
     titre : () => `Go to the back of the mine.`,
     texte: () =>`Oh no, it's the ***ghost*** of the mine!`
     ,image: "mine.png"
     ,commandes: () => {
-        if (valeurVariable("astuceFantomeDite") !== true) {
-            ajouterTexte(` He jumps on you and kills you.
+        if (showVariable("astuceFantomeDite") !== true) {
+            addText(` He jumps on you and kills you.
                 ***FIN***`);
         }else {
-            ajouterLien({libelle: () => `Scream "It's the tax collector"! like Mimi taught you.`, chemin: "crierImpots"});
+            addLink({libelle: () => `Scream "It's the tax collector"! like Mimi taught you.`, chemin: "crierImpots"});
         }
     }
 });
 
 /* Exemple d'ajout d'un lien. */
-creerEpisode({
+episode({
     clef: "crierImpots",
     titre : () => `Scream the magical words.`,
     texte: () =>`You scream "it's the tax collector!!!" and the ghost dissipate with a panicky scream.
@@ -198,6 +198,6 @@ creerEpisode({
     ***Congratulations, you won!***`
     ,image: "victoire.png"
     ,commandes: () => {
-        ajouterInventaire({clef:"goldenNugget", nom:"Golder nugget d'or", description:"A golden nugget.", nombre:1});
+        giveToPlayer({clef:"goldenNugget", nom:"Golder nugget d'or", description:"A golden nugget.", nombre:1});
     }
 });

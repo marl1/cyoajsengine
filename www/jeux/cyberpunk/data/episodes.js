@@ -1,6 +1,6 @@
-titrerJeu("cyberpunk");
+setGameTitle("cyberpunk");
 
-creerEpisode({
+episode({
     clef: "intro",
     titre : `Introduction`,
     texte :
@@ -22,7 +22,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "intro2",
     titre : `Transaction dans le club`,
     texte :
@@ -45,13 +45,13 @@ creerEpisode({
         ],
     image:"dancefloor1.gif",
     commandes: () => {
-		ajouterInventaireDiscretement({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:2000});
-		ajouterInventaire({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:-900});
-        ajouterInventaire({clef:"SMX", nom:"Gélules de SMX", description:"Relaxant utilisé de façon festive ou par les implantés pour limiter les tremblements.", nombre:3});
+		giveSilentlyToPlayer({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:2000});
+		giveToPlayer({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:-900});
+        giveToPlayer({clef:"SMX", nom:"Gélules de SMX", description:"Relaxant utilisé de façon festive ou par les implantés pour limiter les tremblements.", nombre:3});
     }
 });
 
-creerEpisode({
+episode({
     clef: "consulterNotifClub",
     titre : `Consulter la notif CopCast`,
     texte :
@@ -71,7 +71,7 @@ creerEpisode({
     ,image:"dancefloor1.gif",
 });
 
-creerEpisode({
+episode({
     clef: "5",
     titre : `Les toilettes du club`,
     texte :
@@ -94,7 +94,7 @@ Vous remarquez une ***trappe d'aération au dessus d'une cabine***, fermée.`
     ,image:"toilettesPubliquesClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "6",
     titre : `♪♩♫♬♬♫♬♪`,
     texte :
@@ -116,7 +116,7 @@ Vous finissez par remarquer deux personnes, habillées normalement, avancer dans
     ,image:"dancefloor1.gif",
 });
 
-creerEpisode({
+episode({
     clef: "continuerDAttendreClub",
     titre : `Continuer d'attendre`,
     texte :
@@ -136,7 +136,7 @@ Soudain, ils se dirigent droit sur vous. ***Vous êtes repéré***, ça ne fait 
     ,image:"dancefloor1.gif",
 });
 
-creerEpisode({
+episode({
     clef: "planquerApresAttente",
     titre : `Se planquer aux toilettes`,
     texte :
@@ -157,7 +157,7 @@ creerEpisode({
         ,image:"toilettesPubliquesClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "FuirFlicsToilettes",
     titre : `Fuir les 3 policiers`,
     texte :
@@ -173,7 +173,7 @@ Dommage. Dans ces toilettes vides, le policier n'a pas hésité à utiliser son 
     ,image:"toilettesPubliquesClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "seRendreFlicsToilettes",
     titre : `Se rendre aux policiers dans les toilettes`,
     texte :
@@ -188,7 +188,7 @@ creerEpisode({
     ,image:"toilettesPubliquesClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "attaquerFlicsToilettes",
     titre : `Combattre les policiers dans les toilettes`,
     texte :
@@ -207,7 +207,7 @@ creerEpisode({
     ,image:"toilettesPubliquesClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "FuirFlicsToilettesConduit",
     titre : `Fuir dans le conduit`,
     texte :
@@ -226,7 +226,7 @@ creerEpisode({
     ,image:"toilettesPubliquesClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "exterieurApresFuitePoliciersToilettes",
     titre : `Fuir dans le conduit`,
     texte :
@@ -241,7 +241,7 @@ creerEpisode({
     ,image:""
 });
 
-creerEpisode({
+episode({
     clef: "interceptionParAugmente",
     titre : `Fuir par les conduits`,
     texte :
@@ -257,12 +257,12 @@ Vous n'avez même pas le temps de le voir attaquer. Vous le voyez juste... Dispa
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
         ,image:"aerationclub.gif"
 });
 
-creerEpisode({
+episode({
     clef: "sortirFlicsToilettes",
     titre : `Sortir des toilettes après avoir neutralisé les policiers`,
     texte :
@@ -280,7 +280,7 @@ creerEpisode({
     ,image:"dancefloor1.gif",
 });
 
-creerEpisode({
+episode({
     clef: "prendreOtageFlicToilettes",
     titre : `Prendre un policier en otage`,
     texte :
@@ -299,7 +299,7 @@ creerEpisode({
         ,image:"toilettesPubliquesClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "continuerDAttendreEncoreClub",
     titre : `Continuer d'attendre encore`,
     texte :
@@ -316,7 +316,7 @@ creerEpisode({
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "7",
     titre : `Sortir par l'entrée principale du club`,
     texte :
@@ -338,7 +338,7 @@ Vous vous faufilez entre les danseurs vers la sortie. Un ***flic en civil***, tr
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "104",
     titre : `Sortir par l'entrée principale du club malgré le policier`,
     texte :
@@ -360,7 +360,7 @@ creerEpisode({
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "105",
     titre : `Péter le bras du policier gardant la sortie du club`,
     texte :
@@ -380,7 +380,7 @@ A votre droite, deux policiers accourent depuis l'intérieur du club. Trois autr
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "106",
     titre : `Demander au policier gardant la sortie du club ce qu'il veut`,
     texte :
@@ -394,7 +394,7 @@ creerEpisode({
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "107",
     titre : `Fuir le policier vers la sortie du club`,
     texte :
@@ -410,7 +410,7 @@ Dommage. Vous n'étiez qu'à quelques mètres de la sortie, mais une fois que vo
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "108",
     titre : `Fuir vers l'intérieur du club`,
     texte :
@@ -429,7 +429,7 @@ Bon. Pas de panique. Vous n'avez rien fait de mal, juste acheté quelques gélul
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "109",
     titre : `Se défendre à main nue contre cinq policiers armés`,
     texte :
@@ -443,7 +443,7 @@ creerEpisode({
 });
 
 
-creerEpisode({
+episode({
     clef: "110",
     titre : `Vous rendre aux collègues de l'homme que vous avez mis KO`,
     texte :
@@ -457,7 +457,7 @@ Ca n'empèche pas les policiers de vous plaquer brutalement sur le sol en vous i
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "111",
     titre : `Fuir les cinq policiers armés qui vous encerclent`,
     texte :
@@ -472,7 +472,7 @@ La scène est surréaliste. Vous êtes sur le sol, blessé par balle, tandis que
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "112",
     titre : `Vous rendre aux policiers vous encerclant dans le club`,
     texte :
@@ -486,7 +486,7 @@ Un policier vient se placer derrière vous, et commence à dire quelque chose ma
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "113",
     titre : `Fuir le club à tout prix`,
     texte :
@@ -503,12 +503,12 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
             chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "114",
     titre : `Prendre un otage dans le club`,
     texte :
@@ -530,12 +530,12 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
             chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
     ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "12",
     titre : `Monter dans le conduit d'aération`,
     texte :
@@ -558,7 +558,7 @@ Le conduit est très étroit, mais vous avez vu pire. Il fait un angle et monte 
     ,image:"aerationclub.gif"
 });
 
-creerEpisode({
+episode({
     clef: "53",
     titre : `Descente brutale`,
     texte :
@@ -574,7 +574,7 @@ Vous êtes plus ou moins coincé à la verticale. Vous pouvez...`
     ,image:"aerationclub.gif"
 });
 
-creerEpisode({
+episode({
     clef: "54",
     titre : `Remontée...`,
     texte :
@@ -592,7 +592,7 @@ Vous revoilà à ***l'intersection***.`
     ,image:"aerationclub.gif"
 });
 
-creerEpisode({
+episode({
     clef: "55",
     titre : `Avançons...`,
     texte :
@@ -617,7 +617,7 @@ creerEpisode({
     ,image:"toilettesClub2.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "59",
     titre : `Avant de remonter...`,
     texte :
@@ -632,7 +632,7 @@ creerEpisode({
     ,image:"toilettesClub2.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "46",
     titre : `Bim`,
     texte :
@@ -651,7 +651,7 @@ Il finit par se ***diviser en trois***.`
     ,image:"aerationclub.gif"
 });
 
-creerEpisode({
+episode({
     clef: "47",
     titre : `Lui laisser le temps de partir`,
     texte :
@@ -672,7 +672,7 @@ Il se divise en trois.`
     ,image:"toilettesClub2.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "48",
     titre : `Sortir des toilettes des loges`,
     texte :
@@ -687,7 +687,7 @@ creerEpisode({
     ,image:"arriereClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "57",
     titre : `Lui répondre que tout va bien`,
     texte :
@@ -704,7 +704,7 @@ Il n'a pas l'air très convaincu. Il vous fait une petite moue et part essayer d
         ,image:"toilettesClub2.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "63",
     titre : `Perdu ?`,
     texte :
@@ -729,7 +729,7 @@ Et à gauche...?`
         ,image:"aerationclub.gif"
 });
 
-creerEpisode({
+episode({
     clef: "ignorerNotifClub",
     titre : `Ignorer la notif CopCast`,
     texte :
@@ -750,7 +750,7 @@ Bon, il n'empêche qu'il faut quand même sortir d'ici.`
         ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "4",
     titre : `Devant la porte des loges`,
     texte :
@@ -770,7 +770,7 @@ Vous remarquez qu'il porte des ***lunettes noires de réalité augmentée*** Ect
         ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "piraterLunettesCLub",
     titre : `Piratage devant la porte des loges`,
     texte :
@@ -794,7 +794,7 @@ Vous voilà dans les loges : des petites pièces, certaines avec portes et d'aut
         ,image:"arriereClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "convaincreLogesCLub",
     titre : `Convaincre le garde devant la porte des loges`,
     texte :
@@ -815,7 +815,7 @@ Quelle approche allez-vous tenter ?`
         ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "28",
     titre : `Vous faire passer pour un technicien auprès du garde devant la porte des loges`,
     texte :
@@ -834,7 +834,7 @@ creerEpisode({
         ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "29",
     titre : `Vous faire passer pour un fan auprès du garde devant la porte des loges`,
     texte :
@@ -853,7 +853,7 @@ creerEpisode({
         ,image:"dancefloor1.gif",
 });
 
-creerEpisode({
+episode({
     clef: "passerEnForceLogesClub",
     titre : `Passer en force le garde devant la porte des loges.`,
     texte :
@@ -872,7 +872,7 @@ Des petites pièces, certaines avec portes et d'autres avec un simple rideau, di
         ,image:"arriereClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "19",
     titre : `Dans le club`,
     texte :
@@ -891,7 +891,7 @@ creerEpisode({
         ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "graisserPatteGarde",
     titre : `Tentative de corruption`,
     texte :
@@ -908,7 +908,7 @@ creerEpisode({
         ,image:"dancefloor1.gif"
 });
 
-creerEpisode({
+episode({
     clef: "20",
     titre : `Sortir par la porte des loges`,
     texte :
@@ -931,7 +931,7 @@ Il y a aussi un grand type en imperméable qui semble augmenté, comme vous, por
         ,image:"sortieArriereClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "123",
     titre : `Demander à l'augmenté de la sortie derrière ce qu'il veut`,
     texte :
@@ -945,7 +945,7 @@ Vous avez à peine le temps de vous rendre compte de sa main qui vient toucher d
         ]
 });
 
-creerEpisode({
+episode({
     clef: "126",
     titre : `Essayer de convaincre de vous laisser passer à l'étage`,
     texte :
@@ -965,7 +965,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "128",
     titre : `Passer en force au premier étage`,
     texte :
@@ -989,7 +989,7 @@ Quoi que vous faites, vous feriez mieux de vous dépêcher.
         ]
 });
 
-creerEpisode({
+episode({
     clef: "129",
     titre : `Le couloir du premier étage`,
     texte :
@@ -1006,7 +1006,7 @@ Vous avez une vue imprenable de la mer humaine en dessous, mais vous ne voyez ri
         ]
 });
 
-creerEpisode({
+episode({
     clef: "130",
     titre : `Pirater la porte fermée`,
     texte :
@@ -1028,7 +1028,7 @@ Vous entrez dans le bureau et fermez la porte derrière vous. Il est plutôt min
         ]
 });
 
-creerEpisode({
+episode({
     clef: "131",
     titre : `Défoncer la porte fermée du premier étage`,
     texte :
@@ -1052,7 +1052,7 @@ Bon. Vous avez le temps pour une action. UNE SEULE action.`
         ]
 });
 
-creerEpisode({
+episode({
     clef: "133",
     titre : `Partir`,
     texte :
@@ -1075,7 +1075,7 @@ Il y a aussi ***un gros type en imperméable qui semble augmenté***, comme vous
         ,image:"sortieArriereClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "134",
     titre : `Fouiller le bureau en bois`,
     texte :
@@ -1094,13 +1094,13 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
         chemin: "133"}
     ],
     commandes: () => {
-        ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
-        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
+        giveToPlayer({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
+        giveToPlayer({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
     },
     revisite:"134Revisite"
 });
 
-creerEpisode({
+episode({
     clef: "134Revisite",
     titre : `Fouiller le bureau en bois`,
     texte :
@@ -1117,7 +1117,7 @@ creerEpisode({
 });
 
 
-creerEpisode({
+episode({
     clef: "135",
     titre : `Fouiller la pièce.`,
     texte :
@@ -1136,13 +1136,13 @@ Il y a environ ***5.000 crédits*** dans le coffre. Pas mal. Vous empochez le to
                 chemin: "133"}
         ],
     commandes: () => {
-        ajouterInventaire({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:5000 });
+        giveToPlayer({clef:"credits", nom:"Crédits", description:"De l'argent.", nombre:5000 });
     },
     revisite:"135Revisite"
 });
 
 
-creerEpisode({
+episode({
     clef: "135Revisite", //TODO on ne peux ouvrir le coffre qu'une fois
     titre : `Vous retournez la pièce, sans rien trouver de spécial.`,
     texte :
@@ -1158,7 +1158,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "73",
     titre : `Sortir vite du bureau par le conduit`,
     texte :
@@ -1184,7 +1184,7 @@ Pas le temps de gamberger, de toute façon. Vous entendez des bruits derrière v
         ]
 });
 
-creerEpisode({
+episode({
     clef: "95",
     titre : `Sortir vite du bureau par le conduit`,
     texte :
@@ -1206,7 +1206,7 @@ Pas le temps de gamberger, de toute façon. Vous entendez des bruits derrière v
         ]
 });
 
-creerEpisode({
+episode({
     clef: "136",
     titre : `Consulter l'ordinateur`,
     texte :
@@ -1228,7 +1228,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "137",
     titre : `Lire les mails`,
     texte :
@@ -1306,7 +1306,7 @@ Rien d'intéressant, en somme.`
         ]
 });
 
-creerEpisode({
+episode({
     clef: "138",
     titre : `Chercher des codes secrets`,
     texte :
@@ -1326,7 +1326,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "139",
     titre : `Chercher des codes secrets`,
     texte :
@@ -1344,7 +1344,7 @@ Vous trouvez une liste de mots de passe utilisé par le gérant du club que vous
         ]
 });
 
-creerEpisode({
+episode({
     clef: "86",
     titre : `Se rendre aux gardes dans le conduit`,
     texte :
@@ -1358,7 +1358,7 @@ L'un d'eux vous tire comme il peut à l'extérieur et vous agenouille dans le bu
         ]
 });
 
-creerEpisode({
+episode({
     clef: "45",
     titre : `Les toilettes des artistes`,
     texte :
@@ -1378,7 +1378,7 @@ Les toilettes sont propres. Trois cabines et des pissotières. Vous remarquez **
 });
 
 
-creerEpisode({
+episode({
     clef: "75",
     titre : `Trouver une autre entrée`,
     texte :
@@ -1401,7 +1401,7 @@ Un technicien passe devant vous, en vous ignorant. Vous savez cependant que vous
         ]
 });
 
-creerEpisode({
+episode({
     clef: "84",
     titre : `Fouiller la pièce`,
     texte :
@@ -1419,7 +1419,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "93",
     titre : `Se rendre`,
     texte :
@@ -1434,7 +1434,7 @@ L'un d'entre eux passe derrière vous et...
         ]
 });
 
-creerEpisode({
+episode({
     clef: "87",
     titre : `Affronter le personnel de sécurité dans le conduit`,
     texte :
@@ -1453,11 +1453,11 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({ //TODO: si arme alors utiliser arme, sinon non
+episode({ //TODO: si arme alors utiliser arme, sinon non
     clef: "97",
     titre : `Combattre les agents de sécurité dans le bureau`,
     texte :
@@ -1477,7 +1477,7 @@ L'affrontement est bref, mais intense. Trois coups, trois hommes à terre. Vous 
         ]
 });
 
-creerEpisode({
+episode({
     clef: "98",
     titre : `Fouiller les corps`,
     texte :
@@ -1494,11 +1494,11 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "99",
     titre : `Fouillez la pièce`,
     texte :
@@ -1513,11 +1513,11 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "85",
     titre : `Consulter l'ordinateur`,
     texte :
@@ -1535,7 +1535,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({ //TODO: si on a un flingue...
+episode({ //TODO: si on a un flingue...
     clef: "94",
     titre : `Se défendre`,
     texte :
@@ -1549,7 +1549,7 @@ Vous êtes rapidement maitrisé, plaqué contre la moquette et...`
         ]
 });
 
-creerEpisode({
+episode({
     clef: "90",
     titre : `Lire les mails`,
     texte :
@@ -1568,7 +1568,7 @@ Vous aviez à peine reperé l'endroit où étaient rapatriés les mails que troi
         ]
 });
 
-creerEpisode({
+episode({
     clef: "91",
     titre : `Chercher des données sensibles`,
     texte :
@@ -1586,7 +1586,7 @@ La porte s'ouvre soudainement et trois agents de sécu débarquent en vous deman
         ]
 });
 
-creerEpisode({
+episode({
     clef: "92",
     titre : `Copiez le contenu de l'ordinateur du club`,
     texte :
@@ -1608,7 +1608,7 @@ Trois agents de sécurité finissent par arriver dans le bureau.
         ]
 });
 
-creerEpisode({
+episode({
     clef: "100",
     titre : `Consulter l'ordinateur`,
     texte :
@@ -1623,11 +1623,11 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "101",
     titre : `Consulter l'ordinateur`,
     texte :
@@ -1645,11 +1645,11 @@ Vous n'avez même pas le temps de le voir se déplacer. Vous le voyez juste... D
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "21",
     titre : `Monter l'escalier des loges`,
     texte :
@@ -1668,7 +1668,7 @@ Pas moyen de passer sans vous faire voir.
         ,image:"arriereClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "redescendreLoges",
     titre : `Redescendre dans les loges`,
     texte :
@@ -1684,7 +1684,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "22",
     titre : `Visiter les pièces`,
     texte :
@@ -1700,7 +1700,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "51",
     titre : `Vers l'extérieur`,
     texte :
@@ -1726,7 +1726,7 @@ Bon. Si vous voulez sortir par là, ***il faudra défoncer le climatiseur***, de
         ,image:"sortieArriereClub.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "65",
     titre : `Sortir d'ici`,
     texte :
@@ -1751,7 +1751,7 @@ Bon. Si vous voulez sortir par là, il faudra ***défoncer le climatiseur***, de
         ]
 });
 
-creerEpisode({
+episode({
     clef: "52",
     titre : `La pièce du premier étage`,
     texte :
@@ -1765,7 +1765,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "66",
     titre : `La pièce du premier étage`,
     texte :
@@ -1785,7 +1785,7 @@ Vous lancez machinalement un scan de la grille : elle est ***protégée par des 
         ]
 });
 
-creerEpisode({
+episode({
     clef: "couperCourantNouveau",
     titre : `Trouver un moyen de couper le courant`,
     texte :
@@ -1812,7 +1812,7 @@ Aidé par la vision infrarouge de vos lunettes, vous ***retournez dans les condu
         ]
 });
 
-creerEpisode({
+episode({
     clef: "fouillerBureauBoisClubCoupureCourant",
     titre : `Fouiller le bureau`,
     texte :
@@ -1831,13 +1831,13 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
                 chemin: "73"},
         ]
         ,commandes: () => {
-        ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
-        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
+        giveToPlayer({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
+        giveToPlayer({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
     }
     ,revisite:"fouillerBureauBoisClubCoupureCourantRevisite"
 });
 
-creerEpisode({
+episode({
     clef: "fouillerBureauBoisClubCoupureCourantRevisite",
     titre : `Fouiller le bureau`,
     texte :
@@ -1853,7 +1853,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "fouillerPieceClubCoupureCourant",
     titre : `Fouiller la pièce.`,
     texte :
@@ -1872,7 +1872,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "defoncerCoffreCLub",
     titre : `Tenter de défoncer le coffre`,
     texte :
@@ -1889,7 +1889,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "consulterOrdiClubCoupureCourant",
     titre : `Consulter l'ordinateur éteint`,
     texte :
@@ -1907,7 +1907,7 @@ Ca serait une bonne idée de le consulter ***s'il y avait du courant***. Malheur
         ]
 });
 
-creerEpisode({
+episode({
     clef: "68",
     titre : `Passer malgré les lasers`,
     texte :
@@ -1927,7 +1927,7 @@ Vous avez le temps pour une action. UNE SEULE action.`
         ]
 });
 
-creerEpisode({
+episode({
     clef: "76",
     titre : `Fouiller le bureau`,
     texte :
@@ -1946,13 +1946,13 @@ Il est chargé à bloc, soit 40 balles. ***Vous l'empochez***, en espérant ne p
                 chemin: "73"},
         ],
     commandes: () => {
-        ajouterInventaire({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
-        ajouterInventaire({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
+        giveToPlayer({clef:"pistoletBK13", nom:"Pistolet BK13", description:"", nombre:1 });
+        giveToPlayer({clef:"ballePistolet", nom:"Balle de pistolet (0.45 ACP)", description:"", nombre:40 });
     },
     revisite:"76Revisite"
 });
 
-creerEpisode({
+episode({
     clef: "76Revisite",
     titre : `Fouiller le bureau`,
     texte :
@@ -1968,7 +1968,7 @@ creerEpisode({
         ]
 });
 
-creerEpisode({
+episode({
     clef: "77",
     titre : `Fouiller la pièce`,
     texte :
@@ -1987,7 +1987,7 @@ Vous savez très bien que vous n'aurez le temps de rien faire. Dommage.`
         ]
 });
 
-creerEpisode({
+episode({
     clef: "88",
     titre : `Essayer d'ouvrir le coffre`,
     texte :
@@ -2009,7 +2009,7 @@ Trois agents de sécurité débarquent, armes au poing.
         ]
 });
 
-creerEpisode({
+episode({
     clef: "78",
     titre : `Consulter l'ordinateur`,
     texte :
@@ -2030,7 +2030,7 @@ C'est très bien mais vous n'avez certainement ***pas le temps*** de faire grand
         ]
 });
 
-creerEpisode({
+episode({
     clef: "80",
     titre : `Vers l'extérieur`,
     texte :
@@ -2047,11 +2047,11 @@ Vous n'avez ***même pas le temps*** de le voir se déplacer. Vous le voyez just
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "81",
     titre : `Vers l'extérieur`,
     texte :
@@ -2069,7 +2069,7 @@ Il se rue dans le club, sans doute va-t-il se mettre à votre poursuite dans les
             ]
 });
 
-creerEpisode({
+episode({
     clef: "82",
     titre : `Sortir par la porte de derrière`,
     texte :
@@ -2087,7 +2087,7 @@ Vous sortez et vous retrouvez dans les loges. La porte de sortie est au fond du 
             ,image: "toilettesClub2.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "83",
     titre : `Rebrousser chemin pour sortir par l'entrée principale`,
     texte :
@@ -2110,7 +2110,7 @@ Et la main d'un policier en civil vient s'abattre sur votre épaule.
         ]
 });
 
-creerEpisode({
+episode({
     clef: "124",
     titre : `Briser le bras de l'augmenté à la sortie du club`,
     texte :
@@ -2128,7 +2128,7 @@ Vous libérez rapidement votre main pour tenter une autre attaque mais, un flash
         ]
 });
 
-creerEpisode({
+episode({
     clef: "102",
     titre : `Fuir par les conduits`,
     texte :
@@ -2146,11 +2146,11 @@ Vous n'avez même pas le temps de le voir attaquer. Vous le voyez juste... Dispa
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "103",
     titre : `Fuir dans la rue`,
     texte :
@@ -2167,11 +2167,11 @@ Vous n'avez même ***pas le temps de le voir*** se déplacer. Vous n'avez aucune
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "125",
     titre : `Fuir l'augmenté gardant la sortie du club`,
     texte :
@@ -2188,11 +2188,11 @@ Vous n'avez ***même pas le temps de le voir*** se déplacer. Vous n'avez aucune
                 chemin: "96"}
         ]
         ,commandes: () => {
-            modifierVariable("augmenteClubVu", true);
+            setVariable("augmenteClubVu", true);
         }
 });
 
-creerEpisode({
+episode({
     clef: "96",
     titre : `Lumière`,
     texte :
@@ -2213,7 +2213,7 @@ Très juste. On ne laissait pas les gens ***partir*** comme ça avec des implant
 ,image:"salleImplantation.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "96seLever",
     titre : `Lumière`,
     texte :
@@ -2238,7 +2238,7 @@ Vous sortez de la salle et débouchez au milieu d'un court couloir plutôt chic,
 });
 
 
-creerEpisode({
+episode({
     clef: "115",
     titre : `Prendre l'ascenseur`,
     texte : () =>
@@ -2254,7 +2254,7 @@ creerEpisode({
     ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "rencontreAlice",
     titre : `Prendre l'ascenseur`,
     texte : () =>
@@ -2298,7 +2298,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "116",
     titre : `Visiter les autres pièces du deuxième étage`,
     texte :
@@ -2326,7 +2326,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "117",
     titre : `Lumière`,
     texte :
@@ -2345,7 +2345,7 @@ creerEpisode({
 ,image:"salleImplantation.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "142",
     titre : `Escalier`,
     texte :
@@ -2361,7 +2361,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "118",
     titre : `Essayer de vous enfuir ?`,
     texte :
@@ -2380,7 +2380,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "119",
     titre : `Lumière`,
     texte :
@@ -2400,7 +2400,7 @@ Sur la demande d'Alice, vous ré-autorisez son accès à votre module de communi
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "120",
     titre : `Demander des détails sur l'offre d'Alice`,
     texte :
@@ -2420,7 +2420,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "121",
     titre : `Demander à réfléchir sur la proposition`,
     texte :
@@ -2439,7 +2439,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "140",
     titre : `Aller dans le bureau en face de la salle d'implantation`,
     texte :
@@ -2456,7 +2456,7 @@ creerEpisode({
 ]
 });
 
-creerEpisode({
+episode({
     clef: "146",
     titre : `Fouiller le bureau`,
     texte :
@@ -2469,7 +2469,7 @@ creerEpisode({
 ]
 });
 
-creerEpisode({
+episode({
     clef: "147",
     titre : `Consulter l'ordinateur`,
     texte :
@@ -2490,7 +2490,7 @@ creerEpisode({
 ]
 });
 
-creerEpisode({
+episode({
     clef: "149",
     titre : `Ouvrir DOSSIER MED`,
     texte :
@@ -2554,7 +2554,7 @@ creerEpisode({
 ]
 });
 
-creerEpisode({
+episode({
     clef: "150",
     titre : `Lire les mails de l'ordinateur du bureau en face de la salle d'implantation`,
     texte :
@@ -2604,7 +2604,7 @@ creerEpisode({
 ]
 });
 
-creerEpisode({
+episode({
     clef: "143",
     titre : `Demander au médecin ce qu'il vous a fait`,
     texte :
@@ -2626,7 +2626,7 @@ creerEpisode({
 ,image:"salleImplantation.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "144",
     titre : `Demander au médecin s'il peut vous améliorer.`,
     texte :
@@ -2641,7 +2641,7 @@ creerEpisode({
 ,image:"salleImplantation.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "145",
     titre : `Dans le couloir du deuxième étage`,
     texte :
@@ -2658,7 +2658,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "148",
     titre : `Retourner dans le couloir du deuxième étage`,
     texte :
@@ -2677,7 +2677,7 @@ creerEpisode({
 ,image:"couloirsPremanod.jpg"
 });
 
-creerEpisode({
+episode({
     clef: "141",
     titre : `Dans les toilettes du deuxième étage`,
     texte :
@@ -2701,7 +2701,7 @@ creerEpisode({
 ]
 });
 
-creerEpisode({
+episode({
     clef: "163",
     titre : `Jeter un oeil à la pièce où est stocké le matériel médical`,
     texte :

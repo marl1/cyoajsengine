@@ -1,86 +1,82 @@
 :toc:
 
-== ENGLISH
-
-A CYOA Javascript framework.
-
-CC0 Licence under French law.
+A set of Javascript functions to easily write text adventures in English.
 
 Have fun with it.
 
+image::exemple.png[]
+
 ==== FEATURES
+
 * Load/save system.
 * Inventory.
 * Redirect on already visited episode (and can manage circular redirects).
 * Go backward (adjusting inventory accordingly!).
-* Safeguards (duplicates detections, detect paths that leads nowhere...)
+* Safeguards (auto-detect duplicate names, detect paths that leads nowhere...)
 * Vanilla Javascript.
 
 ==== Demo
-A sample game that illustrate all the features:
+A sample game illustrating all the features:
 https://marclv.gitlab.io/cyoajsengine/jeux/1_jeu_exemple/index.htm
 
+==== Base Fonctions
 
-== FRANCAIS ==
-Un moteur de LDVELH.
+*episode* : this is the base function to create an episode. An episode is a reusable "step" in the player's adventure. It's usually a location ("in front of the cave") or an event ("meeting with the king").
 
-Licence CC0 (sous respect de la loi française).
+----
+episode({
+    clef: "uniqueIdentifierOfTheEpisode",
+    titre : () => `The title of this episode (for instance "Arrival in the village")`,
+    texte: () => `This is the description of this episode (location, player actions...).`
+    ,liens: [
+            {libelle: () => `This is a link to another episode.`,
+            chemin: "anotherEpisode"},
+            {libelle: () => `This is a second link.`,
+            chemin: "aThirdEpisode"}
+        ]
+    ,image: "imageFileName.png"
+});
+----
 
-image::exemple.png[]
 
-==== Fonctionnalités
-* Sauvegarde/chargement.
-* Inventaire.
-* Redirections lors de seconde visite d'épisode (et gestion des redirections en boucle).
-* Retour arrière (en ajustant l'inventaire de façon appropriée !).
-* Garde-fous (détection des liens vers épisodes inexistants, détection des noms d'épisodes en doublon...).
-* Javascript sans librairie.
-
-
-==== Exemples
-
-Jeu d'exemple servant de démo des fonctionnalités :
-https://marclv.gitlab.io/cyoajsengine/jeux/1_jeu_exemple/index.htm
-
-==== Fonctions de base
-
-*creerEpisode* : fonction à utiliser pour écrire un nouvel épisode.
-
-*titrerJeu* : donne un titre au jeu. Il sera utilisé lors de l'enregistrement des sauvegardes, pour differencier les sauvegardes d'un jeu d'un autre.
+*setGameTitle* : donne un titre au jeu. Il sera utilisé lors de l'enregistrement des sauvegardes, pour differencier les sauvegardes d'un jeu d'un autre.
 
 ====== Commandes
 
-Commandes utilisées dans les épisodes, exemple avec la fonction "ajouterInventaire" ci-dessous :
+Commandes utilisées dans les épisodes, exemple avec la fonction "giveToPlayer" ci-dessous :
 [source,javascript]
 ----
-creerEpisode({
+episode({
     clef: "allerInterim",
     titre : `Aller à l'agence d'interim.`,
     texte :`Vous travaillez avec l'agence et gagnez ***50 euros***.`
     ,commandes: () => {
-		    ajouterInventaire({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
+		    giveToPlayer({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
     }
 });
 ----
 
-*ajouterInventaire* : `ajouterInventaire({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` Ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire.
+*giveToPlayer* : `giveToPlayer({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` Ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire.
 
-*ajouterInventaireDiscretement* : `ajouterInventaireDiscretement({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` : ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire. Ne sera pas mis en valeur. Utile notamment pour donner quelque chose au joueur au début de l'aventure, ou de manière générale lorsqu'on ne veut pas attirer l'attention sur quelque chose qu'il reçoit.
+*giveSilentlyToPlayer* : `giveSilentlyToPlayer({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` : ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire. Ne sera pas mis en valeur. Utile notamment pour donner quelque chose au joueur au début de l'aventure, ou de manière générale lorsqu'on ne veut pas attirer l'attention sur quelque chose qu'il reçoit.
 
-*ajouterLien* : ``ajouterLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Ajouter un lien. Si un lien identique existe déjà, il ne sera pas ajouté.
+*addLink* : ``addLink({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Ajouter un lien. Si un lien identique existe déjà, il ne sera pas ajouté.
 
-*ajouterTexte* : ``ajouterTexte(`Nouveau texte !`);``. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
+*addText* : ``addText(`Nouveau texte !`);``. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
 
-*modifierVariable* : ``modifierVariable("nomDeMaVariable", 18);``. Donne une valeur à une nouvelle variable ou modifie une variable existant.
+*setVariable* : ``setVariable("nomDeMaVariable", 18);``. Donne une valeur à une nouvelle variable ou modifie une variable existant.
 
-*nombrePossedeDe* : `nombrePossedeDe("pioche")`. Renvoie le nombre d'exemplaire de l'objet renseigné que possède le joueur. Utile pour metre des conditions en place, par exemple "si le joueur possède au moins 4 roues, alors...".
+*getNumberOf* : `getNumberOf("pioche")`. Renvoie le nombre d'exemplaire de l'objet renseigné que possède le joueur. Utile pour metre des conditions en place, par exemple "si le joueur possède au moins 4 roues, alors...".
 
-*nombreVisite* : retourne le nombre de visite précédentes de l'épisode en cours.
+*getNumberOfVisits* : retourne le nombre de visite précédentes de l'épisode en cours.
 
-*remplacerLien* : ``remplacerLien({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Supprime tous les liens et remplace par d'autres.
+*replaceAllLinks* : ``replaceAllLinks({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Supprime tous les liens et remplace par d'autres.
 
-*remplacerTexte* : ``remplacerTexte(`Nouveau texte !`);``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
+*remplaceAllText* : ``remplaceAllText(`Nouveau texte !`);``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
 
-*valeurVariable* : ``valeurVariable("nomVariable")``. Retourne la valeur d'une variable.
+*showVariable* : ``showVariable("nomVariable")``. Retourne la valeur d'une variable.
 
-*variable* : ``variable("nomVariable")`` ou ``variable("nomVariable", "nouvelleValeur")``. Retourne la valeur d'une variable OU modifie une variable. Notation raccourcie de valeurVariable et modifierVariable.
+*variable* : ``variable("nomVariable")`` ou ``variable("nomVariable", "nouvelleValeur")``. Retourne la valeur d'une variable OU modifie une variable. Notation raccourcie de showVar et updateVar.
+
+=== LICENSE
+CC0 License under French law.
