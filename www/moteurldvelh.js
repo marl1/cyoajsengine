@@ -37,7 +37,7 @@ let historiqueVariables=[];
 let variables=new Map();
 
 
-/* Titre du jeu, pour séparer le local storage entre les jeux sur la même adresse (localhost typiquement).*/
+/* Titre du jeu, pour séparer le local storage entre les games sur la même adresse (localhost typiquement).*/
 var titreJeu="";
 
 // Map contenant tous les épisodes, avec en clef la clef de l'épisode et en valeur l'intégralité de l'épisode

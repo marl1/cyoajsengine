@@ -11,12 +11,12 @@ build:
   script:
     - echo "Creation d'un timestamp pour eviter le cache..."
     - timestamp=$(date +%s)
-    - echo "Copie du moteur dans les dossiers des jeux..."
-    - cp ./www/moteurldvelh.js ./www/jeux/1_jeu_exemple/data/
-    - cp ./www/moteurldvelh.js ./www/jeux/cyberpunk/data/
+    - echo "Copie du moteur dans les dossiers des games..."
+    - cp ./www/moteurldvelh.js ./www/games/a_sample_game/data/
+    - cp ./www/moteurldvelh.js ./www/games/cyberpunk/data/
     - echo "Modification des chemins dans les index.htm..."
-    - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/jeux/1_jeu_exemple/index.htm
-    - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/jeux/cyberpunk/index.htm
+    - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/games/a_sample_game/index.htm
+    - sed -i "s,../../moteurldvelh.js,data/moteurldvelh.js?$timestamp," ./www/games/cyberpunk/index.htm
     - mkdir .public
     - cp -r ./www/* .public
     - mv .public public

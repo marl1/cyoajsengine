@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://127.0.0.1:3000/jeux/1_jeu_exemple/index.htm');
+  await page.goto('http://127.0.0.1:3000/games/a_sample_game/index.htm');
 });
 
 test('should have the correct html title', async ({ page }) => {

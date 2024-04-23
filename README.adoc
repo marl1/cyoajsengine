@@ -17,7 +17,7 @@ image::exemple.png[]
 
 == Demo
 A sample game illustrating all the features:
-https://marclv.gitlab.io/cyoajsengine/jeux/1_jeu_exemple/index.htm
+https://marclv.gitlab.io/cyoajsengine/games/a_sample_game/index.htm
 
 == Base Fonctions
 
