@@ -1,82 +1,87 @@
 :toc:
 
-A set of Javascript functions to easily write text adventures in English.
+A Javascript framework to easily write text adventures.
 
 Have fun with it.
 
 image::exemple.png[]
 
-==== FEATURES
+== FEATURES
 
+* Inventory system.
+* "Go back" button (adjusting the game state accordingly!).
 * Load/save system.
-* Inventory.
-* Redirect on already visited episode (and can manage circular redirects).
-* Go backward (adjusting inventory accordingly!).
-* Safeguards (auto-detect duplicate names, detect paths that leads nowhere...)
+* Auto-redirect to episodes (and can manage circular redirects).
+* Safeguards (auto-detect duplicate episode names, detect paths that leads nowhere...)
 * Vanilla Javascript.
 
-==== Demo
+== Demo
 A sample game illustrating all the features:
 https://marclv.gitlab.io/cyoajsengine/jeux/1_jeu_exemple/index.htm
 
-==== Base Fonctions
+== Base Fonctions
 
-*episode* : this is the base function to create an episode. An episode is a reusable "step" in the player's adventure. It's usually a location ("in front of the cave") or an event ("meeting with the king").
+*episode* : this is the base function to create an episode. An episode is a reusable "step" in the player's adventure. It's usually a location ("in front of the cave") or an event ("meeting with the king"). A game is usually composed of multiple episodes, inside of which there is text, links, scripts...
 
+The structure is as follow:
+[source,javascript]
 ----
 episode({
-    clef: "uniqueIdentifierOfTheEpisode",
-    titre : () => `The title of this episode (for instance "Arrival in the village")`,
-    texte: () => `This is the description of this episode (location, player actions...).`
-    ,liens: [
-            {libelle: () => `This is a link to another episode.`,
-            chemin: "anotherEpisode"},
-            {libelle: () => `This is a second link.`,
-            chemin: "aThirdEpisode"}
+    key: "uniqueIdentifierOfTheEpisode",
+    title: () => `The title of this episode (for instance "Arrival in the village")`,
+    text: () => `This is the description of this episode (location, player actions...).`
+    ,links: [
+            {label: () => `This is a link to another episode.`,
+            path: "anotherEpisode"},
+            {label: () => `This is a second link.`,
+            path: "aThirdEpisode"}
         ]
     ,image: "imageFileName.png"
+    ,revisit:"aFourthEpisode" // Episode to redirect to if we already have visited this episode
 });
 ----
 
 
-*setGameTitle* : donne un titre au jeu. Il sera utilisé lors de l'enregistrement des sauvegardes, pour differencier les sauvegardes d'un jeu d'un autre.
+*setGameTitle* : give a title to the game. Will be used as a title in the web browser. Will also be used internally to distinguish saves between games.
 
-====== Commandes
+=== Commands
 
-Commandes utilisées dans les épisodes, exemple avec la fonction "giveToPlayer" ci-dessous :
+Those are the functions that you can use in episodes, for instance to give player an item or to modify a variable.
+
+*giveToPlayer* : `giveToPlayer({key:"uniqueIdOfTheObjectType", name:"name of the object", description:"description of the object that will be displayed in the inventory panel.", amount:99});`. Adds or removes (by using a negative number) an object to the player's inventory. The action of giving or taking will be highlighted in the inventory.
+
+Exemple, giving player some money:
 [source,javascript]
 ----
 episode({
-    clef: "allerInterim",
-    titre : `Aller à l'agence d'interim.`,
-    texte :`Vous travaillez avec l'agence et gagnez ***50 euros***.`
-    ,commandes: () => {
-		    giveToPlayer({clef:"euros", nom:"Euros", description:"Des euros.", nombre:50});
+    key: "goToTheTempAgency",
+    title: `Go to the temp agency.`,
+    text:`You work and earn ***50 euros***.`
+    ,commands: () => {
+		    giveToPlayer({key:"euros", name:"Euros", description:"Some euros.", amount:50});
     }
 });
 ----
 
-*giveToPlayer* : `giveToPlayer({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` Ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire.
+*giveSilentlyToPlayer* : `giveSilentlyToPlayer({key:"uniqueIdOfTheObjectType", name:"name of the object", description:"description of the object that will be displayed in the inventory panel.", amount:99});`. Same as giveToPlayer but won't be highlighted in the inventory. Usueful when you want to give something discretely, for instance at the start of the adventure.
 
-*giveSilentlyToPlayer* : `giveSilentlyToPlayer({clef:"idDeVotreObjet", nom:"Le nom de mon bel objet", description:"Ceci est mon bel objet.", nombre:99});` : ajouter ou retirer (en donnant un nombre négatif) un objet de l'inventaire. Ne sera pas mis en valeur. Utile notamment pour donner quelque chose au joueur au début de l'aventure, ou de manière générale lorsqu'on ne veut pas attirer l'attention sur quelque chose qu'il reçoit.
+*addLink* : ``addLink({label: `Label of the link.`, path: "pathOfTheLink"});``. Adds a link. If it already exists, won't be added again.
 
-*addLink* : ``addLink({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Ajouter un lien. Si un lien identique existe déjà, il ne sera pas ajouté.
+*addText* : ``addText(`Nouveau texte !`);``. Adds a text to the end of the current episode or a specified episode.
 
-*addText* : ``addText(`Nouveau texte !`);``. Ajoute un texte à la fin de l'épisode en cours ou d'un épisode spécifié.
+*setVariable* : ``setVariable("nomDeMaVariable", 18);``. Assigns a value to a new variable or modifies an existing variable.
 
-*setVariable* : ``setVariable("nomDeMaVariable", 18);``. Donne une valeur à une nouvelle variable ou modifie une variable existant.
+*getNumberOf* : `getNumberOf("pioche")`. Returns the number of the specified object the player possesses. Useful for setting conditions, for example, "if the player has at least 4 sticks, then...".
 
-*getNumberOf* : `getNumberOf("pioche")`. Renvoie le nombre d'exemplaire de l'objet renseigné que possède le joueur. Utile pour metre des conditions en place, par exemple "si le joueur possède au moins 4 roues, alors...".
+*getNumberOfVisits* : Returns the number of previous visits to the current episode.
 
-*getNumberOfVisits* : retourne le nombre de visite précédentes de l'épisode en cours.
+*replaceAllLinks* : ``replaceAllLinks({label: `Nouveau lien.`, path: "cheminDuNouveauLien"});``. Removes all existing links in the episode and replaces them with new ones.
 
-*replaceAllLinks* : ``replaceAllLinks({libelle: `Nouveau lien.`, chemin: "cheminDuNouveauLien"});``. Supprime tous les liens et remplace par d'autres.
+*remplaceAllText* : ``remplaceAllText(`Nouveau texte !`);``. Replaces all text in the current episode or a specified episode.
 
-*remplaceAllText* : ``remplaceAllText(`Nouveau texte !`);``. Remplace tout le texte de l'épisode en cours ou d'un épisode spécifié.
+*showVariable* : ``showVariable("nomVariable")``. Returns a variable value.
 
-*showVariable* : ``showVariable("nomVariable")``. Retourne la valeur d'une variable.
+*variable* : ``variable("nomVariable")`` ou ``variable("nomVariable", "nouvelleValeur")``. Returns the value of a variable OR modifies a variable. Shorthand notation for showVar and updateVar.
 
-*variable* : ``variable("nomVariable")`` ou ``variable("nomVariable", "nouvelleValeur")``. Retourne la valeur d'une variable OU modifie une variable. Notation raccourcie de showVar et updateVar.
-
-=== LICENSE
+== LICENSE
 CC0 License under French law.

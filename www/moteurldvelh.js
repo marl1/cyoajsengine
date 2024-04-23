@@ -44,10 +44,10 @@ var titreJeu="";
 var episodes = new Map();
 
 function episode(nouvelEpisode) {
-    if(episodes.get(nouvelEpisode.clef)) {
-        alert(`The episode `+ nouvelEpisode.clef + ` already exist!`)
+    if(episodes.get(nouvelEpisode.key)) {
+        alert(`The episode `+ nouvelEpisode.key + ` already exist!`)
     } else {
-        episodes.set(nouvelEpisode.clef, nouvelEpisode);
+        episodes.set(nouvelEpisode.key, nouvelEpisode);
     }
 }
 
@@ -56,9 +56,9 @@ function playEpisode(clefEpisode) {
     let episode = episodes.get(clefEpisode);
     if (!episode) {alert("Episode " + clefEpisode + " not found."); return;}
 
-    if(episode.revisite && historique.includes(episode.clef)) { // gestion des redirections
+    if(episode.revisit && historique.includes(episode.key)) { // gestion des redirections
         //cet épisode redirige vers un autre
-        if (historiqueRedirection.filter((clefEp) => clefEp == episode.clef).length > 1) {
+        if (historiqueRedirection.filter((clefEp) => clefEp == episode.key).length > 1) {
             // boucle infinie (ep1 qui redirige vers ep2 qui redrigige vers ep1)
             let posPlusVieilleClefAffichee=historique.length;
             // on repasse sur chaque épisode qui ont redirigé
@@ -72,8 +72,8 @@ function playEpisode(clefEpisode) {
             historiqueRedirection = []; // vide l'historique de redirection qui vient de servir
 
         } else { // pas une boucle infinie
-            historiqueRedirection.push(episode.revisite);
-            playEpisode(episode.revisite);
+            historiqueRedirection.push(episode.revisit);
+            playEpisode(episode.revisit);
             return;
         }
     }
@@ -85,21 +85,21 @@ function playEpisode(clefEpisode) {
 
     const episodeOriginal = clonerEpisode(episode);
 
-    if (episode.commandes) {
-        episode.commandes();
-        episodeOriginal.commandes = episode.commandes;
+    if (episode.commands) {
+        episode.commands();
+        episodeOriginal.commands = episode.commands;
     }
     historique.push(clefEpisode);
     historiqueRedirection = [];
-    if (episode.titre instanceof Function) {
-        document.getElementById("titre").innerHTML=episode.titre();
+    if (episode.title instanceof Function) {
+        document.getElementById("titre").innerHTML=episode.title();
     } else {
-        document.getElementById("titre").innerHTML=episode.titre;
+        document.getElementById("titre").innerHTML=episode.title;
     }
-    if (episode.texte instanceof Function) {
-        document.getElementById("texte").innerHTML=formatterTexte(episode.texte());
+    if (episode.text instanceof Function) {
+        document.getElementById("texte").innerHTML=formatterTexte(episode.text());
     } else {
-        document.getElementById("texte").innerHTML=formatterTexte(episode.texte);
+        document.getElementById("texte").innerHTML=formatterTexte(episode.text);
     }
     if(episode.image) {
          remplacerImage(episode.image);
@@ -107,7 +107,7 @@ function playEpisode(clefEpisode) {
         remplacerImage("");
     }
 
-    genererLiens(episode.liens);
+    genererLiens(episode.links);
     afficherInventaire();
 
     // L'épisode a pu être modifié par des callbacks donc on réinjecte l'original.
@@ -118,16 +118,16 @@ function playEpisode(clefEpisode) {
 function clonerEpisode(episode) {
     let episodeClone = JSON.parse(JSON.stringify(episode));
     // en parsant on a perdu les fonctions titre, texte, libelle des liens donc il faut les réinjecter
-    episodeClone.titre = episode.titre;
-    episodeClone.texte = episode.texte;
-    if (episode.liens) {
+    episodeClone.title = episode.title;
+    episodeClone.text = episode.text;
+    if (episode.links) {
         let tabLiensOriginaux=[];
-        for (const lien of episode.liens) {
+        for (const lien of episode.links) {
             let lienOriginal = lien;
-            lienOriginal.libelle = lien.libelle;
+            lienOriginal.label = lien.label;
             tabLiensOriginaux.push(lienOriginal);
         }
-        episodeClone.liens = tabLiensOriginaux;
+        episodeClone.links = tabLiensOriginaux;
     }
 
     return episodeClone;
@@ -140,10 +140,10 @@ function genererLiens(liens) {
     let htmlLiens = "";
     if (liens) {
         for (const lien of liens) {
-            if (lien.libelle instanceof Function) {
-                htmlLiens = htmlLiens + `<a href="#" onClick="playEpisode('${lien.chemin}')">${lien.libelle()}</a><br>`;
+            if (lien.label instanceof Function) {
+                htmlLiens = htmlLiens + `<a href="#" onClick="playEpisode('${lien.path}')">${lien.label()}</a><br>`;
             } else {
-                htmlLiens = htmlLiens + `<a href="#" onClick="playEpisode('${lien.chemin}')">${lien.libelle}</a><br>`;
+                htmlLiens = htmlLiens + `<a href="#" onClick="playEpisode('${lien.path}')">${lien.label}</a><br>`;
             }
         }
     }
@@ -236,13 +236,13 @@ function analyserLiens() {
     let tabLiens=[];
     let tabChemins=[];
     for (const episode of episodes.values()) {
-        if (episode.liens) {
-            tabLiens.push(episode.liens);
+        if (episode.links) {
+            tabLiens.push(episode.links);
             for (const lien of tabLiens.flat()) {
-                tabChemins.push(lien.chemin);
+                tabChemins.push(lien.path);
             }
-            //et les revisites aussi
-            if(episode.revisite) { tabChemins.push(episode.revisite); }
+            //et les revisits aussi
+            if(episode.revisit) { tabChemins.push(episode.revisit); }
         }
     }
 
@@ -274,30 +274,30 @@ function setGameTitle(titre) {
 }
 
 function addLink(nouveauLien) {
-    if (!episodes.get(clefEpisodeEnCours).liens) {
-        episodes.get(clefEpisodeEnCours).liens = [];
+    if (!episodes.get(clefEpisodeEnCours).links) {
+        episodes.get(clefEpisodeEnCours).links = [];
     }
-        episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
+        episodes.get(clefEpisodeEnCours).links.push(nouveauLien);
 }
 
 function replaceAllLinks(nouveauLien) {
-    episodes.get(clefEpisodeEnCours).liens = [];
-    episodes.get(clefEpisodeEnCours).liens.push(nouveauLien);
+    episodes.get(clefEpisodeEnCours).links = [];
+    episodes.get(clefEpisodeEnCours).links.push(nouveauLien);
 }
 
 function addText(nouveauTexte) {
-    if (!episodes.get(clefEpisodeEnCours).texte) {
-        episodes.get(clefEpisodeEnCours).texte = "";
+    if (!episodes.get(clefEpisodeEnCours).text) {
+        episodes.get(clefEpisodeEnCours).text = "";
     }
-    if (episodes.get(clefEpisodeEnCours).texte instanceof Function) {
-        episodes.get(clefEpisodeEnCours).texte = episodes.get(clefEpisodeEnCours).texte() + nouveauTexte;
+    if (episodes.get(clefEpisodeEnCours).text instanceof Function) {
+        episodes.get(clefEpisodeEnCours).text = episodes.get(clefEpisodeEnCours).text() + nouveauTexte;
     } else {
-        episodes.get(clefEpisodeEnCours).texte += nouveauTexte;
+        episodes.get(clefEpisodeEnCours).text += nouveauTexte;
     }
 }
 
 function remplaceAllText(nouveauTexte) {
-    episodes.get(clefEpisodeEnCours).texte = nouveauTexte;
+    episodes.get(clefEpisodeEnCours).text = nouveauTexte;
 }
 
 function variable(nomVar, valeur) {
@@ -316,12 +316,12 @@ function setVariable(nomVar, valeur) {
     console.log("ajout en histo");
     let precedenteValeur=undefined;
     if(historiqueVariables.length>0) {
-    console.log("on teste si " +  historiqueVariables[historiqueVariables.length-1].clefEpisode + " vaut " + historique[historique.length-1])
+    console.log("on teste si " +  historiqueVariables[historiqueVariables.length-1].keyEpisode + " vaut " + historique[historique.length-1])
     }
-    if (historiqueVariables.length>0 && historiqueVariables[historiqueVariables.length-1].clefEpisode === historique[historique.length-1]) {
+    if (historiqueVariables.length>0 && historiqueVariables[historiqueVariables.length-1].keyEpisode === historique[historique.length-1]) {
         console.log("on a deja cet épisode en mémoire, ça doit être un retour arrière.");
         for (let vieilleVar of historiqueVariables[historiqueVariables.length-1].variables){
-            if(vieilleVar.nomVar === nomVar){
+            if(vieilleVar.nameVar === nomVar){
                 console.log("on a trouvé l'ancienne valeur : " + vieilleVar.valeur);
                 precedenteValeur = vieilleVar.valeur;
             }
@@ -343,15 +343,15 @@ function setVariable(nomVar, valeur) {
 }
 
 function getNumberOf(objet) {
-    return inventaire.get(objet)?inventaire.get(objet).nombre:0;
+    return inventaire.get(objet)?inventaire.get(objet).amount:0;
 }
 
 function giveSilentlyToPlayer(objet) {
-    inventaireAjout.push({clef:objet.clef, nom:objet.nom, description:objet.description, nombre:objet.nombre, discret: true });
+    inventaireAjout.push({key:objet.key, name:objet.name, description:objet.description, amount:objet.amount, silent: true });
 }
 
 function giveToPlayer(objet) {
-    inventaireAjout.push({clef:objet.clef, nom:objet.nom, description:objet.description, nombre:objet.nombre });
+    inventaireAjout.push({key:objet.key, name:objet.name, description:objet.description, amount:objet.amount });
 }
 
 function afficherInventaire() {
@@ -359,8 +359,8 @@ function afficherInventaire() {
     let mapHtmlInventaire=new Map();
     // Déjà, on parcourt l'inventaire et on prépare le html pour chaque objet existant
     for (const [key, value] of inventaire) {
-        if (value.nombre>0) {
-            mapHtmlInventaire.set(key, "-" + value.nom + " (x" + value.nombre + ")");
+        if (value.amount>0) {
+            mapHtmlInventaire.set(key, "-" + value.name + " (x" + value.amount + ")");
         } else {
             inventaire.delete(key);
         }
@@ -369,28 +369,28 @@ function afficherInventaire() {
     //Ensuite, on parcourt les ajouts
     let tabObjetspourHistorique=[];
     for (const nouvelObjet of inventaireAjout) {
-        if (mapHtmlInventaire.get(nouvelObjet.clef)) { //l'objet n'est pas vraiment nouveau, c'est juste une modif de nombre
+        if (mapHtmlInventaire.get(nouvelObjet.key)) { //l'objet n'est pas vraiment nouveau, c'est juste une modif de nombre
             // maj de sa quantite dans le vrai inventaire
-            inventaire.get(nouvelObjet.clef).nombre = nouvelObjet.nombre + inventaire.get(nouvelObjet.clef).nombre;
-            if (!nouvelObjet.discret) {
-                if(nouvelObjet.nombre > 0) {
-                    mapHtmlInventaire.set(nouvelObjet.clef, mapHtmlInventaire.get(nouvelObjet.clef) + '<span class="ajoutInventaire"> +' + nouvelObjet.nombre + '</span>');
+            inventaire.get(nouvelObjet.key).amount = nouvelObjet.amount + inventaire.get(nouvelObjet.key).amount;
+            if (!nouvelObjet.silent) {
+                if(nouvelObjet.amount > 0) {
+                    mapHtmlInventaire.set(nouvelObjet.key, mapHtmlInventaire.get(nouvelObjet.key) + '<span class="ajoutInventaire"> +' + nouvelObjet.amount + '</span>');
                 } else {
-                    mapHtmlInventaire.set(nouvelObjet.clef, mapHtmlInventaire.get(nouvelObjet.clef) + '<span class="supprInventaire"> ' + nouvelObjet.nombre + '</span>');
+                    mapHtmlInventaire.set(nouvelObjet.key, mapHtmlInventaire.get(nouvelObjet.key) + '<span class="supprInventaire"> ' + nouvelObjet.amount + '</span>');
                 }
             } else { // ajout en toute discrétion
-                mapHtmlInventaire.set(nouvelObjet.clef, "-" + inventaire.get(nouvelObjet.clef).nom + " (x" + inventaire.get(nouvelObjet.clef).nombre + ")");
+                mapHtmlInventaire.set(nouvelObjet.key, "-" + inventaire.get(nouvelObjet.key).name + " (x" + inventaire.get(nouvelObjet.key).amount + ")");
             }
         } else { // l'objet est totalement nouveau
             // ajout dans le vrai inventaire
-            inventaire.set(nouvelObjet.clef, {nom:nouvelObjet.nom, description:nouvelObjet.description, nombre:nouvelObjet.nombre});
-            if (!nouvelObjet.discret) {
-                mapHtmlInventaire.set(nouvelObjet.clef, '<span class="ajoutInventaire">-' + nouvelObjet.nom + " (x" + nouvelObjet.nombre + ")</span>");
+            inventaire.set(nouvelObjet.key, {name:nouvelObjet.name, description:nouvelObjet.description, amount:nouvelObjet.amount});
+            if (!nouvelObjet.silent) {
+                mapHtmlInventaire.set(nouvelObjet.key, '<span class="ajoutInventaire">-' + nouvelObjet.name + " (x" + nouvelObjet.amount + ")</span>");
             } else {
-                mapHtmlInventaire.set(nouvelObjet.clef, '-' + nouvelObjet.nom + " (x" + nouvelObjet.nombre + ")");
+                mapHtmlInventaire.set(nouvelObjet.key, '-' + nouvelObjet.name + " (x" + nouvelObjet.amount + ")");
             }
         }
-        tabObjetspourHistorique.push({clef:nouvelObjet.clef, nom:nouvelObjet.nom, description:nouvelObjet.description, nombre:nouvelObjet.nombre});
+        tabObjetspourHistorique.push({key:nouvelObjet.key, name:nouvelObjet.name, description:nouvelObjet.description, amount:nouvelObjet.amount});
     }
     historiqueInventaire.push({clefEpisode:clefEpisodeEnCours, modifObjets:{tabObjetspourHistorique}});
 
@@ -420,11 +420,11 @@ function enleverDerniersObjetsAcquis() {
         const tabObjetsARetirer = historiqueInventaire.pop().modifObjets.tabObjetspourHistorique;
         if (tabObjetsARetirer) {
             for (const objetARetirer of tabObjetsARetirer) {
-                if (inventaire.get(objetARetirer.clef)) {
-                    if((inventaire.get(objetARetirer.clef).nombre - objetARetirer.nombre) === 0) {
-                        inventaire.delete(objetARetirer.clef);
+                if (inventaire.get(objetARetirer.key)) {
+                    if((inventaire.get(objetARetirer.key).amount - objetARetirer.amount) === 0) {
+                        inventaire.delete(objetARetirer.key);
                     } else {
-                    inventaire.get(objetARetirer.clef).nombre -= objetARetirer.nombre;
+                    inventaire.get(objetARetirer.key).amount -= objetARetirer.amount;
                     }
                 }
             }
@@ -438,11 +438,11 @@ function remplacerParVariablesPrecedentes(clefEpisodeVerifVarASupprimer) {
     if (historiqueVariables.length > 0) {
         const variablesARemplacer = historiqueVariables[historiqueVariables.length-1];
         console.log("de l'épisode " + clefEpisodeVerifVarASupprimer + " faut remplacer ", variablesARemplacer);
-        if (variablesARemplacer && variablesARemplacer.clefEpisode === clefEpisodeVerifVarASupprimer) {
+        if (variablesARemplacer && variablesARemplacer.keyEpisode === clefEpisodeVerifVarASupprimer) {
             for (const variable of variablesARemplacer.variables) {
-                console.log("on remplace " + variable.nomVar + "avec ", variablesARemplacer);
+                console.log("on remplace " + variable.nameVar + "avec ", variablesARemplacer);
                 //on remplace avec l'ancienne
-                variables.set(variable.nomVar, variable.valeur);
+                variables.set(variable.nameVar, variable.valeur);
             }
             historiqueVariables.pop();
         }
