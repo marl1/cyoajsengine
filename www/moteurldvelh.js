@@ -401,7 +401,12 @@ function afficherInventaire() {
     for (let [key, value] of mapHtmlInventaire) {
         htmlInventaireFinal+=value+"<br>";
     }
-    document.getElementById("contenuInventaire").innerHTML=htmlInventaireFinal;
+    
+    if (mapHtmlInventaire.size == 0) {
+        document.getElementById("contenuInventaire").innerHTML="(empty)";
+    } else {
+        document.getElementById("contenuInventaire").innerHTML=htmlInventaireFinal;
+    }
 }
 
 function episodePrecedent() {
