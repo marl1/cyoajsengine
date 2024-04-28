@@ -16,6 +16,7 @@ jobs:
 
     environment:
       # This "github-pages" environment is created automatically by GitHub
+      # check the deployment rules here https://github.com/marl1/cyoajsengine/settings/environments
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     
