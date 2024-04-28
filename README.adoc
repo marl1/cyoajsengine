@@ -16,8 +16,11 @@ image::exemple.png[]
 * Vanilla Javascript.
 
 == Demo
-A sample game illustrating all the features:
-https://marclv.gitlab.io/cyoajsengine/games/a_sample_game/index.htm
+A sample game illustrating all the features.
+
+On GitLab: https://marclv.gitlab.io/cyoajsengine/games/a_sample_game/index.htm
+
+On GitHub: https://marl1.github.io/cyoajsengine/games/a_sample_game/index.htm
 
 == Base Fonctions
 
