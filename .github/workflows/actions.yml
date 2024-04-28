@@ -23,18 +23,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Git checkout on the master branch
+      # Git checkout on the tryingGhActions branch
       - name: Checkout
         uses: actions/checkout@v4        
         with:
-          ref: master
+          ref: tryingGhActions
       # Enable Pages and extract various metadata about a site
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload only the content of this folder, will be on https://marl1.github.io/cyoajsengine/games/
           path: './www'
       - name: Deploy to GitHub Pages
         id: deployment
