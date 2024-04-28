@@ -18,9 +18,9 @@ image::exemple.png[]
 == Demo
 A sample game illustrating all the features.
 
-On GitLab: https://marclv.gitlab.io/cyoajsengine/games/a_sample_game/index.htm
+GitLab: https://marclv.gitlab.io/cyoajsengine/games/a_sample_game/index.htm
 
-On GitHub: https://marl1.github.io/cyoajsengine/games/a_sample_game/index.htm
+GitHub (mirror): https://marl1.github.io/cyoajsengine/games/a_sample_game/index.htm
 
 == Base Fonctions
 
