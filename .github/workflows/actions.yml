@@ -51,6 +51,7 @@ jobs:
         uses: actions/checkout@v4        
         with:
           ref: tryingGhActions
+      - name: TimeStamping
         run: |
           echo "Creation d'un timestamp pour eviter le cache..."
           timestamp=$(date +%s)
