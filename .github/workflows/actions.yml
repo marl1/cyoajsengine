@@ -1,0 +1,40 @@
+name: my-pretty-test-and-deploy-pipeline
+run-name: Testing the sample game with Playwright then deploy to GitHub pages
+# Will be launched in case of...
+on:
+  # ...a push.
+  push:
+    branches: ["tryingGhActions"]
+    # ...a manual from the Actions tab
+    workflow_dispatch:
+jobs:
+  the-pretty-deployment:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      # This "github-pages" environment is created automatically by GitHub
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      # Git checkout on the master branch
+      - name: Checkout
+        uses: actions/checkout@v4        
+        with:
+          ref: master
+      # Enable Pages and extract various metadata about a site
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
